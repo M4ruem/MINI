@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+int	g_status;
+
 enum e_builtin	get_builtin_type(t_token *cmd, t_toklst *toklst)
 {
 	if (cmd == NULL || ft_strlen(cmd->str) == 0)

@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+int g_status;
+
 static int	single_builtin(t_toklst *toklst, t_env *envlst, enum e_builtin type)
 {
 	int	stdin;

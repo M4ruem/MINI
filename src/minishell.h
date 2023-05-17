@@ -8,6 +8,7 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/errno.h>
 
@@ -44,7 +45,7 @@
 # define CONTINUE 1
 # define STOP 0
 
-int	g_status;
+extern int	g_status;
 
 enum e_builtin
 {
