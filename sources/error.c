@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/22 13:38:49 by cormiere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	syntax_error(t_data *data)
@@ -60,7 +72,7 @@ void	exekerror(int nbr, t_data *data)
 	{
 		write(2, "Error with redirections\n", 25);
 		data->last_error = 1;
-	}	
+	}
 	if (nbr == 4)
 	{
 		write(2, "No command after pipe\n", 23);

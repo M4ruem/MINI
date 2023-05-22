@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_replace_list.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:36:59 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/22 13:41:02 by cormiere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	ft_env_var(t_data *data)
@@ -40,8 +52,6 @@ int	ft_search_and_replace_env_var(t_data *data)
 	return (0);
 }
 
-/*	Replace environment variables by their value
-	in each element of the cmd_list */
 void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 {
 	int		len;
@@ -70,7 +80,6 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	}
 }
 
-/* if variable exists, replace by value, if not, replace by nothing */
 char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 {
 	t_env_list	*env_list;

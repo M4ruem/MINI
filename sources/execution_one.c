@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution_one.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/22 13:39:47 by cormiere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	forward_redir(t_data *data, int i)
@@ -30,12 +42,10 @@ int	backward_redir(t_data *data, int i, int nbr)
 {
 	int		file;
 	char	*here_doc_file;
-	//char	*str2;
 
 	file = 0;
 	if (data->cmd_table->redir_type[i] == 3)
 	{
-		//str2 = NULL;
 		here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));
 		file = open(here_doc_file, O_RDONLY);
 		if (file < 0)

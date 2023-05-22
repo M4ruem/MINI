@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rm_quote.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:38:32 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/22 13:39:57 by cormiere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 char	**rm_quote(char **tabl, t_data *data)
@@ -46,9 +58,6 @@ char	*rm_quote2(t_data *data, char **tabl, char *str)
 
 int	ft_is_builtin(const char *s1)
 {
-	//size_t	i;
-
-	//i = 0;
 	if (ft_strncmp(s1, "pwd") == 0)
 		return (0);
 	if (ft_strncmp(s1, "env") == 0)

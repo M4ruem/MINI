@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/22 13:44:51 by cormiere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -5,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <limits.h>
