@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 18:21:24 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/23 18:49:35 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ typedef struct s_env_list
 	struct s_env_list	*next;
 }	t_env_list;
 
-typedef struct s_data
+typedef struct s_data1
 {
-	char		*main_str;
-	t_cmd_list	*cmd_table;
-	t_cmd_list	*cmd_table_temp;
-	t_env_list	*env_table;
-	t_env_list	*env_table_sorted;
 	int			squote;
 	int			dquote;
 	int			r_tabl;
@@ -55,6 +50,10 @@ typedef struct s_data
 	char		**arg_tabl;
 	int			path_nbr;
 	int			here_doc_nbr;
+}	t_data1;
+
+typedef struct s_data2
+{
 	int			lst_nbr;
 	int			nbr;
 	int			i;
@@ -63,6 +62,10 @@ typedef struct s_data
 	int			j;
 	int			rdj;
 	int			x;
+}	t_data2;
+
+typedef struct s_data3
+{
 	int			exec_i;
 	int			lexer_error;
 	int			lexer_start;
@@ -73,6 +76,10 @@ typedef struct s_data
 	int			rdi;
 	int			pskip;
 	char		*pcommand;
+}	t_data3;
+
+typedef struct s_data4
+{
 	int			*redir_type;
 	char		**redir_file;
 	int			tabl_s;
@@ -85,6 +92,10 @@ typedef struct s_data
 	int			free_i;
 	int			e;
 	int			f;
+}	t_data4;
+
+typedef struct s_data5
+{
 	int			ppi;
 	int			echo_i;
 	int			echo_j;
@@ -93,7 +104,22 @@ typedef struct s_data
 	int			stdin_save;
 	int			stdout_save;
 	int			last_error;
-}	t_data;
+}	t_data5;
+
+typedef struct s_data
+{
+	char		*main_str;
+	t_cmd_list	*cmd_table;
+	t_cmd_list	*cmd_table_temp;
+	t_env_list	*env_table;
+	t_env_list	*env_table_sorted;
+	t_data1		*data1;
+	t_data2		*data2;
+	t_data3		*data3;
+	t_data4		*data4;
+	t_data5		*data5;
+}				t_data;
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */
