@@ -7,11 +7,11 @@ LDFLAGS = -lreadline
 
 SRC = ./sources/main.c \
 	./sources/builtins/cd.c ./sources/builtins/echo.c ./sources/builtins/error.c ./sources/builtins/exit.c \
-	./sources/builtins/export.c ./sources/builtins/signals.c ./sources/builtins/unset1.c ./sources/builtins/unset2.c \
-	./sources/env/env_in_list.c ./sources/env/env_lst_utils1.c ./sources/env/env_lst_utils2.c ./sources/env/env_replace_list.c \
-	./sources/env/env_replace_str.c ./sources/exec/exec_one_cmd.c ./sources/exec/exec_path_fct.c ./sources/exec/execution_one.c \
-	./sources/exec/execution_two.c ./sources/parsing/parsing_redir.c ./sources/parsing/parsing.c ./sources/parsing/parsing2.c \
-	./sources/parsing/rm_quote.c ./sources/utils/cmd_lst_utils1.c ./sources/utils/cmd_lst_utils2.c ./sources/utils/ft_utils.c \
+	./sources/builtins/export.c ./sources/builtins/signals.c ./sources/builtins/unset.c ./sources/builtins/unset2.c \
+	./sources/env/env_lst.c ./sources/env/env_utils.c ./sources/env/env_utils2.c ./sources/env/env_replace_list.c \
+	./sources/env/env_replace_str.c ./sources/exec/exec_cmd.c ./sources/exec/exec_path.c ./sources/exec/exec_one.c \
+	./sources/exec/exec_two.c ./sources/parsing/pars_redir.c ./sources/parsing/parsing.c ./sources/parsing/parsing2.c \
+	./sources/parsing/rm_quote.c ./sources/utils/cmd_utils.c ./sources/utils/cmd_utils2.c ./sources/utils/ft_utils.c \
 	./sources/utils/ft_utils2.c ./sources/utils/ft_utils3.c ./sources/utils/ft_utils4.c
 
 PURPLE	= \033[38;5;213m
