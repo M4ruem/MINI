@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:36:59 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:41:02 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:21:14 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_env_var(t_data *data)
 {

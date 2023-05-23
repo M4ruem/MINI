@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:36:49 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:36:50 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:21:10 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 t_env_list	*ft_env_lstnew(char *name, char *value)
 {

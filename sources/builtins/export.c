@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:49 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:38:49 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:20:38 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	bin_export(char **arg, t_data *data)
 {

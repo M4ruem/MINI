@@ -1,38 +1,42 @@
-SOURCES = main.c parsing.c parsing2.c parsing_redir.c env_replace_list.c \
-		  env_replace_str.c env_in_list.c error.c cmd_lst_utils1.c cmd_lst_utils2.c \
-		  env_lst_utils1.c env_lst_utils2.c ft_utils.c ft_utils2.c ft_utils3.c \
-		  ft_utils4.c execution_one.c execution_two.c exec_path_fct.c exec_one_cmd.c \
-		  rm_quote.c echo.c cd.c exit.c export.c unset1.c unset2.c signals.c
+SRC = ./sources/main.c \
+	./sources/builtins/cd.c ./sources/builtins/echo.c ./sources/builtins/error.c ./sources/builtins/exit.c \
+	./sources/builtins/export.c ./sources/builtins/signals.c ./sources/builtins/unset1.c ./sources/builtins/unset2.c \
+	./sources/env/env_in_list.c ./sources/env/env_lst_utils1.c ./sources/env/env_lst_utils2.c ./sources/env/env_replace_list.c \
+	./sources/env/env_replace_str.c ./sources/exec/exec_one_cmd.c ./sources/exec/exec_path_fct.c ./sources/exec/execution_one.c \
+	./sources/exec/execution_two.c ./sources/parsing/parsing_redir.c ./sources/parsing/parsing.c ./sources/parsing/parsing2.c \
+	./sources/parsing/rm_quote.c ./sources/utils/cmd_lst_utils1.c ./sources/utils/cmd_lst_utils2.c ./sources/utils/ft_utils.c \
+	./sources/utils/ft_utils2.c ./sources/utils/ft_utils3.c ./sources/utils/ft_utils4.c
 
-OBJETS = $(SOURCES:.c=.o)
-INCLUDES = minishell.h
+OBJ = $(patsubst ./sources/%.c, .object/%.o, $(SRC))
+INC = include/minishell.h
 
-DIR_SRC = sources
 DIR_OBJ = .object
 DIR_INC = include
 
-SRC := $(addprefix $(DIR_SRC)/,$(SOURCES))
-OBJ := $(addprefix $(DIR_OBJ)/,$(OBJETS))
-INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+LDFLAGS = -lreadline
 
-CC := gcc
-CFLAGS := -Wall -Werror -Wextra
-LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
-CPPFLAGS := -I $(shell brew --prefix readline)/include
-NAME := minishell
+NAME = minishell
 
-all : $(NAME)
-re : fclean all
-clean :
+all: $(NAME)
+
+re: fclean all
+
+clean:
 	rm -rf $(DIR_OBJ)
-fclean : clean
-	rm -rf minishell
 
-$(NAME) : $(OBJ) | $(DIR_BIN)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o $(NAME) -lreadline
-$(DIR_OBJ)/%.o : $(DIR_SRC)/%.c $(INC) Makefile | $(DIR_OBJ)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ -I $(DIR_INC)
-$(DIR_OBJ) :
+fclean: clean
+	rm -f $(NAME)
+
+$(NAME): $(OBJ) | $(DIR_OBJ)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(DIR_OBJ)/%.o: ./sources/%.c $(INC) Makefile | $(DIR_OBJ)
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(DIR_INC)
+
+$(DIR_OBJ):
 	mkdir -p $(DIR_OBJ)
 
-.PHONY : all bonus re clean fclean
+.PHONY: all re clean fclean

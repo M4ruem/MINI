@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:30 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:38:49 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:21:29 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	**recup_path(t_data *data)
 {

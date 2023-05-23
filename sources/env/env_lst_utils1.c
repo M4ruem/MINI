@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:36:40 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:36:41 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:21:06 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	ft_env_lstadd_back(t_env_list **lst, t_env_list *new)
 {

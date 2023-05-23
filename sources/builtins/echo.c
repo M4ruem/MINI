@@ -6,11 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:36:26 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/22 13:36:27 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:20:09 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	built_in_two(t_data *data)
 {
