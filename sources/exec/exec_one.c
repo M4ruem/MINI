@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_one.c                                    :+:      :+:    :+:   */
+/*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:21:37 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:21:48 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 	{
 		if (data->cmd_table->cmd[0] == '\0')
 			exit (0);
+		close(data->stdin_save);
+		close(data->stdout_save);
 		execve(data->arg_tabl[0], data->arg_tabl, env);
 	}
 	return (0);
@@ -119,18 +121,22 @@ int	ft_execution(t_data *data, char **env)
 
 	last = ft_lstlast(data->cmd_table);
 	data->lst_nbr = ft_lstsize(data->cmd_table);
-	data->stdin_save = dup(1);
-	data->stdout_save = dup(0);
-	data->is_pipe = 0;
-	data->is_built_in = 0;
+	close_hell(data, 0);
 	if (data->lst_nbr == 1)
+	{
+		close_hell(data, 1);
 		return (exec_one_cmd(data, env));
+	}
 	if (data->lst_nbr > 1)
 	{
 		data->is_pipe = 1;
 		if (last->cmd[0] == '\0')
+		{	
+			close_hell(data, 1);
 			return (4);
+		}
 		data->lst_nbr = (data->lst_nbr / 2) + 1;
+		close_hell(data, 1);
 		return (exec_cmds(data, env));
 	}
 	return (0);

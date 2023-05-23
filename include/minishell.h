@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 16:34:13 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:21:24 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void		main_fonction_two(t_data *data);
 /*                                    utils                                   */
 /* -------------------------------------------------------------------------- */
 
+void		close_hell(t_data *data, int key);
 char		*ft_strmjoin(char *s1, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:11 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:22:34 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:20:53 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ char	*ft_itoa(int n)
 		nb = nb / 10;
 	}
 	return (str);
+}
+
+void	close_hell(t_data *data, int key)
+{
+	if (key == 1)
+	{
+		close(data->stdin_save);
+		close(data->stdout_save);
+	}
+	if (key == 0)
+	{
+		data->stdin_save = dup(1);
+		data->stdout_save = dup(0);
+		data->is_pipe = 0;
+		data->is_built_in = 0;
+	}
 }
 
 int	ft_atoi(const char *str)
