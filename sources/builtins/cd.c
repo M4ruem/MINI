@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:51 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:20:19 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:57:18 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ void	bin_cd(t_data *data)
 	int		error;
 	char	cwd[PATH_MAX];
 
-	data->last_error = 0;
-	if (!data->arg_tabl[1])
+	data->data5->last_error = 0;
+	if (!data->data1->arg_tabl[1])
 	{
 		error = chdir(ft_chr_var_env(data, "HOME"));
 		if (error != 0)
 			printf("minishell: cd: No PATH found\n");
 		if (error != 0)
-			data->last_error = 1;
+			data->data5->last_error = 1;
 		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
 		ft_update_var_env(data, "PWD", ft_chr_var_env(data, "HOME"));
 	}
 	else
 	{
-		error = chdir(data->arg_tabl[1]);
+		error = chdir(data->data1->arg_tabl[1]);
 		if (error != 0)
 			printf("minishell: cd: %s: No such file or directory\n", \
-				data->arg_tabl[1]);
+				data->data1->arg_tabl[1]);
 		if (error != 0)
-			data->last_error = 1;
+			data->data5->last_error = 1;
 		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
 		ft_update_var_env(data, "PWD", getcwd(cwd, sizeof(cwd)));
 	}

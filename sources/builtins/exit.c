@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:20:32 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:04:55 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,27 @@ int	is_number(char *str)
 
 void	bin_exit(t_data *data, int is_pipe)
 {
-	if (data->nbr_save > 1)
+	if (data->data4->nbr_save > 1)
 		printf("exit: too many arguments\n");
-	if (data->nbr_save > 1)
+	if (data->data4->nbr_save > 1)
 		if (is_pipe == 1)
 			exit(1);
-	if (!(data->nbr_save > 1))
+	if (!(data->data4->nbr_save > 1))
 	{
 		if (is_pipe == 0)
 			printf("exit");
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
 		rl_clear_history();
-		if (data->nbr_save == 1)
+		if (data->data4->nbr_save == 1)
 		{
-			if (is_number(data->arg_tabl[1]) == 0
-				|| ft_atoi(data->arg_tabl[1]) == -2)
+			if (is_number(data->data1->arg_tabl[1]) == 0
+				|| ft_atoi(data->data1->arg_tabl[1]) == -2)
 			{
 				printf(" numeric argument required\n");
 				exit(255);
 			}
-			exit(ft_atoi((data->arg_tabl[1])) % 256);
+			exit(ft_atoi((data->data1->arg_tabl[1])) % 256);
 		}
 		printf("\n");
 		exit(EXIT_SUCCESS);

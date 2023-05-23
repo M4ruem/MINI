@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:36 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 18:14:12 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/23 19:09:05 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ void	ft_free_all(t_data *data)
 	int	i;
 
 	i = -1;
-	while (data->paths[++i])
-		free(data->paths[i]);
-	close(data->stdin_save);
-	close(data->stdout_save);
-	free(data->paths);
+	while (data->data1->paths[++i])
+		free(data->data1->paths[i]);
+	close(data->data5->stdin_save);
+	close(data->data5->stdout_save);
+	free(data->data1->paths);
 	free(data->main_str);
 }
 
 void	exec_cmds_two(t_data *data)
 {
-	while (data->exec_i < data->lst_nbr - 1)
+	while (data->data3->exec_i < data->data2->lst_nbr - 1)
 	{
-		close(data->fds[data->exec_i][0]);
-		close(data->fds[data->exec_i][1]);
-		data->exec_i++;
+		close(data->data3->fds[data->data3->exec_i][0]);
+		close(data->data3->fds[data->data3->exec_i][1]);
+		data->data3->exec_i++;
 	}
-	data->exec_i = 0;
-	close(data->stdin_save);
-	close(data->stdout_save);
+	data->data3->exec_i = 0;
+	close(data->data5->stdin_save);
+	close(data->data5->stdout_save);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_path_fct.c                                    :+:      :+:    :+:   */
+/*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:30 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:21:29 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:22:26 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ char	**recup_path(t_data *data)
 
 	str = ft_found_path(data, "PATH");
 	i = -1;
-	data->nbr = 0;
+	data->data2->nbr = 0;
 	while (str[++i])
 		if (str[i] == ':')
-			data->nbr = data->nbr + 1;
-	data->path_nbr = data->nbr;
-	tabl = malloc(sizeof(char *) * (data->nbr + 2));
-	tabl[data->nbr + 1] = NULL;
+			data->data2->nbr = data->data2->nbr + 1;
+	data->data1->path_nbr = data->data2->nbr;
+	tabl = malloc(sizeof(char *) * (data->data2->nbr + 2));
+	tabl[data->data2->nbr + 1] = NULL;
 	while (i-- > 0)
 	{
 		if (str[i] == ':')
 		{
-			tabl[data->nbr] = ft_malloc_str(&str[i + 1]);
+			tabl[data->data2->nbr] = ft_malloc_str(&str[i + 1]);
 			str[i] = '\0';
-			data->nbr = data->nbr - 1;
+			data->data2->nbr = data->data2->nbr - 1;
 		}
 	}
-	tabl[data->nbr] = ft_malloc_str(str);
+	tabl[data->data2->nbr] = ft_malloc_str(str);
 	free(str);
 	return (tabl);
 }
@@ -46,20 +46,20 @@ void	wait_loop(t_data *data)
 	int	error_code;
 	int	status;
 
-	status = wait(&data->last_error);
+	status = wait(&data->data5->last_error);
 	while (status != -1)
 	{
-		if (WIFEXITED(data->last_error))
+		if (WIFEXITED(data->data5->last_error))
 		{
-			error_code = WEXITSTATUS(data->last_error);
+			error_code = WEXITSTATUS(data->data5->last_error);
 		}
-		else if (WIFSIGNALED(data->last_error))
+		else if (WIFSIGNALED(data->data5->last_error))
 		{
-			error_code = WTERMSIG(data->last_error) + 128;
+			error_code = WTERMSIG(data->data5->last_error) + 128;
 		}
-		status = wait(&data->last_error);
+		status = wait(&data->data5->last_error);
 	}
-	data->last_error = error_code;
+	data->data5->last_error = error_code;
 }
 
 char	*safe_malloc(void)
@@ -76,23 +76,23 @@ int	put_path(t_data *data)
 {
 	char	*full_path;
 
-	data->ppi = -1;
-	if (access(data->arg_tabl[0], X_OK) == 0)
+	data->data5->ppi = -1;
+	if (access(data->data1->arg_tabl[0], X_OK) == 0)
 		return (0);
 	full_path = safe_malloc();
 	full_path[0] = '\0';
-	while (access(full_path, X_OK) == -1 && data->ppi < data->path_nbr)
+	while (access(full_path, X_OK) == -1 && data->data5->ppi < data->data1->path_nbr)
 	{
-		data->ppi++;
+		data->data5->ppi++;
 		full_path[0] = '\0';
 		free(full_path);
-		full_path = ft_1ststrjoin(data->paths[data->ppi], data->arg_tabl[0]);
+		full_path = ft_1ststrjoin(data->data1->paths[data->data5->ppi], data->data1->arg_tabl[0]);
 	}
-	data->ppi = 0;
+	data->data5->ppi = 0;
 	if (access(full_path, X_OK) == 0)
 	{
-		free(data->arg_tabl[0]);
-		data->arg_tabl[0] = ft_malloc_str(full_path);
+		free(data->data1->arg_tabl[0]);
+		data->data1->arg_tabl[0] = ft_malloc_str(full_path);
 		free(full_path);
 		return (0);
 	}
