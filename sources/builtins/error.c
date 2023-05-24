@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 17:07:07 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/24 19:32:45 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	exekerror(int nbr, t_data *data)
 
 	i = 0;
 	(void)data;
-	
-	printf("%s : Is a diretory\n" ,data->cmd_table->cmd);
+	if (access(data->cmd_table->cmd, X_OK) == 0)	
+		printf("%s : Is a diretory\n" ,data->cmd_table->cmd);
 	if (nbr == 2)
 	{
 		while (i <= data->data4.nbr_save + 1)
