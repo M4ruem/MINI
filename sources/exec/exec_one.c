@@ -6,7 +6,7 @@
 /*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 02:58:31 by jalel            ###   ########.fr       */
+/*   Updated: 2023/05/24 17:09:28 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 	{
 		if (data->cmd_table->cmd[0] == '\0')
 			exit (0);
-		close(data->data5.stdin_save);
-		close(data->data5.stdout_save);
 		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);
+		exit(0);
 	}
 	return (0);
 }
@@ -125,7 +124,7 @@ int	ft_execution(t_data *data, char **env)
 	close_hell(data, 0);
 	if (data->data2.lst_nbr == 1)
 	{
-		close_hell(data, 1);
+		//close_hell(data, 1);
 		return (exec_one_cmd(data, env));
 	}
 	if (data->data2.lst_nbr > 1)
@@ -133,11 +132,11 @@ int	ft_execution(t_data *data, char **env)
 		data->data5.is_pipe = 1;
 		if (last->cmd[0] == '\0')
 		{
-			close_hell(data, 1);
+		//	close_hell(data, 1);
 			return (4);
 		}
 		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
-		close_hell(data, 1);
+		//close_hell(data, 1);
 		return (exec_cmds(data, env));
 	}
 	return (0);

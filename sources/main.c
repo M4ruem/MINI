@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 18:56:13 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:19:46 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	main_fonction_two(t_data *data)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-
+	int i;
+	
+	i = 0;
 	if (argc != 1 || !(argv[0]))
 		exit (0);
 	parserror(ft_put_env_in_lst(&data, env), &data);

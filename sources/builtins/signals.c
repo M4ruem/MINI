@@ -49,8 +49,6 @@ void	ft_free_all(t_data *data)
 	i = -1;
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
-	close(data->data5.stdin_save);
-	close(data->data5.stdout_save);
 	free(data->data1.paths);
 	free(data->main_str);
 }
@@ -64,6 +62,4 @@ void	exec_cmds_two(t_data *data)
 		data->data3.exec_i++;
 	}
 	data->data3.exec_i = 0;
-	close(data->data5.stdin_save);
-	close(data->data5.stdout_save);
 }

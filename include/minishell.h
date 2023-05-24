@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 18:49:35 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/24 15:01:39 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_data
 /*                                   parsing                                  */
 /* -------------------------------------------------------------------------- */
 
+void		find_dollar(t_data *data);
 int			ft_lexer(char *str, t_data *data);
 int			ft_parser(char *str, t_data *data, int end);
 void		ft_addpipe(t_data *data);

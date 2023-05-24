@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:03:58 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:07:07 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,18 @@ void	exekerror(int nbr, t_data *data)
 
 	i = 0;
 	(void)data;
+	
+	printf("%s : Is a diretory\n" ,data->cmd_table->cmd);
 	if (nbr == 2)
 	{
 		while (i <= data->data4.nbr_save + 1)
 			free(data->data1.arg_tabl[i++]);
 		free(data->data1.arg_tabl);
 		data->data5.last_error = 127;
-		write(2, "Command not found\n", 19);
+		if (data->cmd_table->cmd)
+			printf("%s : Command not found\n", data->cmd_table->cmd);
+		else
+			write(2, "Command not found\n", 19);
 		if (data->data5.is_pipe == 1)
 			exit(127);
 	}

@@ -50,7 +50,7 @@ int	ft_lexer(char *str, t_data *data)
 	data->data3.lexer_start = 0;
 	data->data2.ly = 0;
 	while (str[data->data2.ly] && (str[data->data2.ly] == ' '
-			|| str[data->data2.ly] == '\n'))
+		|| str[data->data2.ly] == '\n' || str[data->data2.ly] == '\t'))
 		data->data2.ly++;
 	if (str[data->data2.ly] == '|')
 		return (1);
@@ -87,7 +87,7 @@ void	ft_addpipe(t_data *data)
 
 int	ft_parser2(t_data *data, char *str)
 {
-	while (str[data->data3.rdi] == ' ')
+	while (str[data->data3.rdi] == ' ' || str[data->data3.rdi] == '\t')
 		data->data3.rdi++;
 	while (str[data->data3.rdi])
 	{
