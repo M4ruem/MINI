@@ -14,24 +14,24 @@
 
 void	bin_unset(char **arg, t_data *data)
 {
-	data->data5->last_error = 0;
-	data->data4->f = 0;
-	while (arg[data->data4->f])
+	data->data5.last_error = 0;
+	data->data4.f = 0;
+	while (arg[data->data4.f])
 	{
-		data->data4->e = 0;
-		while (arg[data->data4->f][data->data4->e])
+		data->data4.e = 0;
+		while (arg[data->data4.f][data->data4. e])
 		{
-			while (ft_isalnum(arg[data->data4->f][data->data4->e]) == 1 \
-				|| arg[data->data4->f][data->data4->e] == '_')
-				data->data4->e++;
-			if (arg[data->data4->f][data->data4->e] == '\0')
+			while (ft_isalnum(arg[data->data4.f][data->data4.e]) == 1 \
+				|| arg[data->data4.f][data->data4.e] == '_')
+				data->data4.e++;
+			if (arg[data->data4.f][data->data4.e] == '\0')
 				ft_remove_env_var(arg, data);
 			else
 				ft_name_error(arg, data);
-			if (arg[data->data4->f][data->data4->e])
-				data->data4->e++;
+			if (arg[data->data4.f][data->data4.e])
+				data->data4.e++;
 		}
-		data->data4->f++;
+		data->data4.f++;
 	}
 }
 
@@ -56,7 +56,7 @@ void	ft_remove_env_var(char **arg, t_data *data)
 {
 	char		*name;
 
-	name = ft_substr(arg[data->data4->f], 0, data->data4->e);
+	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
 	if (ft_strncmp(name, data->env_table->name) == 0 && data->env_table->next)
 	{
 		ft_clear_first_elmt(data);
@@ -70,10 +70,11 @@ void	ft_name_error(char **arg, t_data *data)
 {
 	char	*name;
 
-	while (arg[data->data4->f][data->data4->e] && arg[data->data4->f][data->data4->e] != ' ')
-		data->data4->e++;
-	name = ft_substr(arg[data->data4->f], 0, data->data4->e);
+	while (arg[data->data4.f][data->data4.e] &&
+			arg[data->data4.f][data->data4.e] != ' ')
+		data->data4.e++;
+	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
 	printf("minishell: unset: `%s': not a valid identifier\n", name);
-	data->data5->last_error = 1;
+	data->data5.last_error = 1;
 	free(name);
 }

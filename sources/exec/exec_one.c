@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:28:03 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/24 02:58:31 by jalel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 			return (-1);
 		i++;
 	}
-	if (data->data4->is_built_in == 0)
+	if (data->data4.is_built_in == 0)
 	{
 		if (data->cmd_table->cmd[0] == '\0')
 			exit (0);
-		close(data->data5->stdin_save);
-		close(data->data5->stdout_save);
-		execve(data->data1->arg_tabl[0], data->data1->arg_tabl, env);
+		close(data->data5.stdin_save);
+		close(data->data5.stdout_save);
+		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);
 	}
 	return (0);
 }
@@ -93,25 +93,26 @@ int	exec_cmds(t_data *data, char **env)
 {
 	char	*hd_file;
 
-	data->data3->error_getcmd = exec_cmds_second(data, env);
-	if (data->data3->error_getcmd != 0)
-		return (data->data3->error_getcmd);
+	data->data3.error_getcmd = exec_cmds_second(data, env);
+	if (data->data3.error_getcmd != 0)
+		return (data->data3.error_getcmd);
 	exec_cmds_two(data);
-	while (data->data3->exec_i++ < data->data2->lst_nbr)
+	while (data->data3.exec_i++ < data->data2.lst_nbr)
 		wait_loop(data);
-	data->data3->exec_i = 0;
-	while (data->data3->exec_i < data->data2->lst_nbr)
+	data->data3.exec_i = 0;
+	while (data->data3.exec_i < data->data2.lst_nbr)
 	{
-		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(data->data3->exec_i + 97));
+		hd_file = ft_strjoin_c("/tmp/.here_doc", \
+		(char)(data->data3.exec_i + 97));
 		if (access(hd_file, F_OK) == 0)
 			unlink(hd_file);
 		free(hd_file);
-		data->data3->exec_i++;
+		data->data3.exec_i++;
 	}
-	data->data4->free_i = -1;
-	while (++data->data4->free_i <= data->data2->lst_nbr)
-		free(data->data3->fds[data->data4->free_i]);
-	free(data->data3->fds);
+	data->data4.free_i = -1;
+	while (++data->data4.free_i <= data->data2.lst_nbr)
+		free(data->data3.fds[data->data4.free_i]);
+	free(data->data3.fds);
 	return (0);
 }
 
@@ -120,22 +121,22 @@ int	ft_execution(t_data *data, char **env)
 	t_cmd_list	*last;
 
 	last = ft_lstlast(data->cmd_table);
-	data->data2->lst_nbr = ft_lstsize(data->cmd_table);
+	data->data2.lst_nbr = ft_lstsize(data->cmd_table);
 	close_hell(data, 0);
-	if (data->data2->lst_nbr == 1)
+	if (data->data2.lst_nbr == 1)
 	{
 		close_hell(data, 1);
 		return (exec_one_cmd(data, env));
 	}
-	if (data->data2->lst_nbr > 1)
+	if (data->data2.lst_nbr > 1)
 	{
-		data->data5->is_pipe = 1;
+		data->data5.is_pipe = 1;
 		if (last->cmd[0] == '\0')
 		{
 			close_hell(data, 1);
 			return (4);
 		}
-		data->data2->lst_nbr = (data->data2->lst_nbr / 2) + 1;
+		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		close_hell(data, 1);
 		return (exec_cmds(data, env));
 	}

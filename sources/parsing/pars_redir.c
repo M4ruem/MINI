@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:19 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 17:37:59 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/24 03:01:43 by jalel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	here_doc_fct(t_data *data, char *str)
 	char	*str2;
 
 	str2 = NULL;
-	file = ft_strjoin_c("/tmp/.here_doc", (char)(data->here_doc_nbr + 97));
+	file = ft_strjoin_c("/tmp/.here_doc", \
+	(char)(data->data1.here_doc_nbr + 97));
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(file);
 	while (1)
@@ -38,24 +39,24 @@ void	here_doc_fct(t_data *data, char *str)
 
 int	redir_parsing2(t_data *data, char *str)
 {
-	data->rdj = data->rdi;
-	if (str[data->rdj] == '>' && str[data->rdj + 1] == '>')
+	data->data2.rdj = data->data3.rdi;
+	if (str[data->data2.rdj] == '>' && str[data->data2.rdj + 1] == '>')
 	{
-		data->redir_type[data->r_tabl] = 1;
-		data->rdj++;
+		data->data4.redir_type[data->data1.r_tabl] = 1;
+		data->data2.rdj++;
 	}
-	else if (str[data->rdj] == '>')
-		data->redir_type[data->r_tabl] = 2;
-	else if (str[data->rdj] == '<' && str[data->rdj + 1] == '<')
+	else if (str[data->data2.rdj] == '>')
+		data->data4.redir_type[data->data1.r_tabl] = 2;
+	else if (str[data->data2.rdj] == '<' && str[data->data2.rdj + 1] == '<')
 	{
-		data->redir_type[data->r_tabl] = 3;
-		data->rdj++;
+		data->data4.redir_type[data->data1.r_tabl] = 3;
+		data->data2.rdj++;
 	}
-	else if (str[data->rdj] == '<')
-		data->redir_type[data->r_tabl] = 4;
-	data->rdj++;
-	while (str[data->rdj] == ' ')
-		data->rdj++;
+	else if (str[data->data2.rdj] == '<')
+		data->data4.redir_type[data->data1.r_tabl] = 4;
+	data->data2.rdj++;
+	while (str[data->data2.rdj] == ' ')
+		data->data2.rdj++;
 	return (0);
 }
 
@@ -63,37 +64,38 @@ int	ft_is_chr(char c, t_data *data)
 {
 	if ((c == 33 || c == 35 || c == 42 || c == 40 || c == 41
 			|| c == 59 || c == 47 || c == 63 || c == 124)
-		&& data->squote == 0 && data->dquote == 0)
+		&& data->data1.squote == 0 && data->data1.dquote == 0)
 		return (1);
 	return (0);
 }
 
 int	redir_parsing(char *str, t_data *data)
 {
-	data->rd_error = redir_parsing2(data, str);
-	if (data->rd_error != 0)
-		return (data->rd_error);
-	while (str[data->rdj])
+	data->data4.rd_error = redir_parsing2(data, str);
+	if (data->data4.rd_error != 0)
+		return (data->data4.rd_error);
+	while (str[data->data2.rdj])
 	{
-		quotes_switch(data, str, data->rdj);
-		if ((str[data->rdj] == ' ' || str[data->rdj] == '<' || str[data->rdj]
-				== '>') && data->squote == 0 && data->dquote == 0)
+		quotes_switch(data, str, data->data2.rdj);
+		if ((str[data->data2.rdj] == ' ' || str[data->data2.rdj] == '<'
+				|| str[data->data2.rdj] == '>') && data->data1.squote == 0
+			&& data->data1.dquote == 0)
 			break ;
-		if (ft_is_chr(str[data->rdj], data) == 1)
+		if (ft_is_chr(str[data->data2.rdj], data) == 1)
 			return (-2);
-		data->redir_file[data->r_tabl]
-			= ft_strmjoin(data->redir_file[data->r_tabl], str[data->rdj]);
-		data->rdj++;
+		data->data4.redir_file[data->data1.r_tabl] = ft_strmjoin(data->data4. \
+		redir_file[data->data1.r_tabl], str[data->data2.rdj]);
+		data->data2.rdj++;
 	}
-	if (!(data->redir_file[data->r_tabl]))
+	if (!(data->data4.redir_file[data->data1.r_tabl]))
 		return (-2);
-	data->redir_file = rm_quote(data->redir_file, data);
-	if (str[data->rdi] == '<' && str[data->rdi + 1] == '<')
-		here_doc_fct(data, data->redir_file[data->r_tabl]);
-	data->r_tabl = data->r_tabl + 1;
-	while (str[data->rdj] == ' ')
-		data->rdj++;
-	return (data->rdj - data->rdi);
+	data->data4.redir_file = rm_quote(data->data4.redir_file, data);
+	if (str[data->data3.rdi] == '<' && str[data->data3.rdi + 1] == '<')
+		here_doc_fct(data, data->data4.redir_file[data->data1.r_tabl]);
+	data->data1.r_tabl = data->data1.r_tabl + 1;
+	while (str[data->data2.rdj] == ' ')
+		data->data2.rdj++;
+	return (data->data2.rdj - data->data3.rdi);
 }
 
 int	count_redir(char *str, t_data *data)
@@ -106,8 +108,8 @@ int	count_redir(char *str, t_data *data)
 	while (str[++i])
 	{
 		quotes_switch(data, str, i);
-		if ((str[i] == '>' || str[i] == '<') && data->squote == 0
-			&& data->dquote == 0)
+		if ((str[i] == '>' || str[i] == '<') && data->data1.squote == 0
+			&& data->data1.dquote == 0)
 		{
 			if (str[i] == '>' && str[i + 1] == '>')
 				i++;

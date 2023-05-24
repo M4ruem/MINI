@@ -56,6 +56,6 @@ int	bin_pwd(t_data *data)
 
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
-	data->data5->last_error = 0;
+	data->data5.last_error = 0;
 	return (0);
 }

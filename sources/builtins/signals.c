@@ -47,23 +47,23 @@ void	ft_free_all(t_data *data)
 	int	i;
 
 	i = -1;
-	while (data->data1->paths[++i])
-		free(data->data1->paths[i]);
-	close(data->data5->stdin_save);
-	close(data->data5->stdout_save);
-	free(data->data1->paths);
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
+	free(data->data1.paths);
 	free(data->main_str);
 }
 
 void	exec_cmds_two(t_data *data)
 {
-	while (data->data3->exec_i < data->data2->lst_nbr - 1)
+	while (data->data3.exec_i < data->data2.lst_nbr - 1)
 	{
-		close(data->data3->fds[data->data3->exec_i][0]);
-		close(data->data3->fds[data->data3->exec_i][1]);
-		data->data3->exec_i++;
+		close(data->data3.fds[data->data3.exec_i][0]);
+		close(data->data3.fds[data->data3.exec_i][1]);
+		data->data3.exec_i++;
 	}
-	data->data3->exec_i = 0;
-	close(data->data5->stdin_save);
-	close(data->data5->stdout_save);
+	data->data3.exec_i = 0;
+	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
 }

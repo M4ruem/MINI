@@ -113,13 +113,12 @@ typedef struct s_data
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
 	t_env_list	*env_table_sorted;
-	t_data1		*data1;
-	t_data2		*data2;
-	t_data3		*data3;
-	t_data4		*data4;
-	t_data5		*data5;
+	t_data1		data1;
+	t_data2		data2;
+	t_data3		data3;
+	t_data4		data4;
+	t_data5		data5;
 }				t_data;
-
 
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */
@@ -216,7 +215,8 @@ void		main_fonction_two(t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
 /* -------------------------------------------------------------------------- */
-
+void		ft_continue3(t_data *data);
+void		ft_continue2(t_data *data, char *str);
 void		close_hell(t_data *data, int key);
 char		*ft_strmjoin(char *s1, char c);
 size_t		ft_strlen(const char *str);

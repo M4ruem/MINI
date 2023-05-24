@@ -15,10 +15,10 @@
 int	syntax_error(t_data *data)
 {
 	write(2, "Syntax error after > < >> <<\n", 30);
-	data->data5->last_error = 258;
-	free(data->data4->redir_file);
-	free(data->data4->redir_type);
-	free(data->data3->pcommand);
+	data->data5.last_error = 258;
+	free(data->data4.redir_file);
+	free(data->data4.redir_type);
+	free(data->data3.pcommand);
 	ft_lstclear(&data->cmd_table);
 	return (-1);
 }
@@ -28,19 +28,19 @@ int	parserror(int nbr, t_data *data)
 	if (nbr == 1)
 	{
 		write(2, "syntax error near unexpected token `|'\n", 40);
-		data->data5->last_error = 258;
+		data->data5.last_error = 258;
 		return (-1);
 	}
 	if (nbr == 2)
 	{
 		write(2, "Error quote not closed\n", 24);
-		data->data5->last_error = 1;
+		data->data5.last_error = 1;
 		return (-1);
 	}
 	if (nbr == 3)
 	{
 		write(2, "Syntax error\n", 14);
-		data->data5->last_error = 258;
+		data->data5.last_error = 258;
 		return (-1);
 	}
 	if (nbr == -2)
@@ -60,22 +60,22 @@ void	exekerror(int nbr, t_data *data)
 	(void)data;
 	if (nbr == 2)
 	{
-		while (i <= data->data4->nbr_save + 1)
-			free(data->data1->arg_tabl[i++]);
-		free(data->data1->arg_tabl);
-		data->data5->last_error = 127;
+		while (i <= data->data4.nbr_save + 1)
+			free(data->data1.arg_tabl[i++]);
+		free(data->data1.arg_tabl);
+		data->data5.last_error = 127;
 		write(2, "Command not found\n", 19);
-		if (data->data5->is_pipe == 1)
+		if (data->data5.is_pipe == 1)
 			exit(127);
 	}
 	if (nbr == 3)
 	{
 		write(2, "Error with redirections\n", 25);
-		data->data5->last_error = 1;
+		data->data5.last_error = 1;
 	}
 	if (nbr == 4)
 	{
 		write(2, "No command after pipe\n", 23);
-		data->data5->last_error = 1;
+		data->data5.last_error = 1;
 	}
 }

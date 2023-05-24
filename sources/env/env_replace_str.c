@@ -20,7 +20,7 @@ char	*ft_search_and_change_env_var(t_data *data, char *str)
 	while (str[i])
 	{
 		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 \
-			|| str[i + 1] == '_') && data->data1->squote == 0)
+			|| str[i + 1] == '_') && data->data1.squote == 0)
 		{
 			str = ft_change_var_env(str, i, data);
 			if (i > 0)
