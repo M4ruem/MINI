@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:05 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:22:30 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:02:24 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	str_diff(char *str1, char *str2)
 	int	i;
 
 	if (!str1 || !str2)
-		return (1);
+		return (0);
 	i = 0;
 	while (str1[i] && str2[i])
 	{

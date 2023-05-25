@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 15:01:39 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/25 11:25:53 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+
+#ifndef GLOBAL_H
+# define GLOBAL_H
+extern int	g_sigint;
+#endif
 
 typedef struct s_cmd_list
 {
@@ -119,6 +124,7 @@ typedef struct s_data
 	t_data4		data4;
 	t_data5		data5;
 }				t_data;
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */

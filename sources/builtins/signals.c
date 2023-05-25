@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:36 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:09:05 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:31:20 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	setup_term(int save)
 
 int	str_is_empty(char *str)
 {
-	int	i;
-
-	i = 0;
-	if (str[i])
+	if (str[0])
 		return (1);
 	return (0);
 }

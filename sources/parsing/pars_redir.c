@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   pars_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:19 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 03:01:43 by jalel            ###   ########.fr       */
+/*   Updated: 2023/05/25 12:33:34 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	check_rl(void)
+{
+	if (g_sigint == 1)
+		rl_done = 1;
+	return (0);
+}
+
+void	sig_handler_hd(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_sigint = 1;
+	}
+}
 
 void	here_doc_fct(t_data *data, char *str)
 {
@@ -18,25 +33,32 @@ void	here_doc_fct(t_data *data, char *str)
 	int		fd;
 	char	*str2;
 
+	g_sigint = 0;
 	str2 = NULL;
 	file = ft_strjoin_c("/tmp/.here_doc", \
 	(char)(data->data1.here_doc_nbr + 97));
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(file);
-	while (1)
+	signal(SIGINT, sig_handler_hd);
+	rl_event_hook = check_rl;
+	while (g_sigint != 1)
 	{
 		str2 = readline("> ");
-		signal(SIGINT, handler2);
-		signal(SIGQUIT, handler2);
-		str2 = ft_search_and_change_env_var(data, str2);
+		if (str2 == NULL)
+		{
+			write(fd, "\n", 1);
+			break ;
+		}
 		if (str_diff(str, str2) == 0)
 			break ;
+		str2 = ft_search_and_change_env_var(data, str2);
 		write(fd, str2, ft_strlen(str2));
 		write(fd, "\n", 1);
 		free(str2);
 	}
 	close(fd);
 	free(str2);
+	g_sigint = 0;
 }
 
 int	redir_parsing2(t_data *data, char *str)

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:04 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:12:56 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 09:59:20 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_search_and_change_env_var(t_data *data, char *str)
 	int		i;
 
 	i = 0;
+	if (data == NULL || str == NULL || str[0] == '\0')
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 \

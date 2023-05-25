@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 17:19:46 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/25 12:00:13 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	main_fonction_two(t_data *data)
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	setup_term(0);
-	data->main_str = readline("Minisheru $> ");
+	data->main_str = readline("Minisheru > ");
 	setup_term(1);
 	if (!data->main_str)
 		bin_exit(data, 0);
@@ -57,11 +57,13 @@ void	main_fonction_two(t_data *data)
 	data->data3.main_error = parserror(ft_lexer(data->main_str, data), data);
 }
 
+int	g_sigint;
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 	int i;
-	
+
 	i = 0;
 	if (argc != 1 || !(argv[0]))
 		exit (0);
@@ -70,6 +72,7 @@ int	main(int argc, char **argv, char **env)
 	data.data5.last_error = 0;
 	while (1)
 	{
+		rl_done = 0;
 		main_fonction_two(&data);
 		if (data.data3.main_error == 0)
 		{
