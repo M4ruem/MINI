@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-static void	handler(int sigtype)
+void	handler(int sigtype)
 {
 	if (sigtype == SIGINT)
 	{
@@ -23,7 +23,7 @@ static void	handler(int sigtype)
 	}
 }
 
-static void	handler2(int sigtype)
+void	handler2(int sigtype)
 {
 	if (sigtype == SIGINT)
 	{

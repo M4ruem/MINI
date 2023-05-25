@@ -26,6 +26,8 @@ void	here_doc_fct(t_data *data, char *str)
 	while (1)
 	{
 		str2 = readline("> ");
+		signal(SIGINT, handler2);
+		signal(SIGQUIT, handler2);
 		str2 = ft_search_and_change_env_var(data, str2);
 		if (str_diff(str, str2) == 0)
 			break ;

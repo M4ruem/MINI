@@ -98,6 +98,7 @@ char	**get_cmd(t_data *data)
 	int		i;
 
 	str = data->cmd_table->cmd;
+	str = ft_strtrim(str, " ");
 	data->data2.nbr = get_argnbr(str, data);
 	i = strlen(str) - 1;
 	if (i == -1)

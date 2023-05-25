@@ -185,7 +185,8 @@ void		getcmd_and_pipe_three(t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                                  builtins                                  */
 /* -------------------------------------------------------------------------- */
-
+void		handler(int sigtype);
+void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
@@ -216,6 +217,8 @@ void		main_fonction_two(t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
 /* -------------------------------------------------------------------------- */
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strtrim(char const *s1, char const *set);
 void		ft_continue3(t_data *data);
 void		ft_continue2(t_data *data, char *str);
 void		close_hell(t_data *data, int key);
