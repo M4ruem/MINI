@@ -11,10 +11,10 @@ SRC = ./sources/main.c \
 	./sources/env/env_lst.c ./sources/env/env_utils.c ./sources/env/env_utils2.c ./sources/env/env_replace_list.c \
 	./sources/env/env_replace_str.c ./sources/exec/exec_cmd.c ./sources/exec/exec_path.c ./sources/exec/exec_one.c \
 	./sources/exec/exec_two.c ./sources/parsing/pars_redir.c ./sources/parsing/parsing.c ./sources/parsing/parsing2.c \
-	./sources/parsing/rm_quote.c ./sources/parsing/find_dollar.c ./sources/utils/cmd_utils.c ./sources/utils/cmd_utils2.c ./sources/utils/ft_utils.c \
+	./sources/parsing/rm_quote.c ./sources/utils/cmd_utils.c ./sources/utils/cmd_utils2.c ./sources/utils/ft_utils.c \
 	./sources/utils/ft_utils2.c ./sources/utils/ft_utils3.c ./sources/utils/ft_utils4.c sources/utils/ft_strtrim.c\
 	sources/utils/ft_calloc.c
-	
+
 PURPLE	= \033[38;5;213m
 
 MINININI	= @printf "$(PURPLE)        _       _     _                      \n"

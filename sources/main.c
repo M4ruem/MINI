@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/25 12:00:13 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:09:25 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	handler2(int sigtype)
 	}
 	if (sigtype == SIGQUIT)
 	{
-		printf("Quit: 3\n");
+		printf("Quit (core dumped)\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 	}

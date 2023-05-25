@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/25 11:25:53 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:53:19 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 # include <readline/history.h>
 # include <termios.h>
 
-#ifndef GLOBAL_H
-# define GLOBAL_H
+//# ifndef GLOBAL_H
+//# define GLOBAL_H
+
 extern int	g_sigint;
-#endif
+
+//# endif
 
 typedef struct s_cmd_list
 {
@@ -124,7 +126,6 @@ typedef struct s_data
 	t_data4		data4;
 	t_data5		data5;
 }				t_data;
-
 
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */
@@ -223,8 +224,8 @@ void		main_fonction_two(t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
 /* -------------------------------------------------------------------------- */
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strtrim(char const *s1, char const *set);
+void		*ft_calloc(size_t nmemb, size_t size);
+char		*ft_strtrim(char const *s1, char const *set);
 void		ft_continue3(t_data *data);
 void		ft_continue2(t_data *data, char *str);
 void		close_hell(t_data *data, int key);
