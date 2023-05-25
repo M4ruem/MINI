@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:19 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/25 12:33:34 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:47:48 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	here_doc_fct(t_data *data, char *str)
 			write(fd, "\n", 1);
 			break ;
 		}
+		//	signal(SIGQUIT, handler2);
+		//	free(str2);
+		//	break;
+		//}
+		//signal(SIGINT, handler2);
+		//str2 = ft_search_and_change_env_var(data, str2);
 		if (str_diff(str, str2) == 0)
 			break ;
 		str2 = ft_search_and_change_env_var(data, str2);
