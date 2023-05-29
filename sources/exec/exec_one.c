@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 17:09:28 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:24:12 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int	ft_execution(t_data *data, char **env)
 	close_hell(data, 0);
 	if (data->data2.lst_nbr == 1)
 	{
-		//close_hell(data, 1);
 		return (exec_one_cmd(data, env));
 	}
 	if (data->data2.lst_nbr > 1)
@@ -132,11 +131,9 @@ int	ft_execution(t_data *data, char **env)
 		data->data5.is_pipe = 1;
 		if (last->cmd[0] == '\0')
 		{
-		//	close_hell(data, 1);
 			return (4);
 		}
 		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
-		//close_hell(data, 1);
 		return (exec_cmds(data, env));
 	}
 	return (0);

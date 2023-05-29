@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/25 16:53:19 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:22:20 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@
 # include <readline/history.h>
 # include <termios.h>
 
-//# ifndef GLOBAL_H
-//# define GLOBAL_H
-
 extern int	g_sigint;
-
-//# endif
 
 typedef struct s_cmd_list
 {
@@ -142,6 +137,7 @@ int			str_is_empty(char *str);
 void		here_doc_fct(t_data *data, char *str);
 int			ft_lexer2(t_data *data, char *str);
 int			ft_parser2(t_data *data, char *str);
+void		here_doc_fct(t_data *data, char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                                     env                                    */
@@ -188,6 +184,8 @@ int			getcmd_and_pipe_two(t_data *data);
 int			exec_cmds_second(t_data *data, char **env);
 void		exec_cmds_two(t_data *data);
 void		getcmd_and_pipe_three(t_data *data);
+char		**allocate_tabl(t_data **data);
+char		**fill_tabl(t_data **data, char *str, char **tabl);
 
 /* -------------------------------------------------------------------------- */
 /*                                  builtins                                  */
@@ -253,5 +251,7 @@ int			ft_lstsize(t_cmd_list *lst);
 t_cmd_list	*ft_lstlast(t_cmd_list *lst);
 void		ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new);
 void		ft_lstclear(t_cmd_list **lst);
+int			ft_is_chr(char c, t_data *data);
+int			check_rl(void);
 
 #endif

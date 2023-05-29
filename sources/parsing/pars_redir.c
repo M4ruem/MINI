@@ -6,68 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:19 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/25 18:20:20 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:21:23 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	check_rl(void)
-{
-	if (g_sigint == 1)
-		rl_done = 1;
-	return (0);
-}
-
-void	sig_handler_hd(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_sigint = 1;
-	}
-}
-
-void	here_doc_fct(t_data *data, char *str)
-{
-	char	*file;
-	int		fd;
-	char	*str2;
-
-	g_sigint = 0;
-	str2 = NULL;
-	file = ft_strjoin_c("/tmp/.here_doc", \
-	(char)(data->data1.here_doc_nbr + 97));
-	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	free(file);
-	signal(SIGINT, sig_handler_hd);
-	rl_event_hook = check_rl;
-	while (g_sigint != 1)
-	{
-		str2 = readline("> ");
-		if (str2 == NULL)
-		{
-		//	write(fd, "\n", 1);
-		//	break ;
-		//}
-			signal(SIGQUIT, handler2);
-			printf("warning: here-document at line 1 delimited by end-of-file (wanted `EOF')\n");
-			//write(fd, "\n", 1);
-			//free(str2);
-			break;
-		}
-		//signal(SIGINT, handler2);
-		//str2 = ft_search_and_change_env_var(data, str2);
-		if (str_diff(str, str2) == 0)
-			break ;
-		str2 = ft_search_and_change_env_var(data, str2);
-		write(fd, str2, ft_strlen(str2));
-		write(fd, "\n", 1);
-		//free(str2);
-	}
-	close(fd);
-	free(str2);
-	g_sigint = 0;
-}
 
 int	redir_parsing2(t_data *data, char *str)
 {
@@ -89,15 +32,6 @@ int	redir_parsing2(t_data *data, char *str)
 	data->data2.rdj++;
 	while (str[data->data2.rdj] == ' ')
 		data->data2.rdj++;
-	return (0);
-}
-
-int	ft_is_chr(char c, t_data *data)
-{
-	if ((c == 33 || c == 35 || c == 42 || c == 40 || c == 41
-			|| c == 59 || c == 47 || c == 63 || c == 124)
-		&& data->data1.squote == 0 && data->data1.dquote == 0)
-		return (1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:22 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:16:41 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:54:36 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,7 @@ char	**get_cmd(t_data *data)
 		str[i + 1] = '\0';
 	}
 	data->data4.nbr_save = data->data2.nbr;
-	tabl = malloc(sizeof(char *) * (data->data2.nbr + 2));
-	if (!tabl)
-		exit(EXIT_FAILURE);
-	tabl[data->data2.nbr + 1] = NULL;
-	tabl = put_cmd_in_arg(i, data, str, tabl);
+	tabl = allocate_tabl(&data);
+	tabl = fill_tabl(&data, str, tabl);
 	return (tabl);
 }

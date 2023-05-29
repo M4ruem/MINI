@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:23 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 03:02:41 by jalel            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:21:56 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_lexer(char *str, t_data *data)
 	data->data3.lexer_start = 0;
 	data->data2.ly = 0;
 	while (str[data->data2.ly] && (str[data->data2.ly] == ' '
-		|| str[data->data2.ly] == '\n' || str[data->data2.ly] == '\t'))
+			|| str[data->data2.ly] == '\n' || str[data->data2.ly] == '\t'))
 		data->data2.ly++;
 	if (str[data->data2.ly] == '|')
 		return (1);

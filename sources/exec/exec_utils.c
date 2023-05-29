@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 10:31:49 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/25 12:43:00 by cormiere         ###   ########.fr       */
+/*   Created: 2023/05/29 14:53:34 by cormiere          #+#    #+#             */
+/*   Updated: 2023/05/29 14:55:11 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	**allocate_tabl(t_data **data)
 {
-	size_t	i;
-	char	*dest;
+	char	**tabl;
 
-	i = 0;
-	if (nmemb == 0 || size <= 0)
-		return (malloc(0));
-	if (!(nmemb * size / size == nmemb))
-		return (NULL);
-	dest = malloc(size * nmemb);
-	if (dest == NULL)
-		return (NULL);
-	while (i < nmemb * size)
-	{
-		dest[i] = 0;
-		i++;
-	}
-	return (dest);
+	tabl = malloc(sizeof(char *) * ((*data)->data2.nbr + 2));
+	if (!tabl)
+		exit(EXIT_FAILURE);
+	tabl[(*data)->data2.nbr + 1] = NULL;
+	return (tabl);
+}
+
+char	**fill_tabl(t_data **data, char *str, char **tabl)
+{
+	int	i;
+
+	i = strlen(str) - 1;
+	tabl = put_cmd_in_arg(i, *data, str, tabl);
+	return (tabl);
 }
