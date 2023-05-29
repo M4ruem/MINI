@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 15:22:20 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:06:51 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef struct s_data4
 	int			rd_error;
 	int			is_built_in;
 	int			bin_nbr;
-	int			bin_inpipe;
 	int			nbr_save;
 	int			free_i;
 	int			e;
