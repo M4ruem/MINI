@@ -42,12 +42,12 @@ void	ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new)
 	}
 }
 
-void	ft_lstclear(t_cmd_list **lst)
+void	ft_lstclear(t_data *data, t_cmd_list **lst)
 {
 	t_cmd_list	*nexto;
 	int			i;
 
-	if (!lst)
+	if (!lst || data->bsn == 1)
 		return ;
 	nexto = (*lst)->next;
 	free(*lst);

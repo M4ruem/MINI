@@ -50,6 +50,8 @@ int	get_argnbr(char *str, t_data *data)
 	nbr = 0;
 	data->data1.squote = 0;
 	data->data1.dquote = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i] == ' ')
 		i++;
 	while (str[i])
@@ -100,20 +102,22 @@ char	**get_cmd(t_data *data)
 	str = data->cmd_table->cmd;
 	str = ft_strtrim(str, " ");
 	data->data2.nbr = get_argnbr(str, data);
-	i = strlen(str) - 1;
+	i = ft_strlen(str) - 1;
 	if (i == -1)
 		i = 0;
-	if (str[i] == ' ' && data->data1.squote == 0
-		&& data->data1.dquote == 0)
-	{
-		data->data2.nbr--;
-		while (str[i] == ' ' && data->data1.squote == 0
+	if (str != NULL)
+		if (str[i] == ' ' && data->data1.squote == 0
 			&& data->data1.dquote == 0)
-			i--;
-		str[i + 1] = '\0';
-	}
+		{
+			data->data2.nbr--;
+			while (str[i] == ' ' && data->data1.squote == 0
+				&& data->data1.dquote == 0)
+				i--;
+			str[i + 1] = '\0';
+		}
 	data->data4.nbr_save = data->data2.nbr;
 	tabl = allocate_tabl(&data);
 	tabl = fill_tabl(&data, str, tabl);
+	free(str);
 	return (tabl);
 }

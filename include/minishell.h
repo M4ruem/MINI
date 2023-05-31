@@ -110,6 +110,8 @@ typedef struct s_data5
 typedef struct s_data
 {
 	char		*main_str;
+	int			bsn;
+	int			hell;
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
@@ -249,7 +251,7 @@ void		ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new);
 int			ft_lstsize(t_cmd_list *lst);
 t_cmd_list	*ft_lstlast(t_cmd_list *lst);
 void		ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new);
-void		ft_lstclear(t_cmd_list **lst);
+void		ft_lstclear(t_data *data, t_cmd_list **lst);
 int			ft_is_chr(char c, t_data *data);
 int			check_rl(void);
 

@@ -45,10 +45,14 @@ void	main_fonction_two(t_data *data)
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	data->data1.here_doc_nbr = 0;
 	data->data4.nbr_save = 0;
+	setup_term(0);
+	data->bsn = 0;
+	data->hell = 0;
+	data->main_str = readline("Minisheru > ");
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
-	setup_term(0);
-	data->main_str = readline("Minisheru > ");
+	if (ft_strncmp(data->main_str, "") == 0)
+		data->bsn = 1;
 	setup_term(1);
 	if (!data->main_str)
 		bin_exit(data, 0);
@@ -63,7 +67,7 @@ void	run_main_loop(t_data *data, char **env)
 	{
 		rl_done = 0;
 		main_fonction_two(data);
-		if (data->data3.main_error == 0)
+		if (data->data3.main_error == 0 && data->bsn == 0)
 		{
 			data->cmd_table_temp = data->cmd_table;
 			data->cmd_table = data->cmd_table->next;
@@ -74,7 +78,7 @@ void	run_main_loop(t_data *data, char **env)
 		}
 		ft_free_all(data);
 		if (data->data3.main_error != -1)
-			ft_lstclear(&data->cmd_table_temp);
+			ft_lstclear(data, &data->cmd_table_temp);
 		else
 			free(data->cmd_table);
 	}

@@ -34,6 +34,8 @@ char	*ft_malloc_str(char *s1)
 	int		i;
 
 	i = -1;
+	if (s1 == NULL)
+		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
 		return (NULL);

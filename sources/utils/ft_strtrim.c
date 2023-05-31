@@ -37,6 +37,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (s1 == NULL || set == NULL)
 		return (NULL);
 	j = ft_strlen(s1);
+	if (j == 0)
+		return (NULL);
 	while (check(s1[i], set) == 1)
 		i++;
 	while (check(s1[j - 1], set) == 1)

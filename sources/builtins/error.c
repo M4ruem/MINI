@@ -19,7 +19,7 @@ int	syntax_error(t_data *data)
 	free(data->data4.redir_file);
 	free(data->data4.redir_type);
 	free(data->data3.pcommand);
-	ft_lstclear(&data->cmd_table);
+	ft_lstclear(data, &data->cmd_table);
 	return (-1);
 }
 
@@ -84,7 +84,8 @@ void	exekerror(int nbr, t_data *data)
 			free(data->data1.arg_tabl[i++]);
 		free(data->data1.arg_tabl);
 		data->data5.last_error = 127;
-		print_command_not_found(data);
+		if (data->hell == 0)
+			print_command_not_found(data);
 	}
 	if (nbr == 3)
 	{

@@ -27,7 +27,7 @@ char	**fill_tabl(t_data **data, char *str, char **tabl)
 {
 	int	i;
 
-	i = strlen(str) - 1;
+	i = ft_strlen(str) - 1;
 	tabl = put_cmd_in_arg(i, *data, str, tabl);
 	return (tabl);
 }
