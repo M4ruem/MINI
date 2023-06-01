@@ -48,9 +48,9 @@ void	main_fonction_two(t_data *data)
 	setup_term(0);
 	data->bsn = 0;
 	data->hell = 0;
-	data->main_str = readline("Minisheru > ");
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
+	data->main_str = readline("Minisheru > ");
 	if (ft_strncmp(data->main_str, "") == 0)
 		data->bsn = 1;
 	setup_term(1);
