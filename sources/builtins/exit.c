@@ -30,8 +30,12 @@ int	is_number(char *str)
 	return (0);
 }
 
+
 void	bin_exit(t_data *data, int is_pipe)
 {
+	int i;
+
+	i = -1;
 	if (data->data4.nbr_save > 1)
 		printf("exit: too many arguments\n");
 	if (data->data4.nbr_save > 1)
@@ -41,6 +45,10 @@ void	bin_exit(t_data *data, int is_pipe)
 	{
 		if (is_pipe == 0)
 			printf("exit");
+		while (data->data1.paths[++i])
+			free(data->data1.paths[i]);
+		free(data->data1.paths);
+		free(data->cmd_table);
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
 		rl_clear_history();
