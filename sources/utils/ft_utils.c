@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:53 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 13:22:14 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:13:32 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (!str )
+	if (!str)
 		return (0);
 	while (str[i])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:22 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 14:54:36 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:14:03 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	**get_cmd(t_data *data)
 	if (i == -1)
 		i = 0;
 	if (str != NULL)
+	{
 		if (str[i] == ' ' && data->data1.squote == 0
 			&& data->data1.dquote == 0)
 		{
@@ -115,6 +116,7 @@ char	**get_cmd(t_data *data)
 				i--;
 			str[i + 1] = '\0';
 		}
+	}
 	data->data4.nbr_save = data->data2.nbr;
 	tabl = allocate_tabl(&data);
 	tabl = fill_tabl(&data, str, tabl);

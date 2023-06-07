@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 15:36:48 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:22:22 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ static void	print_command_not_found(t_data *data)
 
 static void	handle_directory_error(t_data *data)
 {
-	if (access(data->cmd_table->cmd, X_OK) == 0)
+	if	(access(data->cmd_table->cmd, F_OK) == 0)
+		return ;
+	else if (access(data->cmd_table->cmd, X_OK) == 0)
 	{
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
 		return ;

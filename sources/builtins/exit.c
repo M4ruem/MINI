@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:04:55 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:14:31 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ int	is_number(char *str)
 	return (0);
 }
 
-
 void	bin_exit(t_data *data, int is_pipe)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (data->data4.nbr_save > 1)
