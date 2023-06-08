@@ -42,7 +42,6 @@ void	handler2(int sigtype)
 void	main_fonction_two(t_data *data)
 {
 	data->data1.paths = recup_path(data);
-	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	data->data1.here_doc_nbr = 0;
 	data->data4.nbr_save = 0;
 	setup_term(0);
@@ -52,7 +51,12 @@ void	main_fonction_two(t_data *data)
 	signal(SIGQUIT, SIG_IGN);
 	data->main_str = readline("Minisheru > ");
 	if (ft_strncmp(data->main_str, "") == 0)
+	{
+		data->data3.main_error = 0;
 		data->bsn = 1;
+		return;
+	}
+	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	setup_term(1);
 	if (!data->main_str)
 		bin_exit(data, 0);
