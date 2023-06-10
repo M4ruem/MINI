@@ -56,6 +56,13 @@ void	main_fonction_two(t_data *data)
 		data->bsn = 1;
 		return;
 	}
+	if (stupid_problem(data, data->main_str) == 1)
+	{
+		data->data3.main_error = 0;
+		add_history(data->main_str);
+		data->bsn = 1;
+		return ;
+	}
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	setup_term(1);
 	if (!data->main_str)

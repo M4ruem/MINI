@@ -254,5 +254,6 @@ void		ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new);
 void		ft_lstclear(t_data *data, t_cmd_list **lst);
 int			ft_is_chr(char c, t_data *data);
 int			check_rl(void);
+int			stupid_problem(t_data *data ,char *str);
 
 #endif

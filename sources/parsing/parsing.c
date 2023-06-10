@@ -41,6 +41,68 @@ int	ft_lexer2(t_data *data, char *str)
 	return (0);
 }
 
+int finsh_stupid(t_data *data, char *str, int x, int j)
+{
+	int i;
+	int len;
+
+	len  = ft_strlen(str);
+	i = 0;
+	while (str[i] == '/')
+		i++;
+	if (i == len)
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == '/')
+			x++;
+		if (str[i] == '.')
+			j++;
+		i++;
+	}
+	if (x + j == len)
+	{
+		printf("bash: %s: Is a directory\n", str);
+		data->data5.last_error = 126;
+		return (1);
+	}
+	return (0);
+
+}
+
+int	stupid_problem(t_data *data, char *str)
+{
+	int i;
+	int j;
+	int x;
+	int len;
+	
+	i = 0;
+	x = 0;
+	j = 0;
+	len = ft_strlen(str);
+	if (str == NULL)
+		return (2);
+	if (ft_strncmp(str, ".") == 0)
+	{
+		printf("Minisheru: .: filename argument required]\n");
+		printf(".: usage: . filename [arguments]\n");
+		data->data5.last_error = 2;
+		return (1);
+	}
+	while  (str[i] == '.')
+		i++;
+	if (i == len)
+	{
+		printf("%s: command not found\n", str);	
+		data->data5.last_error = 127;
+		return (1);
+	}
+	if (finsh_stupid(data, str, x, j) == 1)
+		return (1);
+	return (0);
+}
+
 int	ft_lexer(char *str, t_data *data)
 {
 	data->data1.squote = 0;
@@ -110,6 +172,7 @@ int	ft_parser(char *str, t_data *data, int end)
 {
 	if (str[end])
 		str[end] = '\0';
+	
 	data->data3.pcommand = NULL;
 	data->data4.tabl_s = count_redir(str, data);
 	if (data->data4.tabl_s == -1)
