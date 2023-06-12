@@ -14,27 +14,25 @@
 
 char	**rm_quote(char **tabl, t_data *data)
 {
-	char	*str;
-
 	data->data2.i = 0;
 	data->data2.j = 0;
-	str = NULL;
+	data->data5.str_f = NULL;
 	data->data1.dquote = 0;
 	data->data1.squote = 0;
 	while (tabl[data->data2.j])
 	{
 		data->data2.i = 0;
-		str = malloc(sizeof(char) * (ft_strlen(tabl[data->data2.j]) + 1));
-		if (!str)
+		data->data5.str_f = malloc(sizeof(char) * (ft_strlen(tabl[data->data2.j]) + 1));
+		if (!data->data5.str_f)
 			exit(EXIT_FAILURE);
-		str[ft_strlen(tabl[data->data2.j])] = '\0';
+		data->data5.str_f[ft_strlen(tabl[data->data2.j])] = '\0';
 		data->data2.x = 0;
 		data->data2.nbr = 0;
 		while (tabl[data->data2.j][data->data2.i])
-			str = rm_quote2(data, tabl, str);
-		str[ft_strlen(tabl[data->data2.j]) - data->data2.nbr] = '\0';
+			data->data5.str_f = rm_quote2(data, tabl, data->data5.str_f);
+		data->data5.str_f[ft_strlen(tabl[data->data2.j]) - data->data2.nbr] = '\0';
 		free(tabl[data->data2.j]);
-		tabl[data->data2.j] = str;
+		tabl[data->data2.j] = data->data5.str_f;
 		data->data2.j = data->data2.j + 1;
 	}
 	return (tabl);

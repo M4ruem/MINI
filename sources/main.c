@@ -41,6 +41,9 @@ void	handler2(int sigtype)
 
 void	main_fonction_two(t_data *data)
 {
+	int i;
+
+	i = 0;
 	data->data1.paths = recup_path(data);
 	data->data1.here_doc_nbr = 0;
 	data->data4.nbr_save = 0;
@@ -56,7 +59,16 @@ void	main_fonction_two(t_data *data)
 		data->bsn = 1;
 		return;
 	}
-	if (stupid_problem(data, data->main_str) == 1)
+	
+	i = stupid_problem(data, data->main_str);
+	if (i == 1)
+	{
+		data->data3.main_error = 0;
+		add_history(data->main_str);
+		data->bsn = 1;
+		return ;
+	}
+	if (i == 3)
 	{
 		data->data3.main_error = 0;
 		add_history(data->main_str);
@@ -77,6 +89,7 @@ void	run_main_loop(t_data *data, char **env)
 	while (1)
 	{
 		rl_done = 0;
+		data->str_exit = 0;
 		main_fonction_two(data);
 		if (data->data3.main_error == 0 && data->bsn == 0)
 		{

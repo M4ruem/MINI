@@ -30,9 +30,28 @@ int	is_number(char *str)
 	return (0);
 }
 
+void	free_for_exit(t_data *data, int x)
+{
+	int i; 
+	
+	i = 0;
+	if (data->str_exit == 1)
+	{
+		free(data->data4.redir_type);
+		free(data->data4.redir_file);
+		free(data->data3.pcommand);
+		while (data->data1.arg_tabl[++i])
+			free(data->data1.arg_tabl[i]);
+		if (x == 0)
+			free(data->data5.str_f);
+		free(data->data1.arg_tabl);
+	}
+}
+
 void	bin_exit(t_data *data, int is_pipe)
 {
 	int	i;
+	int len;
 
 	i = -1;
 	if (data->data4.nbr_save > 1)
@@ -56,11 +75,15 @@ void	bin_exit(t_data *data, int is_pipe)
 			if (is_number(data->data1.arg_tabl[1]) == 0
 				|| ft_atoi(data->data1.arg_tabl[1]) == -2)
 			{
+				free_for_exit(data, 1);
 				printf(" numeric argument required\n");
 				exit(255);
 			}
-			exit(ft_atoi((data->data1.arg_tabl[1])) % 256);
+			len = ft_atoi((data->data1.arg_tabl[1])) % 256;
+			free_for_exit(data, 1);
+			exit(len);
 		}
+		free_for_exit(data, 0);
 		printf("\n");
 		exit(EXIT_SUCCESS);
 	}

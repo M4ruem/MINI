@@ -39,7 +39,10 @@ int	built_in(t_data *data, char **env, int nbr)
 	cmd_redir(data, env, nbr);
 	built_in_two(data);
 	if (ft_strncmp(data->data1.arg_tabl[0], "exit") == 0)
+	{
+		data->str_exit = 1;
 		bin_exit(data, data->data5.is_pipe);
+	}
 	i = 0;
 	while (i <= data->data4.nbr_save + 1)
 		free(data->data1.arg_tabl[i++]);

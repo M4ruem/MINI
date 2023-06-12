@@ -97,6 +97,7 @@ typedef struct s_data4
 
 typedef struct s_data5
 {
+	char		*str_f;
 	int			ppi;
 	int			echo_i;
 	int			echo_j;
@@ -112,6 +113,7 @@ typedef struct s_data
 	char		*main_str;
 	int			bsn;
 	int			hell;
+	int			str_exit;
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
