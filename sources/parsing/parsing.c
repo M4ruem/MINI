@@ -60,7 +60,8 @@ int check_stupid_quotes(char *str)
 			x++;
 		i++;
 	}
-	if (j % 2 != 0 || x % 2 != 0)
+	if ((j % 2 != 0 || x % 2 != 0) && (j == len || x == len\
+					||(j + x) == len))
 		printf("Error quote not closed\n");
 	if (j == len || x == len || (j + x) == len)
 		return (1);

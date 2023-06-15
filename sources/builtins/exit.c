@@ -34,17 +34,24 @@ void	free_for_exit(t_data *data, int x)
 {
 	int i; 
 	
-	i = 0;
+	i = -1;
 	if (data->str_exit == 1)
 	{
-		free(data->data4.redir_type);
 		free(data->data4.redir_file);
+		free(data->data4.redir_type);
 		free(data->data3.pcommand);
-		while (data->data1.arg_tabl[++i])
-			free(data->data1.arg_tabl[i]);
+		free(data->cmd_table_temp);
 		if (x == 0)
+		{
 			free(data->data5.str_f);
-		free(data->data1.arg_tabl);
+			free(data->data1.arg_tabl);
+		}
+		else
+		{
+			while (data->data1.arg_tabl[++i])
+				free(data->data1.arg_tabl[i]);
+			free(data->data1.arg_tabl);
+		}
 	}
 }
 
@@ -66,6 +73,7 @@ void	bin_exit(t_data *data, int is_pipe)
 		while (data->data1.paths[++i])
 			free(data->data1.paths[i]);
 		free(data->data1.paths);
+		ft_lstclear(data, &data->cmd_table);
 		free(data->cmd_table);
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
