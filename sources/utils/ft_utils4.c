@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:11 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 03:04:28 by jalel            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:04:15 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	close_hell(t_data *data, int key)
 		data->data5.stdout_save = dup(0);
 		data->data5.is_pipe = 0;
 		data->data4.is_built_in = 0;
+		close(data->data5.stdin_save);
+		close(data->data5.stdout_save);
 	}
 }
 

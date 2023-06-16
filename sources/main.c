@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 14:37:07 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:12:57 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	main_fonction_two(t_data *data)
 		data->bsn = 1;
 		return;
 	}
-	
+
 	i = stupid_problem(data, data->main_str);
 	if (i == 1)
 	{

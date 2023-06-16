@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_two.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:39 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 03:00:45 by jalel            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:03:15 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ int	exec_cmds_second(t_data *data, char **env)
 	malloc_fds(data);
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr - 1)
+	{
 		pipe(data->data3.fds[data->data3.exec_i++]);
+		//close(data->data3.fds[data->data3.exec_i++][1]);
+	}
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
 	{

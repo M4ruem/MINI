@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:23 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 14:21:56 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:03:59 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_lexer2(t_data *data, char *str)
 			data->data1.r_tabl = 0;
 		}
 		data->data2.li++;
-	}
+		}
 	return (0);
 }
 
@@ -65,7 +65,7 @@ int check_stupid_quotes(char *str)
 		printf("Error quote not closed\n");
 	if (j == len || x == len || (j + x) == len)
 		return (1);
-	return (0); 
+	return (0);
 
 }
 int finsh_stupid(t_data *data, char *str, int x, int j)
@@ -103,7 +103,7 @@ int	stupid_problem(t_data *data, char *str)
 	int j;
 	int x;
 	int len;
-	
+
 	i = 0;
 	x = 0;
 	j = 0;
@@ -123,7 +123,7 @@ int	stupid_problem(t_data *data, char *str)
 		i++;
 	if (i == len)
 	{
-		printf("%s: command not found\n", str);	
+		printf("%s: command not found\n", str);
 		data->data5.last_error = 127;
 		return (1);
 	}

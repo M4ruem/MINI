@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/07 14:14:31 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:04:08 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	is_number(char *str)
 
 void	free_for_exit(t_data *data, int x)
 {
-	int i; 
-	
+	int i;
+
 	i = -1;
 	if (data->str_exit == 1)
 	{
