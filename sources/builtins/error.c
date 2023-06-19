@@ -54,20 +54,34 @@ int	parserror(int nbr, t_data *data)
 
 static void	print_command_not_found(t_data *data)
 {
+	int	i;
+
+	i = -1;
 	if (data->cmd_table->cmd)
 		printf("%s : Command not found\n", data->cmd_table->cmd);
 	else
 		write(2, "Command not found\n", 19);
 	if (data->data5.is_pipe == 1)
+	{
+		while (data->data1.paths[++i])
+			free(data->data1.paths[i]);
+		free(data->data1.paths);
+		i = 0;
+		free_fds_error(data);
+		ft_lstclear(data, &data->cmd_table_temp);
+		free(data->cmd_table_temp);
+		ft_env_lstclear(&data->env_table);
+		free(data->data3.fds);
 		exit(127);
+	}
 }
 
 static void	handle_directory_error(t_data *data)
 {
-	if	(access(data->cmd_table->cmd, F_OK) == 0)
+	if (access(data->cmd_table->cmd, F_OK) == 0)
 		return ;
 	else if (access(data->cmd_table->cmd, X_OK) == 0)
-	{
+	{	
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
 		return ;
 	}

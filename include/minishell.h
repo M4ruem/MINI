@@ -58,6 +58,7 @@ typedef struct s_data2
 {
 	int			lst_nbr;
 	int			nbr;
+	char		*full_path; 
 	int			i;
 	int			li;
 	int			ly;
@@ -101,6 +102,9 @@ typedef struct s_data5
 	int			ppi;
 	int			echo_i;
 	int			echo_j;
+	char 		*str;
+	char		**tabl;
+	int			i;
 	int			echo_n;
 	int			is_pipe;
 	int			stdin_save;
@@ -257,5 +261,9 @@ void		ft_lstclear(t_data *data, t_cmd_list **lst);
 int			ft_is_chr(char c, t_data *data);
 int			check_rl(void);
 int			stupid_problem(t_data *data ,char *str);
+void		free_fds_error(t_data *data);
+int			stupid_problem(t_data *data, char *str);
+int			finish_stupid(t_data *data, char *str, int x, int j);
+int			check_stupid_quotes(char *str);
 
 #endif

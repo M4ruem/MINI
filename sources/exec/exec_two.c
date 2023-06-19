@@ -99,10 +99,7 @@ int	exec_cmds_second(t_data *data, char **env)
 	malloc_fds(data);
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr - 1)
-	{
 		pipe(data->data3.fds[data->data3.exec_i++]);
-		//close(data->data3.fds[data->data3.exec_i++][1]);
-	}
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
 	{

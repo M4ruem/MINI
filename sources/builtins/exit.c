@@ -32,7 +32,7 @@ int	is_number(char *str)
 
 void	free_for_exit(t_data *data, int x)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (data->str_exit == 1)
@@ -55,10 +55,31 @@ void	free_for_exit(t_data *data, int x)
 	}
 }
 
+static void	ft_continue(t_data *data)
+{
+	int	len;
+
+	if (data->data4.nbr_save == 1)
+	{
+		if (is_number(data->data1.arg_tabl[1]) == 0
+			|| ft_atoi(data->data1.arg_tabl[1]) == -2)
+		{
+			free_for_exit(data, 1);
+			printf(" numeric argument required\n");
+			exit(255);
+		}
+		len = ft_atoi((data->data1.arg_tabl[1])) % 256;
+		free_for_exit(data, 1);
+		exit(len);
+	}
+	free_for_exit(data, 0);
+	printf("\n");
+	exit(EXIT_SUCCESS);
+}
+
 void	bin_exit(t_data *data, int is_pipe)
 {
 	int	i;
-	int len;
 
 	i = -1;
 	if (data->data4.nbr_save > 1)
@@ -78,21 +99,6 @@ void	bin_exit(t_data *data, int is_pipe)
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
 		rl_clear_history();
-		if (data->data4.nbr_save == 1)
-		{
-			if (is_number(data->data1.arg_tabl[1]) == 0
-				|| ft_atoi(data->data1.arg_tabl[1]) == -2)
-			{
-				free_for_exit(data, 1);
-				printf(" numeric argument required\n");
-				exit(255);
-			}
-			len = ft_atoi((data->data1.arg_tabl[1])) % 256;
-			free_for_exit(data, 1);
-			exit(len);
-		}
-		free_for_exit(data, 0);
-		printf("\n");
-		exit(EXIT_SUCCESS);
+		ft_continue(data);
 	}
 }

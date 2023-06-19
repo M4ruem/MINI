@@ -82,8 +82,6 @@ int	ft_continue(t_data *data, char *full_path)
 
 int	put_path(t_data *data)
 {
-	char	*full_path;
-
 	data->data5.ppi = -1;
 	if (data->data1.arg_tabl[0] == NULL)
 	{
@@ -92,21 +90,21 @@ int	put_path(t_data *data)
 	}
 	if (access(data->data1.arg_tabl[0], X_OK) == 0)
 		return (0);
-	full_path = safe_malloc();
-	full_path[0] = '\0';
-	while (access(full_path, X_OK) == -1
+	data->data2.full_path = safe_malloc();
+	data->data2.full_path[0] = '\0';
+	while (access(data->data2.full_path, X_OK) == -1
 		&& data->data5.ppi < data->data1.path_nbr)
 	{
 		data->data5.ppi++;
-		full_path[0] = '\0';
-		free(full_path);
-		full_path = ft_1ststrjoin(data->data1.paths[data->data5.ppi], \
-		data->data1.arg_tabl[0]);
+		data->data2.full_path[0] = '\0';
+		free(data->data2.full_path);
+		data->data2.full_path = ft_1ststrjoin(
+				data->data1.paths[data->data5.ppi], data->data1.arg_tabl[0]);
 	}
 	data->data5.ppi = 0;
-	if (access(full_path, X_OK) == 0)
-		return (ft_continue(data, full_path));
+	if (access(data->data2.full_path, X_OK) == 0)
+		return (ft_continue(data, data->data2.full_path));
 	else
-		free(full_path);
+		free(data->data2.full_path);
 	return (2);
 }

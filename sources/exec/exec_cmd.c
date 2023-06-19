@@ -95,31 +95,27 @@ char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl)
 
 char	**get_cmd(t_data *data)
 {
-	char	*str;
-	char	**tabl;
-	int		i;
-
-	str = data->cmd_table->cmd;
-	str = ft_strtrim(str, " ");
-	data->data2.nbr = get_argnbr(str, data);
-	i = ft_strlen(str) - 1;
-	if (i == -1)
-		i = 0;
-	if (str != NULL)
+	data->data5.str = data->cmd_table->cmd;
+	data->data5.str = ft_strtrim(data->data5.str, " ");
+	data->data2.nbr = get_argnbr(data->data5.str, data);
+	data->data5.i = ft_strlen(data->data5.str) - 1;
+	if (data->data5.i == -1)
+		data->data5.i = 0;
+	if (data->data5.str != NULL)
 	{
-		if (str[i] == ' ' && data->data1.squote == 0
-			&& data->data1.dquote == 0)
+		if (data->data5.str[data->data5.i] == ' '
+			&& data->data1.squote == 0 && data->data1.dquote == 0)
 		{
 			data->data2.nbr--;
-			while (str[i] == ' ' && data->data1.squote == 0
-				&& data->data1.dquote == 0)
-				i--;
-			str[i + 1] = '\0';
+			while (data->data5.str[data->data5.i] == ' '
+				&& data->data1.squote == 0 && data->data1.dquote == 0)
+				data->data5.i--;
+			data->data5.str[data->data5.i + 1] = '\0';
 		}
 	}
 	data->data4.nbr_save = data->data2.nbr;
-	tabl = allocate_tabl(&data);
-	tabl = fill_tabl(&data, str, tabl);
-	free(str);
-	return (tabl);
+	data->data5.tabl = allocate_tabl(&data);
+	data->data5.tabl = fill_tabl(&data, data->data5.str, data->data5.tabl);
+	free(data->data5.str);
+	return (data->data5.tabl);
 }

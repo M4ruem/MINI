@@ -48,3 +48,22 @@ int	check_rl(void)
 		rl_done = 1;
 	return (0);
 }
+
+void	free_fds_error(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->data2.lst_nbr - 1)
+	{
+		close(data->data3.fds[i][0]);
+		close(data->data3.fds[i][1]);
+		i++;
+	}
+	close(0);
+	close(1);
+	close(2);
+	i = -1;
+	while (++i <= data->data2.lst_nbr)
+		free(data->data3.fds[i]);
+}
