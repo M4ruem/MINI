@@ -55,6 +55,24 @@ int	finsh_stupid(t_data *data, char *str, int x, int j)
 	return (0);
 }
 
+int	print_msg(t_data *data, int key, char *str)
+{
+	if (key == 1)
+	{
+		printf("Minisheru: .: filename argument required]\n");
+		printf(".: usage: . filename [arguments]\n");
+		data->data5.last_error = 2;
+		return (1);
+	}
+	if (key == 2)
+	{
+		printf("%s: command not found\n", str);
+		data->data5.last_error = 127;
+		return (1);
+	}
+	return (0);
+}
+
 int	stupid_problem(t_data *data, char *str)
 {
 	int	i;
@@ -71,20 +89,11 @@ int	stupid_problem(t_data *data, char *str)
 	if (check_stupid_quotes(str) == 1)
 		return (3);
 	if (ft_strncmp(str, ".") == 0)
-	{
-		printf("Minisheru: .: filename argument required]\n");
-		printf(".: usage: . filename [arguments]\n");
-		data->data5.last_error = 2;
-		return (1);
-	}
+		return (print_msg(data, 1, str));
 	while (str[i] == '.')
 		i++;
 	if (i == len)
-	{
-		printf("%s: command not found\n", str);
-		data->data5.last_error = 127;
-		return (1);
-	}
+		return (print_msg(data, 2, str));
 	if (finsh_stupid(data, str, x, j) == 1)
 		return (1);
 	return (0);

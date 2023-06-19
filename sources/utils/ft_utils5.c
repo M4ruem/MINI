@@ -49,6 +49,34 @@ int	check_rl(void)
 	return (0);
 }
 
+int	main_utils(t_data *data)
+{
+	int	i;
+
+	if (ft_strncmp(data->main_str, "") == 0)
+	{
+		data->data3.main_error = 0;
+		data->bsn = 1;
+		return (1);
+	}
+	i = stupid_problem(data, data->main_str);
+	if (i == 1)
+	{
+		data->data3.main_error = 0;
+		add_history(data->main_str);
+		data->bsn = 1;
+		return (1);
+	}
+	if (i == 3)
+	{
+		data->data3.main_error = 0;
+		add_history(data->main_str);
+		data->bsn = 1;
+		return (1);
+	}
+	return (0);
+}
+
 void	free_fds_error(t_data *data)
 {
 	int	i;

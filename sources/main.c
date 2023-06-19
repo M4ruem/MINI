@@ -41,9 +41,6 @@ void	handler2(int sigtype)
 
 void	main_fonction_two(t_data *data)
 {
-	int i;
-
-	i = 0;
 	data->data1.paths = recup_path(data);
 	data->data1.here_doc_nbr = 0;
 	data->data4.nbr_save = 0;
@@ -53,28 +50,8 @@ void	main_fonction_two(t_data *data)
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	data->main_str = readline("Minisheru > ");
-	if (ft_strncmp(data->main_str, "") == 0)
-	{
-		data->data3.main_error = 0;
-		data->bsn = 1;
-		return;
-	}
-
-	i = stupid_problem(data, data->main_str);
-	if (i == 1)
-	{
-		data->data3.main_error = 0;
-		add_history(data->main_str);
-		data->bsn = 1;
+	if (main_utils(data) == 1)
 		return ;
-	}
-	if (i == 3)
-	{
-		data->data3.main_error = 0;
-		add_history(data->main_str);
-		data->bsn = 1;
-		return ;
-	}
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	setup_term(1);
 	if (!data->main_str)

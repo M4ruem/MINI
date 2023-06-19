@@ -83,6 +83,7 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 		if (data->cmd_table->cmd[0] == '\0')
 			exit (0);
 		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);
+		free_if_execv_fail(data);
 		exit(0);
 	}
 	return (0);
