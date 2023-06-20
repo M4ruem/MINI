@@ -16,6 +16,7 @@ void	handler(int sigtype)
 {
 	if (sigtype == SIGINT)
 	{
+		g_sigint = 1;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -52,6 +53,11 @@ void	main_fonction_two(t_data *data)
 	data->main_str = readline("Minisheru > ");
 	if (main_utils(data) == 1)
 		return ;
+	if (g_sigint)
+	{
+		g_sigint = 0;
+		data->data5.last_error = 130;
+	}
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	setup_term(1);
 	if (!data->main_str)
@@ -93,6 +99,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1 || !(argv[0]))
 		exit(0);
+	g_sigint = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);
 	data.env_table_sorted = NULL;
 	data.data5.last_error = 0;
