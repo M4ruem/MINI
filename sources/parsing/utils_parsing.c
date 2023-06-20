@@ -98,3 +98,16 @@ int	stupid_problem(t_data *data, char *str)
 		return (1);
 	return (0);
 }
+
+int	continue_func(t_data *data)
+{
+	if (data->data1.arg_tabl[0] == NULL)
+	{
+		data->hell = 1;
+		if (data->cmd_table->redir_file != NULL)
+			return (0);
+		else
+			return (2);
+	}
+	return (3);
+}

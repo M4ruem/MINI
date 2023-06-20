@@ -30,6 +30,14 @@ int	is_number(char *str)
 	return (0);
 }
 
+void	execkerror_utils(t_data *data)
+{
+	write(2, "Error with redirections\n", 25);
+	data->data5.last_error = 1;
+	data->data5.finale = 1;
+	free_if_execv_fail(data);
+}
+
 void	free_for_exit(t_data *data, int x)
 {
 	int	i;

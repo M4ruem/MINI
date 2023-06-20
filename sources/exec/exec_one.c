@@ -72,16 +72,20 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 	i = 0;
 	while (data->cmd_table->redir_type[i] != 0)
 	{
-		if (forward_redir(data, i) == -1)
-			return (-1);
-		if (backward_redir(data, i, nbr) == -1)
+		if (while_redir(data, i, nbr) == -1)
 			return (-1);
 		i++;
 	}
 	if (data->data4.is_built_in == 0)
 	{
+		data->data5.finale = 0;
 		if (data->cmd_table->cmd[0] == '\0')
+		{
+			data->data5.finale = 1;
+			free_if_execv_fail(data);
+			ft_close_for_fun();
 			exit (0);
+		}
 		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);
 		free_if_execv_fail(data);
 		exit(0);

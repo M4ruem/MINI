@@ -93,6 +93,7 @@ typedef struct s_data4
 	int			nbr_save;
 	int			free_i;
 	int			e;
+	int			set;
 	int			f;
 }	t_data4;
 
@@ -105,6 +106,7 @@ typedef struct s_data5
 	char		*str;
 	char		**tabl;
 	int			i;
+	int			finale;
 	int			echo_n;
 	int			is_pipe;
 	int			stdin_save;
@@ -267,5 +269,9 @@ int			finish_stupid(t_data *data, char *str, int x, int j);
 int			check_stupid_quotes(char *str);
 void		free_if_execv_fail(t_data *data);
 int			main_utils(t_data *data);
+void		ft_close_for_fun(void);
+int			continue_func(t_data *data);
+int			while_redir(t_data *data, int i, int nbr);
+void		execkerror_utils(t_data *data);
 
 #endif

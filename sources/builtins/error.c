@@ -105,8 +105,8 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 3)
 	{
-		write(2, "Error with redirections\n", 25);
-		data->data5.last_error = 1;
+		execkerror_utils(data);
+		exit(data->data5.last_error);
 	}
 	if (nbr == 4)
 	{

@@ -83,11 +83,11 @@ int	ft_continue(t_data *data, char *full_path)
 int	put_path(t_data *data)
 {
 	data->data5.ppi = -1;
-	if (data->data1.arg_tabl[0] == NULL)
-	{
-		data->hell = 1;
+	data->data4.set = continue_func(data);
+	if (data->data4.set == 0)
+		return (0);
+	else if (data->data4.set == 2)
 		return (2);
-	}
 	if (access(data->data1.arg_tabl[0], X_OK) == 0)
 		return (0);
 	data->data2.full_path = safe_malloc();
