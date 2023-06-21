@@ -70,6 +70,8 @@ static void	print_command_not_found(t_data *data)
 		free_fds_error(data);
 		ft_lstclear(data, &data->cmd_table_temp);
 		free(data->cmd_table_temp);
+		close(data->data5.stdin_save);
+ 		close(data->data5.stdout_save);
 		ft_env_lstclear(&data->env_table);
 		free(data->data3.fds);
 		exit(127);
@@ -78,13 +80,14 @@ static void	print_command_not_found(t_data *data)
 
 static void	handle_directory_error(t_data *data)
 {
-	if (access(data->cmd_table->cmd, F_OK) == 0)
-		return ;
-	else if (access(data->cmd_table->cmd, X_OK) == 0)
+	if (access(data->cmd_table->cmd, X_OK) == 0)
 	{	
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
+		data->data5.last_error = 126;
 		return ;
 	}
+	else if (access(data->cmd_table->cmd, F_OK) == 0)
+		return ;
 }
 
 void	exekerror(int nbr, t_data *data)
@@ -102,6 +105,8 @@ void	exekerror(int nbr, t_data *data)
 		data->data5.last_error = 127;
 		if (data->hell == 0)
 			print_command_not_found(data);
+		close(data->data5.stdin_save);
+ 		close(data->data5.stdout_save);
 	}
 	if (nbr == 3)
 	{

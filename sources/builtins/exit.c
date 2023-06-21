@@ -61,27 +61,33 @@ void	free_for_exit(t_data *data, int x)
 			free(data->data1.arg_tabl);
 		}
 	}
+	ft_close_for_fun();
 }
 
 static void	ft_continue(t_data *data)
 {
 	int	len;
-
+	
+	if (data->close_need == 1)
+	{
+		close(data->data5.stdin_save);
+		close(data->data5.stdout_save);
+	}
 	if (data->data4.nbr_save == 1)
 	{
 		if (is_number(data->data1.arg_tabl[1]) == 0
 			|| ft_atoi(data->data1.arg_tabl[1]) == -2)
 		{
-			free_for_exit(data, 1);
 			printf(" numeric argument required\n");
+			free_for_exit(data, 1);
 			exit(255);
 		}
 		len = ft_atoi((data->data1.arg_tabl[1])) % 256;
 		free_for_exit(data, 1);
 		exit(len);
 	}
-	free_for_exit(data, 0);
 	printf("\n");
+	free_for_exit(data, 0);
 	exit(EXIT_SUCCESS);
 }
 

@@ -126,7 +126,7 @@ int	ft_execution(t_data *data, char **env)
 
 	last = ft_lstlast(data->cmd_table);
 	data->data2.lst_nbr = ft_lstsize(data->cmd_table);
-	close_hell(data, 0);
+	close_hell(data);
 	if (data->data2.lst_nbr == 1)
 	{
 		return (exec_one_cmd(data, env));

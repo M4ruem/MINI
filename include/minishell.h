@@ -118,6 +118,7 @@ typedef struct s_data
 {
 	char		*main_str;
 	int			bsn;
+	int			close_need;
 	int			hell;
 	int			str_exit;
 	t_cmd_list	*cmd_table;
@@ -235,7 +236,7 @@ void		*ft_calloc(size_t nmemb, size_t size);
 char		*ft_strtrim(char const *s1, char const *set);
 void		ft_continue3(t_data *data);
 void		ft_continue2(t_data *data, char *str);
-void		close_hell(t_data *data, int key);
+void		close_hell(t_data *data);
 char		*ft_strmjoin(char *s1, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);

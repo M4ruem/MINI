@@ -89,7 +89,10 @@ int	put_path(t_data *data)
 	else if (data->data4.set == 2)
 		return (2);
 	if (access(data->data1.arg_tabl[0], X_OK) == 0)
+	{
+		data->data5.last_error = 126;
 		return (0);
+	}
 	data->data2.full_path = safe_malloc();
 	data->data2.full_path[0] = '\0';
 	while (access(data->data2.full_path, X_OK) == -1

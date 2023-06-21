@@ -99,7 +99,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1 || !(argv[0]))
 		exit(0);
-	g_sigint = 0;
+	data.close_need = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);
 	data.env_table_sorted = NULL;
 	data.data5.last_error = 0;

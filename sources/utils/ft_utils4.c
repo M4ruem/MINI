@@ -59,22 +59,13 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-void	close_hell(t_data *data, int key)
+void	close_hell(t_data *data)
 {
-	if (key == 1)
-	{
-		close(data->data5.stdin_save);
-		close(data->data5.stdout_save);
-	}
-	if (key == 0)
-	{
-		data->data5.stdin_save = dup(1);
-		data->data5.stdout_save = dup(0);
-		data->data5.is_pipe = 0;
-		data->data4.is_built_in = 0;
-		close(data->data5.stdin_save);
-		close(data->data5.stdout_save);
-	}
+	data->close_need = 1;
+	data->data5.stdin_save = dup(1);
+	data->data5.stdout_save = dup(0);
+	data->data5.is_pipe = 0;
+	data->data4.is_built_in = 0;
 }
 
 int	ft_atoi(const char *str)
