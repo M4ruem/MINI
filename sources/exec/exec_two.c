@@ -46,10 +46,32 @@ void	getcmd_and_pipe_three(t_data *data)
 		dup2(data->data3.fds[data->data3.exec_i - 1][0], STDIN_FILENO);
 	while (data->data2.j < data->data2.lst_nbr - 1)
 	{
-		close(data->data3.fds[data->data2.j][0]);
+//		close(data->data3.fds[data->data2.j][0]);
 		close(data->data3.fds[data->data2.j][1]);
 		data->data2.j = data->data2.j + 1;
 	}
+}
+
+void	ultimate_free(t_data *data)
+{
+	int i;
+
+	i = -1;
+	ft_lstclear(data, &data->cmd_table_temp);
+	free(data->cmd_table_temp);
+	i = -1;
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+	i = -1;
+	while (++i <= data->data2.lst_nbr)
+		free(data->data3.fds[i]);
+	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
+	ft_env_lstclear(&data->env_table);
+	ft_env_lstclear(&data->env_table_sorted);
+	free(data->data3.fds);
+	ft_close_for_fun();
 }
 
 int	getcmd_and_pipe(t_data *data, char **env)
@@ -66,6 +88,7 @@ int	getcmd_and_pipe(t_data *data, char **env)
 		{
 			built_in(data, env, data->data4.bin_nbr);
 			data->data4.is_built_in = 0;
+			ultimate_free(data);	
 			exit (0);
 		}
 		else
@@ -84,6 +107,7 @@ void	malloc_fds(t_data *data)
 {
 	while (++data->data3.exec_i <= data->data2.lst_nbr)
 	{
+		data->data4.fds_malloced = 1;
 		data->data3.fds[data->data3.exec_i] = malloc(sizeof(int) * 2);
 		if (!data->data3.fds[data->data3.exec_i])
 			exit(EXIT_FAILURE);
@@ -93,6 +117,7 @@ void	malloc_fds(t_data *data)
 int	exec_cmds_second(t_data *data, char **env)
 {
 	data->data3.exec_i = -1;
+	data->data4.fds_malloced = 0;
 	data->data3.fds = malloc(sizeof(int *) * (data->data2.lst_nbr + 1));
 	if (!data->data3.fds)
 		exit(EXIT_FAILURE);

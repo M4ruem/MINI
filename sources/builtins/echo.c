@@ -120,6 +120,7 @@ void	bin_env(t_data *data)
 			i++;
 		}
 		data->data5.last_error = 0;
+		close(data->data3.fds[data->data2.j - 1][0]);
 	}
 	else
 	{

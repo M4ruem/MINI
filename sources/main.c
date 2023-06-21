@@ -17,7 +17,7 @@ void	handler(int sigtype)
 	if (sigtype == SIGINT)
 	{
 		g_sigint = 1;
-		printf("\n");
+		printf("^C\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -105,6 +105,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1 || !(argv[0]))
 		exit(0);
 	data.close_need = 0;
+	data.data5.finale = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);
 	data.env_table_sorted = NULL;
 	data.data5.last_error = 0;

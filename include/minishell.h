@@ -91,6 +91,7 @@ typedef struct s_data4
 	int			is_built_in;
 	int			bin_nbr;
 	int			nbr_save;
+	int			fds_malloced;
 	int			free_i;
 	int			e;
 	int			set;
