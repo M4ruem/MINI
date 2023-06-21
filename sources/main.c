@@ -106,6 +106,7 @@ int	main(int argc, char **argv, char **env)
 		exit(0);
 	data.close_need = 0;
 	data.data5.finale = 0;
+	data.data4.fds_malloced = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);
 	data.env_table_sorted = NULL;
 	data.data5.last_error = 0;
