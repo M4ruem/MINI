@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/16 15:12:57 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:23:49 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
+	if (!*env)
+	{
+		dprintf(2, "env not found\n");
+		exit(1);
+	}
 	if (argc != 1 || !(argv[0]))
 		exit(0);
 	g_sigint = 0;
