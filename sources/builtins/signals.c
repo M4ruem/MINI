@@ -47,8 +47,11 @@ void	ft_free_all(t_data *data)
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
-	close(data->data5.stdin_save);
-	close(data->data5.stdout_save);
+	if (data->bsn == 0)
+	{
+		close(data->data5.stdin_save);
+		close(data->data5.stdout_save);
+	}
 	free(data->main_str);
 }
 

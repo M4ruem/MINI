@@ -48,7 +48,7 @@ void	free_if_execv_fail(t_data *data)
 		free(data->data4.redir_file);
 	free(data->data4.redir_type);
 	free(data->cmd_table_temp);
-	if (data->data3.pcommand)
+	if (data->data3.pcommand && data->data5.lol == 0)
 		free(data->data3.pcommand);
 	ft_env_lstclear(&data->env_table);
 	i = -1;

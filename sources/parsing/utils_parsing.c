@@ -46,7 +46,7 @@ int	finsh_stupid(t_data *data, char *str, int x, int j)
 
 	len = ft_strlen(str);
 	i = 0;
-	while (str[i] == '/')
+	while (str[i] == '/' || str[i] == ' ')
 		i++;
 	if (i == len)
 		return (1);

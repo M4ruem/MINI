@@ -60,6 +60,7 @@ typedef struct s_data2
 	int			nbr;
 	char		*full_path;
 	int			i;
+	char		*result;
 	int			li;
 	int			ly;
 	int			j;
@@ -110,6 +111,7 @@ typedef struct s_data5
 	int			finale;
 	int			echo_n;
 	int			is_pipe;
+	int			lol;
 	int			stdin_save;
 	int			stdout_save;
 	int			last_error;

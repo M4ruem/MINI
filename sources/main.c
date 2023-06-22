@@ -105,6 +105,8 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1 || !(argv[0]))
 		exit(0);
 	data.close_need = 0;
+	data.data5.lol = 0;
+	data.data2.rdj = 0;
 	data.data5.finale = 0;
 	data.data4.fds_malloced = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);

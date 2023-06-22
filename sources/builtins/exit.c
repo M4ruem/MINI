@@ -45,6 +45,11 @@ void	free_for_exit(t_data *data, int x)
 	i = -1;
 	if (data->str_exit == 1)
 	{
+		if (data->data2.rdj != 0)
+		{
+			while (data->data4.redir_file[++i])
+				free(data->data4.redir_file[i]);
+		}
 		free(data->data4.redir_file);
 		free(data->data4.redir_type);
 		free(data->data3.pcommand);

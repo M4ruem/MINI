@@ -48,6 +48,8 @@ int	ft_search_and_replace_env_var(t_data *data)
 				if (i > 0)
 					i--;
 			}
+			if (ft_strlen(cmd_list->cmd) == 0)
+				break;
 			i++;
 		}
 		cmd_list = cmd_list->next;
@@ -81,6 +83,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 		value = ft_is_var_env(data, cmd_list->cmd, pos, len);
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
+	data->data5.lol = 1;
 }
 
 char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
