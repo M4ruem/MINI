@@ -60,7 +60,8 @@ void	ft_update_var_env(t_data *data, char *name, char *value)
 	t_env_list	*p_env_name;
 
 	p_env_name = ft_search_env(data, name);
-	free(p_env_name->value);
+	if (p_env_name != NULL)
+		free(p_env_name->value);
 	if (p_env_name)
 		p_env_name->value = ft_strdup(value);
 }

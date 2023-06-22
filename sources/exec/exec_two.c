@@ -46,7 +46,6 @@ void	getcmd_and_pipe_three(t_data *data)
 		dup2(data->data3.fds[data->data3.exec_i - 1][0], STDIN_FILENO);
 	while (data->data2.j < data->data2.lst_nbr - 1)
 	{
-		close(data->data3.fds[data->data2.j][0]);
 		close(data->data3.fds[data->data2.j][1]);
 		data->data2.j = data->data2.j + 1;
 	}
@@ -88,6 +87,7 @@ int	getcmd_and_pipe(t_data *data, char **env)
 		{
 			built_in(data, env, data->data4.bin_nbr);
 			data->data4.is_built_in = 0;
+			close(data->data3.fds[data->data2.j - 1][0]);
 			ultimate_free(data);	
 			exit (0);
 		}
