@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:36:59 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:12:48 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:24:42 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	ft_search_and_replace_env_var(t_data *data)
 		while (cmd_list->cmd[i])
 		{
 			quotes_switch(data, cmd_list->cmd, i);
-			if (cmd_list->cmd[i] == '$' && (ft_isalnum(cmd_list->cmd[i + 1]) \
+			if (cmd_list->cmd[i] == '$' && cmd_list->cmd[i + 1] == '$'\
+				&& cmd_list->cmd[i + 2] == '?')
+				i++;
+			else if (cmd_list->cmd[i] == '$' && (ft_isalnum(cmd_list->cmd[i + 1]) \
 				== 1 || cmd_list->cmd[i + 1] == '_' || cmd_list->cmd[i + 1] \
 				== '?') && data->data1.squote == 0)
 			{
