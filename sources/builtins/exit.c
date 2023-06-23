@@ -30,12 +30,41 @@ int	is_number(char *str)
 	return (0);
 }
 
+void	free_for_redir_fail(t_data *data)
+{
+	int i;
+
+	i = -1;
+	ft_lstclear(data, &data->cmd_table);
+	free(data->cmd_table_temp);
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+	if (data->data5.finale == 1)
+	{
+		i = -1;
+ 		while (data->data4.redir_file[++i])
+			free(data->data4.redir_file[i]);
+		free(data->data4.redir_file);
+	}
+	else
+		free(data->data4.redir_file);
+	  i = -1;
+	while (data->data1.arg_tabl[++i])
+		free(data->data1.arg_tabl[i]);
+	ft_env_lstclear(&data->env_table);
+	free(data->data4.redir_type);
+	close(data->data5.stdin_save);
+ 	close(data->data5.stdout_save);
+	ft_close_for_fun();
+}
+
 void	execkerror_utils(t_data *data)
 {
 	write(2, "Error with redirections\n", 25);
 	data->data5.last_error = 1;
 	data->data5.finale = 1;
-	free_if_execv_fail(data);
+	free_for_redir_fail(data);
 }
 
 void	free_for_exit(t_data *data, int x)
