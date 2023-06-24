@@ -46,6 +46,8 @@ void	getcmd_and_pipe_three(t_data *data)
 		dup2(data->data3.fds[data->data3.exec_i - 1][0], STDIN_FILENO);
 	while (data->data2.j < data->data2.lst_nbr - 1)
 	{
+		if (data->data2.close_l == 0)
+			close(data->data3.fds[data->data2.j][0]);
 		close(data->data3.fds[data->data2.j][1]);
 		data->data2.j = data->data2.j + 1;
 	}
@@ -75,7 +77,7 @@ void	ultimate_free(t_data *data)
 
 int	getcmd_and_pipe(t_data *data, char **env)
 {
-	if (ft_is_builtin(data->data1.arg_tabl[0]) != 0)
+	if (ft_is_builtin(data, data->data1.arg_tabl[0]) != 0)
 		if (put_path(data) == 2)
 			return (getcmd_and_pipe_two(data));
 	data->data2.j = 0;
@@ -83,17 +85,20 @@ int	getcmd_and_pipe(t_data *data, char **env)
 	if (data->data3.pid == 0)
 	{
 		getcmd_and_pipe_three(data);
-		if (ft_is_builtin(data->data1.arg_tabl[0]) == 0)
+		if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
 		{
 			built_in(data, env, data->data4.bin_nbr);
 			data->data4.is_built_in = 0;
-			close(data->data3.fds[data->data2.j - 1][0]);
+			if (data->data2.close_l == 1)
+				close(data->data3.fds[data->data2.j - 1][0]);
 			ultimate_free(data);	
 			exit (0);
 		}
 		else
+		{
 			if (cmd_redir(data, env, data->data3.exec_i) != 0)
 				return (3);
+		}
 	}
 	if (data->cmd_table->next)
 		data->cmd_table = data->cmd_table->next;

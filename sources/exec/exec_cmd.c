@@ -19,7 +19,7 @@ int	exec_one_cmd(t_data *data, char **env)
 	pid = 0;
 	data->data4.bin_nbr = 0;
 	data->data1.arg_tabl = get_cmd(data);
-	if (ft_is_builtin(data->data1.arg_tabl[0]) == 0)
+	if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
 	{
 		if (built_in(data, env, data->data4.bin_nbr) != 0)
 			return (5);

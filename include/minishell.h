@@ -61,6 +61,7 @@ typedef struct s_data2
 	char		*full_path;
 	int			i;
 	char		*result;
+	int			close_l;
 	int			li;
 	int			ly;
 	int			j;
@@ -206,7 +207,7 @@ char		**fill_tabl(t_data **data, char *str, char **tabl);
 void		handler(int sigtype);
 void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
-int			ft_is_builtin(const char *s1);
+int			ft_is_builtin(t_data *data, const char *s1);
 void		bin_env(t_data *data);
 int			bin_pwd(t_data *data);
 void		bin_cd(t_data *data);

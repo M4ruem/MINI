@@ -73,6 +73,7 @@ void	run_main_loop(t_data *data, char **env)
 	{
 		rl_done = 0;
 		data->str_exit = 0;
+		data->data2.close_l = 0;
 		main_fonction_two(data);
 		if (data->data3.main_error == 0 && data->bsn == 0)
 		{
@@ -106,6 +107,7 @@ int	main(int argc, char **argv, char **env)
 		exit(0);
 	data.close_need = 0;
 	data.data5.lol = 0;
+	data.data2.lst_nbr = 0;
 	data.data2.rdj = 0;
 	data.data5.finale = 0;
 	data.data4.fds_malloced = 0;

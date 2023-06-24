@@ -57,7 +57,7 @@ char	*rm_quote2(t_data *data, char **tabl, char *str)
 	return (str);
 }
 
-int	ft_is_builtin(const char *s1)
+int	ft_is_builtin(t_data *data, const char *s1)
 {
 	if (ft_strncmp(s1, "pwd") == 0)
 		return (0);
@@ -68,7 +68,10 @@ int	ft_is_builtin(const char *s1)
 	if (ft_strncmp(s1, "echo") == 0)
 		return (0);
 	if (ft_strncmp(s1, "export") == 0)
+	{
+		data->data2.close_l = 1;
 		return (0);
+	}
 	if (ft_strncmp(s1, "unset") == 0)
 		return (0);
 	if (ft_strncmp(s1, "exit") == 0)
