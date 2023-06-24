@@ -21,6 +21,8 @@ void	bin_export(char **arg, t_data *data)
 		ft_display_env(data->env_table_sorted);
 		return ;
 	}
+	if (ft_strncmp(arg[0], "_") == 0)
+		return ;
 	while (arg[data->data4.f])
 	{
 		data->data4.e = 0;

@@ -36,7 +36,8 @@ int	built_in(t_data *data, char **env, int nbr)
 	int	i;
 
 	data->data4.is_built_in = 1;
-	cmd_redir(data, env, nbr);
+	if (cmd_redir(data, env, nbr) == -1)
+			return (-1);
 	built_in_two(data);
 	if (ft_strncmp(data->data1.arg_tabl[0], "exit") == 0)
 	{

@@ -15,13 +15,19 @@
 int	exec_one_cmd(t_data *data, char **env)
 {
 	int	pid;
-
+	int i;
 	pid = 0;
 	data->data4.bin_nbr = 0;
 	data->data1.arg_tabl = get_cmd(data);
 	if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
 	{
-		if (built_in(data, env, data->data4.bin_nbr) != 0)
+		i = built_in(data, env, data->data4.bin_nbr);
+		if (i == -1)
+		{
+			data->data3.redir_error = 1;
+			return (3);
+		}
+		else if (i != 0)
 			return (5);
 		return (0);
 	}

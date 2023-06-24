@@ -53,7 +53,7 @@ void	getcmd_and_pipe_three(t_data *data)
 	}
 }
 
-void	ultimate_free(t_data *data)
+void	ultimate_free(t_data *data , int key)
 {
 	int i;
 
@@ -64,6 +64,15 @@ void	ultimate_free(t_data *data)
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
+	if (key == -1)
+	{
+		i = -1;
+		write(2, "Error with redirections\n", 25);
+		while (data->data1.arg_tabl[++i])
+			free(data->data1.arg_tabl[i]);
+		free(data->data1.arg_tabl);
+		data->data5.last_error = 1;
+	}
 	i = -1;
 	while (++i <= data->data2.lst_nbr)
 		free(data->data3.fds[i]);
@@ -77,6 +86,8 @@ void	ultimate_free(t_data *data)
 
 int	getcmd_and_pipe(t_data *data, char **env)
 {
+	int i;
+
 	if (ft_is_builtin(data, data->data1.arg_tabl[0]) != 0)
 		if (put_path(data) == 2)
 			return (getcmd_and_pipe_two(data));
@@ -87,12 +98,12 @@ int	getcmd_and_pipe(t_data *data, char **env)
 		getcmd_and_pipe_three(data);
 		if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
 		{
-			built_in(data, env, data->data4.bin_nbr);
+			i = built_in(data, env, data->data4.bin_nbr);
 			data->data4.is_built_in = 0;
 			if (data->data2.close_l == 1)
 				close(data->data3.fds[data->data2.j - 1][0]);
-			ultimate_free(data);	
-			exit (0);
+			ultimate_free(data ,i);	
+			exit (data->data5.last_error);
 		}
 		else
 		{

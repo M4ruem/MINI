@@ -90,12 +90,39 @@ static void	handle_directory_error(t_data *data)
 		return ;
 }
 
+void	error_handel(t_data *data)
+{
+	int i;
+
+	i = -1;
+	ft_lstclear(data, &data->cmd_table_temp);
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+	i = 0;
+	while (i < data->data2.lst_nbr - 1)
+	{
+		close(data->data3.fds[i][0]);
+		close(data->data3.fds[i][1]);
+		i++;
+	}
+	i = -1;
+	while (data->data1.arg_tabl[++i])
+ 		free(data->data1.arg_tabl[i]);
+//	free(data->data5.str_f);
+	free(data->data1.arg_tabl);
+	ft_env_lstclear(&data->env_table);
+ 	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
+//	ft_close_for_fun();
+}
 void	exekerror(int nbr, t_data *data)
 {
 	int	i;
 
 	(void)data;
 	i = 0;
+
 	handle_directory_error(data);
 	if (nbr == 2)
 	{
@@ -110,8 +137,17 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 3)
 	{
-		execkerror_utils(data);
-		exit(data->data5.last_error);
+		write(2, "Error with redirections\n", 25);
+		if (data->data3.redir_error == 0)
+			execkerror_utils(data);
+		else
+		{	
+			if (data->data5.is_pipe == 1)
+				error_handel(data);
+		}
+		if (data->data5.is_pipe == 1)
+			exit(data->data5.last_error);
+		data->data5.last_error = 1;
 	}
 	if (nbr == 4)
 	{

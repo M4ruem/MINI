@@ -73,6 +73,7 @@ typedef struct s_data3
 {
 	int			exec_i;
 	int			lexer_error;
+	int			redir_error;
 	int			lexer_start;
 	int			error_getcmd;
 	int			main_error;

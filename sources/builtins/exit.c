@@ -62,7 +62,6 @@ void	free_for_redir_fail(t_data *data)
 
 void	execkerror_utils(t_data *data)
 {
-	write(2, "Error with redirections\n", 25);
 	data->data5.last_error = 1;
 	data->data5.finale = 1;
 	free_for_redir_fail(data);

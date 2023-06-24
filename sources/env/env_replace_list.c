@@ -92,7 +92,10 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 	char		*var_name;
 
 	env_list = data->env_table;
-	var_name = ft_substr(cmd, pos + 1, len);
+	if (len == 0)
+		var_name = ft_strtrim(cmd, "$");
+	else
+		var_name = ft_substr(cmd, pos + 1, len);
 	while (env_list)
 	{
 		if (ft_strncmp(var_name, env_list->name) == 0)

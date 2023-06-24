@@ -62,6 +62,12 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	j = 0;
 	k = 0;
 	newlen = ft_strlen(str) - len + ft_strlen(word);
+	if (len == 1)
+	{
+		result = ft_substr(word , 0, ft_strlen(word));
+		free(str);
+		return (result);
+	}
 	result = malloc(sizeof(char) * (newlen + 1));
 	while (str[k])
 	{
