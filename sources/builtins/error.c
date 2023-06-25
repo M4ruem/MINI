@@ -136,9 +136,20 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 3)
 	{
-		write(2, "Error with redirections\n", 25);
+//		write(2, "Error with redirections\n", 25);
 		if (data->data3.redir_error == 0)
+		{
+			i = -1;
+			while (data->data4.redir_file[++i])
+				if (access(data->data4.redir_file[i], R_OK) != 0)
+				{
+					write(2, "minishell: ", 12);
+					write(2, data->data4.redir_file[i],
+						ft_strlen(data->data4.redir_file[i]));
+					write(2, ": Permission denied\n", 20);
+				}
 			execkerror_utils(data);
+		}
 		else
 		{	
 			if (data->data5.is_pipe == 1)

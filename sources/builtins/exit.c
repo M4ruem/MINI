@@ -39,7 +39,7 @@ void	free_for_redir_fail(t_data *data)
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
-	 i = 0;
+	i = 0;
 	while (i < data->data2.lst_nbr - 1)
 	{
 		close(data->data3.fds[i][0]);
@@ -47,17 +47,21 @@ void	free_for_redir_fail(t_data *data)
 		i++;
 	}
 	i = -1;
-	while (++i <= data->data2.lst_nbr)
- 		free(data->data3.fds[i]);
- 	free(data->data3.fds);
+	if (data->data3.fds != NULL)
+	{
+		while (++i <= data->data2.lst_nbr)
+			free(data->data3.fds[i]);
+ 		free(data->data3.fds);
+	}
 	i = -1;
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	ft_env_lstclear(&data->env_table);
 	close(data->data5.stdin_save);
- 	close(data->data5.stdout_save);
+	close(data->data5.stdout_save);
 	ft_close_for_fun();
+	exit(data->data5.last_error);
 }
 
 void	execkerror_utils(t_data *data)
@@ -85,14 +89,18 @@ void	free_for_exit(t_data *data, int x)
 		free(data->cmd_table_temp);
 		if (x == 0)
 		{
-			free(data->data5.str_f);
-			free(data->data1.arg_tabl);
+//			free(data->data5.str_f);
+		//	if (data->data1.arg_tabl != NULL)
+		//		free(data->data1.arg_tabl);
 		}
 		else
 		{
-			while (data->data1.arg_tabl[++i])
-				free(data->data1.arg_tabl[i]);
-			free(data->data1.arg_tabl);
+			if (data->data1.arg_tabl != NULL)
+			{
+				while (data->data1.arg_tabl[++i])
+					free(data->data1.arg_tabl[i]);
+				free(data->data1.arg_tabl);
+			}
 		}
 	}
 	ft_close_for_fun();
