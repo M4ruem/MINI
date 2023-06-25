@@ -76,6 +76,7 @@ typedef struct s_data3
 	int			redir_error;
 	int			lexer_start;
 	int			houna;
+	int			export_num;
 	int			error_getcmd;
 	int			main_error;
 	int			**fds;

@@ -14,6 +14,7 @@
 
 void	bin_export(char **arg, t_data *data)
 {
+	data->data3.export_num = 0;
 	data->data4.f = 0;
 	if (!arg[data->data4.f])
 	{
@@ -30,14 +31,29 @@ void	bin_export(char **arg, t_data *data)
 		{
 			while (ft_isalnum(arg[data->data4.f][data->data4.e]) == 1 \
 				|| arg[data->data4.f][data->data4.e] == '_')
+			{
+				data->data3.export_num++;
 				data->data4.e++;
+			}
 			if ((arg[data->data4.f][data->data4.e] == '=' || arg[data->data4.f] \
 				[data->data4.e] == '\0') && data->data4.e > 0)
+			{
+				data->data3.export_num = 0;
 				ft_correct_env_name(arg, data);
+			}
 			else
+			{
 				ft_wrong_env_name(arg, data);
+				return ;
+			}
 			if (arg[data->data4.f][data->data4.e])
 				data->data4.e++;
+			if (data->data3.export_num > 0)
+			{
+				write(2, "Minisheru: ", 11);
+ 				write(2, arg[data->data4.f], ft_strlen(arg[0]));
+				write(2, ": not a valid identifie\n", 25);
+ 			}
 		}
 		data->data4.f++;
 	}
@@ -109,7 +125,10 @@ void	ft_wrong_env_name(char **arg, t_data *data)
 		arg[data->data4.f][data->data4.e] != ' ')
 		data->data4.e++;
 	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
-	printf("minishell: export: `%s': not a valid identifier\n", name);
+	write(2, "Minisheru: ", 11);
+	write(2, name, ft_strlen(arg[0]));
+	write(2, ": not a valid identifie\n", 25);
 	data->data5.last_error = 1;
+	data->data3.export_num = 0;
 	free(name);
 }
