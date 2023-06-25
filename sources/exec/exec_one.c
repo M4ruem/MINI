@@ -81,9 +81,12 @@ void	free_if_cmd_fail(t_data *data)
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	i = -1;
-	while (++i <= data->data2.lst_nbr)
- 		free(data->data3.fds[i]);
-	free(data->data3.fds);
+	if (data->data3.fds != NULL)
+	{
+		while (++i <= data->data2.lst_nbr)
+	 		free(data->data3.fds[i]);
+		free(data->data3.fds);
+	}
 	data->data1.arg_tabl = NULL;
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
