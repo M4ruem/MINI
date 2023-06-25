@@ -36,7 +36,9 @@ int	exec_one_cmd(t_data *data, char **env)
 	pid = fork();
 	if (pid == 0)
 		if (cmd_redir(data, env, 0) != 0)
+		{
 			return (3);
+		}
 	wait_loop(data);
 	if (access("/tmp/.here_doca", F_OK) == 0)
 		unlink("/tmp/.here_doca");

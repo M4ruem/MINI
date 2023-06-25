@@ -68,7 +68,13 @@ void	execkerror_utils(t_data *data)
 {
 	data->data5.last_error = 1;
 	data->data5.finale = 1;
-	free_for_redir_fail(data);
+	if (data->data4.is_built_in == 0)
+		free_for_redir_fail(data);
+	if (data->data4.is_built_in == 1)
+	{
+		free(data->data1.arg_tabl);
+		free(data->data5.str_f);
+	}
 }
 
 void	free_for_exit(t_data *data, int x)
@@ -243,7 +249,7 @@ void	bin_exit(t_data *data, int is_pipe)
 		free(data->data1.paths);
 		ft_lstclear(data, &data->cmd_table);
 		free(data->cmd_table);
-		if (data->data1.arg_tabl)
+		if (data->data1.arg_tabl != NULL)
 		{
 			i = -1;
 			while (data->data1.arg_tabl[++i])

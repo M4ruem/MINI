@@ -39,6 +39,10 @@ void	free_if_execv_fail(t_data *data)
 	ft_lstclear(data, &data->cmd_table_temp);
 	ft_env_lstclear(&data->env_table);
 	i = -1;
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+	i = -1;
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
@@ -55,9 +59,15 @@ void	free_if_execv_fail(t_data *data)
 int	while_redir(t_data *data, int i, int nbr)
 {
 	if (forward_redir(data, i) == -1)
+	{
+		data->data3.redir_error = 1;
 		return (-1);
+	}
 	if (backward_redir(data, i, nbr) == -1)
+	{
+		data->data3.redir_error = 1;
 		return (-1);
+	}
 	return (0);
 }
 

@@ -15,7 +15,7 @@
 int	syntax_error(t_data *data)
 {
 	write(2, "Syntax error after > < >> <<\n", 30);
-	data->data5.last_error = 258;
+	data->data5.last_error = 2;
 	free(data->data4.redir_file);
 	free(data->data4.redir_type);
 	free(data->data3.pcommand);
@@ -137,7 +137,7 @@ void	exekerror(int nbr, t_data *data)
 	if (nbr == 3)
 	{
 //		write(2, "Error with redirections\n", 25);
-		if (data->data3.redir_error == 0)
+		if (data->data3.redir_error == 1)
 		{
 			i = -1;
 			while (data->data4.redir_file[++i])
