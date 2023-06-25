@@ -90,7 +90,7 @@ static void	handle_directory_error(t_data *data)
 		return ;
 }
 
-void	error_handel(t_data *data)
+void	error_handel(t_data *data, int key)
 {
 	int i;
 
@@ -111,6 +111,13 @@ void	error_handel(t_data *data)
  		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	ft_env_lstclear(&data->env_table);
+	if (key == 1)
+	{
+		i = -1;
+		while (++i <= data->data2.lst_nbr)
+			free(data->data3.fds[i]);
+		free(data->data3.fds);
+	}
  	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
@@ -137,26 +144,59 @@ void	exekerror(int nbr, t_data *data)
 	if (nbr == 3)
 	{
 //		write(2, "Error with redirections\n", 25);
-		if (data->data3.redir_error == 1)
+		if (data->data3.houna == 1)
+		{
+			i = -1;
+			while (data->cmd_table->redir_file[++i])
+			{
+				if (access(data->cmd_table->redir_file[i], F_OK) != 0)
+				{
+					write(2, "minishell: ", 12);
+					write(2, data->cmd_table->redir_file[i],
+					ft_strlen(data->cmd_table->redir_file[i]));
+					write(2, ": No such file or directory\n", 28);
+				}
+				else if (access(data->cmd_table->redir_file[i], R_OK) != 0)
+				{
+					write(2, "minishell: ", 12);
+					write(2, data->cmd_table->redir_file[i],
+						ft_strlen(data->cmd_table->redir_file[i]));
+					write(2, ": Permission denied\n", 20);
+				}
+				error_handel(data ,1);
+				exit(0);
+				data->data3.houna = 0;
+			}
+		}
+		else
 		{
 			i = -1;
 			while (data->data4.redir_file[++i])
-				if (access(data->data4.redir_file[i], R_OK) != 0)
+			{
+				if (access(data->data4.redir_file[i], F_OK) != 0)
+				{
+					write(2, "minishell: ", 12);
+					write(2, data->data4.redir_file[i],
+						ft_strlen(data->data4.redir_file[i]));
+					write(2, ": No such file or directory\n", 28);
+				}
+				else if (access(data->data4.redir_file[i], R_OK) != 0)
 				{
 					write(2, "minishell: ", 12);
 					write(2, data->data4.redir_file[i],
 						ft_strlen(data->data4.redir_file[i]));
 					write(2, ": Permission denied\n", 20);
 				}
+			}
 			execkerror_utils(data);
 		}
-		else
-		{	
-			if (data->data5.is_pipe == 1)
-				error_handel(data);
-		}
-		if (data->data5.is_pipe == 1)
-			exit(data->data5.last_error);
+//		else
+//		{	
+///			if (data->data5.is_pipe == 1)
+///				error_handel(data , 0);
+//		}
+	//	if (data->data5.is_pipe == 1)
+	//		exit(data->data5.last_error);
 		data->data5.last_error = 1;
 	}
 	if (nbr == 4)

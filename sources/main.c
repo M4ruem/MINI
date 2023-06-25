@@ -48,6 +48,7 @@ void	main_fonction_two(t_data *data)
 	data->data3.fds = NULL;
 	data->data4.nbr_save = 0;
 	setup_term(0);
+	data->data3.houna = 0;
 	data->data3.redir_error = 0;
 	data->bsn = 0;
 	data->hell = 0;

@@ -152,6 +152,7 @@ int	exec_cmds_second(t_data *data, char **env)
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
 	{
+		data->data3.houna = 1;
 		data->data1.arg_tabl = get_cmd(data);
 		data->data3.error_getcmd = getcmd_and_pipe(data, env);
 		if (data->data3.error_getcmd != 0)
