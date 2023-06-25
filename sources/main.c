@@ -44,6 +44,7 @@ void	main_fonction_two(t_data *data)
 {
 	data->data1.paths = recup_path(data);
 	data->data1.here_doc_nbr = 0;
+	data->data1.arg_tabl = NULL; 
 	data->data4.nbr_save = 0;
 	setup_term(0);
 	data->data3.redir_error = 0;

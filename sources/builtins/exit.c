@@ -196,6 +196,7 @@ void	free_exit_argument(t_data *data)
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
+	data->data1.arg_tabl = NULL;
 	ft_env_lstclear(&data->env_table);
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
@@ -234,6 +235,13 @@ void	bin_exit(t_data *data, int is_pipe)
 		free(data->data1.paths);
 		ft_lstclear(data, &data->cmd_table);
 		free(data->cmd_table);
+		if (data->data1.arg_tabl)
+		{
+			i = -1;
+			while (data->data1.arg_tabl[++i])
+				free(data->data1.arg_tabl[i]);
+			free(data->data1.arg_tabl);
+		}
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
 		rl_clear_history();

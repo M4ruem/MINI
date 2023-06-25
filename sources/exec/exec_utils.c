@@ -36,20 +36,7 @@ void	free_if_execv_fail(t_data *data)
 {
 	int	i;
 
-	ft_lstclear(data, &data->cmd_table);
-	if (data->data5.finale == 1)
-	{
-		i = -1;
-		while (data->data4.redir_file[++i])
-			free(data->data4.redir_file[i]);
-		free(data->data4.redir_file);
-	}
-	else
-		free(data->data4.redir_file);
-	free(data->data4.redir_type);
-	free(data->cmd_table_temp);
-	if (data->data3.pcommand && data->data5.lol == 0)
-		free(data->data3.pcommand);
+	ft_lstclear(data, &data->cmd_table_temp);
 	ft_env_lstclear(&data->env_table);
 	i = -1;
 	while (data->data1.arg_tabl[++i])
@@ -58,9 +45,11 @@ void	free_if_execv_fail(t_data *data)
 	i = -1;
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
+	data->data1.arg_tabl = NULL;
 	free(data->data1.paths);
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
+	ft_close_for_fun();
 }
 
 int	while_redir(t_data *data, int i, int nbr)

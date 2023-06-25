@@ -62,7 +62,10 @@ int	ft_is_builtin(t_data *data, const char *s1)
 	if (ft_strncmp(s1, "pwd") == 0)
 		return (0);
 	if (ft_strncmp(s1, "env") == 0)
+	{
+		data->data2.close_l = 1;
 		return (0);
+	}
 	if (ft_strncmp(s1, "cd") == 0)
 		return (0);
 	if (ft_strncmp(s1, "echo") == 0)

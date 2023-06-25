@@ -109,12 +109,11 @@ void	error_handel(t_data *data)
 	i = -1;
 	while (data->data1.arg_tabl[++i])
  		free(data->data1.arg_tabl[i]);
-//	free(data->data5.str_f);
 	free(data->data1.arg_tabl);
 	ft_env_lstclear(&data->env_table);
  	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
-//	ft_close_for_fun();
+	ft_close_for_fun();
 }
 void	exekerror(int nbr, t_data *data)
 {
