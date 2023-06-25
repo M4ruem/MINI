@@ -134,6 +134,13 @@ static void	ft_continue(t_data *data)
 		free_for_exit(data, 1);
 		exit(len);
 	}
+	if (data->data1.arg_tabl != NULL)
+	{
+		len = -1;
+		while (data->data1.arg_tabl[++len])
+			free(data->data1.arg_tabl[len]);
+		free(data->data1.arg_tabl);
+	}
 	printf("\n");
 	free_for_exit(data, 0);
 	exit(EXIT_SUCCESS);
@@ -249,13 +256,6 @@ void	bin_exit(t_data *data, int is_pipe)
 		free(data->data1.paths);
 		ft_lstclear(data, &data->cmd_table);
 		free(data->cmd_table);
-		if (data->data1.arg_tabl != NULL)
-		{
-			i = -1;
-			while (data->data1.arg_tabl[++i])
-				free(data->data1.arg_tabl[i]);
-			free(data->data1.arg_tabl);
-		}
 		ft_env_lstclear(&data->env_table);
 		ft_env_lstclear(&data->env_table_sorted);
 		rl_clear_history();

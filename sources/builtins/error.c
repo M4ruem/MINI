@@ -204,4 +204,4 @@ void	exekerror(int nbr, t_data *data)
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
-}
+}	
