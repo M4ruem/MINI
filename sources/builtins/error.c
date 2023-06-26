@@ -31,6 +31,11 @@ int	parserror(int nbr, t_data *data)
 		data->data5.last_error = 258;
 		return (-1);
 	}
+	if (nbr == 6)
+	{
+		printf("here_doc");
+		return (-1);
+	}
 	if (nbr == 2)
 	{
 		write(2, "Error quote not closed\n", 24);
@@ -80,14 +85,14 @@ static void	print_command_not_found(t_data *data)
 
 static void	handle_directory_error(t_data *data)
 {
-	if (access(data->cmd_table->cmd, X_OK) == 0)
+	if (access(data->cmd_table->cmd, F_OK) == 0)
+		return ;
+	else if (access(data->cmd_table->cmd, X_OK) == 0)
 	{	
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
 		data->data5.last_error = 126;
 		return ;
 	}
-	else if (access(data->cmd_table->cmd, F_OK) == 0)
-		return ;
 }
 
 void	error_handel(t_data *data, int key)

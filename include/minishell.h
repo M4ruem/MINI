@@ -52,6 +52,7 @@ typedef struct s_data1
 	char		**arg_tabl;
 	int			path_nbr;
 	int			here_doc_nbr;
+	int			ctr_c_herd;
 }	t_data1;
 
 typedef struct s_data2
@@ -151,10 +152,9 @@ void		quotes_switch(t_data *data, char *str, int i);
 int			redir_parsing(char *str, t_data *data);
 int			count_redir(char *str, t_data *data);
 int			str_is_empty(char *str);
-void		here_doc_fct(t_data *data, char *str);
+int			here_doc_fct(t_data *data, char *str);
 int			ft_lexer2(t_data *data, char *str);
 int			ft_parser2(t_data *data, char *str);
-void		here_doc_fct(t_data *data, char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                                     env                                    */
@@ -278,6 +278,7 @@ int			check_stupid_quotes(char *str);
 void		free_if_execv_fail(t_data *data);
 int			main_utils(t_data *data);
 void		ft_close_for_fun(void);
+int			ft_isdigit(int c);
 int			continue_func(t_data *data);
 int			while_redir(t_data *data, int i, int nbr);
 void		execkerror_utils(t_data *data);

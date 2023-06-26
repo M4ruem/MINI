@@ -57,7 +57,10 @@ int	redir_parsing(char *str, t_data *data)
 		return (-2);
 	data->data4.redir_file = rm_quote(data->data4.redir_file, data);
 	if (str[data->data3.rdi] == '<' && str[data->data3.rdi + 1] == '<')
-		here_doc_fct(data, data->data4.redir_file[data->data1.r_tabl]);
+	{
+		if (here_doc_fct(data, data->data4.redir_file[data->data1.r_tabl]) == 6)
+			return (6);
+	}
 	data->data1.r_tabl = data->data1.r_tabl + 1;
 	while (str[data->data2.rdj] == ' ')
 		data->data2.rdj++;

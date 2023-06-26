@@ -57,6 +57,16 @@ void	ft_remove_env_var(char **arg, t_data *data)
 	char		*name;
 
 	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
+	if (ft_isdigit(name[0]) == 1)
+	 {
+		write(2, "Minisheru: ", 11);
+		write(2, arg[data->data4.f],
+		ft_strlen(arg[data->data4.f]));
+		write(2, ": not a valid identifie\n", 25);
+		data->data3.export_num = 0;
+		free(name);
+		return ;
+	}
 	if (ft_strncmp(name, data->env_table->name) == 0 && data->env_table->next)
 	{
 		ft_clear_first_elmt(data);

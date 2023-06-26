@@ -38,7 +38,6 @@ void	bin_export(char **arg, t_data *data)
 			if ((arg[data->data4.f][data->data4.e] == '=' || arg[data->data4.f] \
 				[data->data4.e] == '\0') && data->data4.e > 0)
 			{
-				data->data3.export_num = 0;
 				ft_correct_env_name(arg, data);
 			}
 			else
@@ -89,6 +88,13 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	return (NULL);
 }
 
+int ft_isdigit(int c)
+{
+	if (c < 48 || c > 57)
+		return (0);
+	return (1);
+}
+
 void	ft_correct_env_name(char **arg, t_data *data)
 {
 	char		*name;
@@ -105,6 +111,19 @@ void	ft_correct_env_name(char **arg, t_data *data)
 		data->data4.e = ft_strlen(arg[data->data4.f]);
 	else
 		value = NULL;
+	if (value == NULL)
+	{
+		if (ft_isdigit(name[0]) == 1)
+		{
+			write(2, "Minisheru: ", 11);
+			write(2, arg[data->data4.f],
+				ft_strlen(arg[data->data4.f]));
+			write(2, ": not a valid identifie\n", 25);
+			data->data3.export_num = 0;
+			free(name);
+			return ;
+		}
+	}
 	p_env_name = ft_search_env(data, name);
 	if (!p_env_name)
 		ft_env_lstadd_back(&data->env_table, ft_env_lstnew(name, value));
@@ -115,6 +134,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 		p_env_name->value = ft_strdup(value);
 		free(value);
 	}
+			data->data3.export_num = 0;
 }
 
 void	ft_wrong_env_name(char **arg, t_data *data)

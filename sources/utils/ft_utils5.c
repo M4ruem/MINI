@@ -15,7 +15,7 @@
 int	ft_is_chr(char c, t_data *data)
 {
 	if ((c == 33 || c == 35 || c == 42 || c == 40 || c == 41
-			|| c == 59 || c == 47 || c == 63 || c == 124)
+			|| c == 59 || c == 63 || c == 124)
 		&& data->data1.squote == 0 && data->data1.dquote == 0)
 		return (1);
 	return (0);
