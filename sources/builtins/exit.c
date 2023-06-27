@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/16 13:04:08 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:56:49 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	free_for_exit(t_data *data, int x)
 static void	ft_continue(t_data *data)
 {
 	int	len;
-	
+
 	if (data->close_need == 1)
 	{
 		close(data->data5.stdin_save);
@@ -126,7 +126,7 @@ static void	ft_continue(t_data *data)
 		if (is_number(data->data1.arg_tabl[1]) == 0
 			|| ft_atoi(data->data1.arg_tabl[1]) == -2)
 		{
-			printf(" numeric argument required\n");
+			printf("\nnumeric argument required\n");
 			free_for_exit(data, 1);
 			exit(255);
 		}
@@ -222,7 +222,7 @@ void	free_exit_argument(t_data *data)
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
-	
+
 }
 
 void	bin_exit(t_data *data, int is_pipe)

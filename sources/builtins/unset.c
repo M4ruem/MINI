@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:40 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:11:48 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:57:29 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_remove_env_var(char **arg, t_data *data)
 		write(2, "Minisheru: ", 11);
 		write(2, arg[data->data4.f],
 		ft_strlen(arg[data->data4.f]));
-		write(2, ": not a valid identifie\n", 25);
+		write(2, ": not a valid identifier\n", 25);
 		data->data3.export_num = 0;
 		free(name);
 		return ;
