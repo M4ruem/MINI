@@ -14,8 +14,13 @@
 
 void	sig_handler_hd(int sig)
 {
+		g_sigint = 1;
 	if (sig == SIGINT)
 		g_sigint = 1;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 static char	*create_here_doc_file(t_data *data)
@@ -32,6 +37,7 @@ static char	*read_user_input(void)
 {
 	char	*str2;
 
+    signal(SIGINT, sig_handler_hd);
 	str2 = readline("> ");
 	if (str2 == NULL)
 	{
@@ -52,7 +58,6 @@ int	here_doc_fct(t_data *data, char *str)
     fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
     str2 = NULL;
     g_sigint = 0;
-    signal(SIGINT, sig_handler_hd);
     while (1)
     {
         str2 = read_user_input();
@@ -64,8 +69,8 @@ int	here_doc_fct(t_data *data, char *str)
         {
 			g_sigint = 0;
 			data->data1.ctr_c_herd = 1;
-   			close(fd);
-   		 	free(file);
+   	//		close(fd);
+   	//	 	free(file);
             return (6);
         }
         str2 = ft_search_and_change_env_var(data, str2);

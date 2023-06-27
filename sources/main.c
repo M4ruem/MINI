@@ -113,7 +113,6 @@ int	main(int argc, char **argv, char **env)
 	data.close_need = 0;
 	data.data5.lol = 0;
 	data.data5.last_error = 0;
-	data.data5.last_error = 0;
 	data.data2.lst_nbr = 0;
 	data.data2.rdj = 0;
 	data.data5.finale = 0;
