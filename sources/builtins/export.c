@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:49 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:07:15 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:57:21 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	bin_export(char **arg, t_data *data)
 			{
 				write(2, "Minisheru: ", 11);
  				write(2, arg[data->data4.f], ft_strlen(arg[0]));
-				write(2, ": not a valid identifie\n", 25);
+				write(2, ": not a valid identifier\n", 25);
  			}
 		}
 		data->data4.f++;
@@ -118,7 +118,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 			write(2, "Minisheru: ", 11);
 			write(2, arg[data->data4.f],
 				ft_strlen(arg[data->data4.f]));
-			write(2, ": not a valid identifie\n", 25);
+			write(2, ": not a valid identifier\n", 25);
 			data->data3.export_num = 0;
 			free(name);
 			return ;
@@ -147,7 +147,7 @@ void	ft_wrong_env_name(char **arg, t_data *data)
 	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
 	write(2, "Minisheru: ", 11);
 	write(2, name, ft_strlen(arg[0]));
-	write(2, ": not a valid identifie\n", 25);
+	write(2, ": not a valid identifier\n", 25);
 	data->data5.last_error = 1;
 	data->data3.export_num = 0;
 	free(name);
