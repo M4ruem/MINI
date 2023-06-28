@@ -28,7 +28,7 @@ int	parserror(int nbr, t_data *data)
 	if (nbr == 1)
 	{
 		write(2, "syntax error near unexpected token `|'\n", 40);
-		data->data5.last_error = 258;
+		data->data5.last_error = 2;
 		return (-1);
 	}
 	if (nbr == 6)
@@ -45,7 +45,7 @@ int	parserror(int nbr, t_data *data)
 	if (nbr == 3)
 	{
 		write(2, "Syntax error\n", 14);
-		data->data5.last_error = 258;
+		data->data5.last_error = 2;
 		return (-1);
 	}
 	if (nbr == -2)
@@ -209,6 +209,6 @@ void	exekerror(int nbr, t_data *data)
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
-	if (nbr != 4 && nbr != 3 && nbr != 2)
+	if (nbr != 4 && nbr != 3 && nbr != 2 && !data->data5.last_error)
 		data->data5.last_error = 0;
 }

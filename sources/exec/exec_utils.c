@@ -46,11 +46,7 @@ void	free_if_execv_fail(t_data *data)
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
-	i = -1;
-	while (data->data1.paths[++i])
-		free(data->data1.paths[i]);
 	data->data1.arg_tabl = NULL;
-	free(data->data1.paths);
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
 	ft_close_for_fun();

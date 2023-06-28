@@ -52,6 +52,7 @@ void	bin_export(char **arg, t_data *data)
 				write(2, "Minisheru: ", 11);
  				write(2, arg[data->data4.f], ft_strlen(arg[0]));
 				write(2, ": not a valid identifier\n", 25);
+				data->data5.last_error = 1;
  			}
 		}
 		data->data4.f++;
@@ -118,14 +119,9 @@ void	ft_correct_env_name(char **arg, t_data *data)
 			write(2, "Minisheru: ", 11);
 			write(2, arg[data->data4.f],
 				ft_strlen(arg[data->data4.f]));
-<<<<<<< HEAD
 			write(2, ": not a valid identifie\n", 25);
-			data->data3.export_num = 1;
-			data->data5.last_error = 1;
-=======
-			write(2, ": not a valid identifier\n", 25);
 			data->data3.export_num = 0;
->>>>>>> 05c1cfd2a073eb54ebc882a450d6b75b7626e254
+			data->data5.last_error = 1;
 			free(name);
 			return ;
 		}
