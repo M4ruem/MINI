@@ -99,6 +99,7 @@ typedef struct s_data4
 	int			nbr_save;
 	int			fds_malloced;
 	int			free_i;
+	int			sit;
 	int			e;
 	int			set;
 	int			f;

@@ -89,6 +89,7 @@ void	free_if_cmd_fail(t_data *data)
 	}
 	data->data1.arg_tabl = NULL;
 	close(data->data5.stdin_save);
+	data->data5.last_error = 127;
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
 }
@@ -107,6 +108,12 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 	if (data->data4.is_built_in == 0)
 	{
 		data->data5.finale = 0;
+		if (data->cmd_table->cmd == NULL)
+		{
+			free_if_cmd_fail(data);
+			ft_close_for_fun();
+			exit(0);
+		}
 		if (data->cmd_table->cmd[0] == '\0')
 		{
 			data->data5.finale = 1;
@@ -166,7 +173,6 @@ int	ft_execution(t_data *data, char **env)
 //		{
 //			return (4);
 //		}
-		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		return (exec_cmds(data, env));
 	}
 	return (0);

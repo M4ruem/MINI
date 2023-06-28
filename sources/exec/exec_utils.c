@@ -29,6 +29,7 @@ char	**fill_tabl(t_data **data, char *str, char **tabl)
 
 	i = ft_strlen(str) - 1;
 	tabl = put_cmd_in_arg(i, *data, str, tabl);
+	(*data)->data4.sit = 1;
 	return (tabl);
 }
 
@@ -38,6 +39,7 @@ void	free_if_execv_fail(t_data *data)
 
 	ft_lstclear(data, &data->cmd_table_temp);
 	ft_env_lstclear(&data->env_table);
+	ft_env_lstclear(&data->env_table_sorted);
 	i = -1;
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
@@ -48,6 +50,7 @@ void	free_if_execv_fail(t_data *data)
 	free(data->data1.arg_tabl);
 	data->data1.arg_tabl = NULL;
 	close(data->data5.stdin_save);
+	data->data5.last_error = 127;
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
 }

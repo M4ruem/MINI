@@ -116,8 +116,10 @@ int	main(int argc, char **argv, char **env)
 	data.data2.lst_nbr = 0;
 	data.data2.rdj = 0;
 	data.data5.finale = 0;
+	data.data4.sit = 0;
 	data.data4.fds_malloced = 0;
 	parserror(ft_put_env_in_lst(&data, env), &data);
+	data.data5.str_f = NULL;
 	data.env_table_sorted = NULL;
 	data.data5.last_error = 0;
 	run_main_loop(&data, env);

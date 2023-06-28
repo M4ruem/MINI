@@ -62,12 +62,9 @@ static void	print_command_not_found(t_data *data)
 	int	i;
 
 	i = -1;
-	if (data->cmd_table->cmd)
-		printf("%s : Command not found\n", data->cmd_table->cmd);
-	else
-		write(2, "Command not found\n", 19);
 	if (data->data5.is_pipe == 1)
 	{
+		printf("%s : Command not found\n", data->cmd_table->cmd);
 		while (data->data1.paths[++i])
 			free(data->data1.paths[i]);
 		free(data->data1.paths);
@@ -81,10 +78,16 @@ static void	print_command_not_found(t_data *data)
 		free(data->data3.fds);
 		exit(127);
 	}
+	if (data->cmd_table->cmd)
+		printf("%s : Command not found\n", data->cmd_table->cmd);
+	else
+		write(2, "Command not found\n", 19);
 }
 
 static void	handle_directory_error(t_data *data)
 {
+	if (data->cmd_table->cmd == NULL)
+		return ;
 	if (access(data->cmd_table->cmd, F_OK) == 0)
 	{
 		if (access(data->cmd_table->cmd, X_OK) == 0)
@@ -141,13 +144,12 @@ void	exekerror(int nbr, t_data *data)
 	(void)data;
 	i = 0;
 
-	handle_directory_error(data);
 	if (nbr == 2)
 	{
+		handle_directory_error(data);
 		while (i <= data->data4.nbr_save + 1)
 			free(data->data1.arg_tabl[i++]);
 		free(data->data1.arg_tabl);
-		data->data5.last_error = 127;
 		if (data->hell == 0)
 			print_command_not_found(data);
 		close(data->data5.stdin_save);
@@ -155,6 +157,7 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 3)
 	{
+		handle_directory_error(data);
 //		write(2, "Error with redirections\n", 25);
 		if (data->data3.houna == 1)
 		{
@@ -201,6 +204,7 @@ void	exekerror(int nbr, t_data *data)
 				}
 			}
 			execkerror_utils(data);
+			data->data5.last_error = 127;
 		}
 //		else
 //		{	
@@ -213,9 +217,8 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 4)
 	{
+		handle_directory_error(data);
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
-	if (nbr != 4 && nbr != 3 && nbr != 2 && !data->data5.last_error)
-		data->data5.last_error = 0;
 }
