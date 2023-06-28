@@ -86,7 +86,14 @@ static void	print_command_not_found(t_data *data)
 static void	handle_directory_error(t_data *data)
 {
 	if (access(data->cmd_table->cmd, F_OK) == 0)
-		return ;
+	{
+		if (access(data->cmd_table->cmd, X_OK) == 0)
+		{	
+			printf("%s : Is a directory\n", data->cmd_table->cmd);
+			data->data5.last_error = 126;
+			return ;
+		}
+	}
 	else if (access(data->cmd_table->cmd, X_OK) == 0)
 	{	
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
