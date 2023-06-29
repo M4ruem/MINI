@@ -69,14 +69,17 @@ void	ft_display_env(t_env_list *list)
 	begin = list;
 	while (begin)
 	{
-		printf("declare -x %s", begin->name);
 		if (begin->name[0] == '_')
 			begin = begin->next;
-		if (begin->value)
-			printf("=\"%s\"\n", begin->value);
 		else
-			printf("\n");
-		begin = begin->next;
+		{
+			printf("declare -x %s", begin->name);
+			if (begin->value)
+				printf("=\"%s\"\n", begin->value);
+			else
+				printf("\n");
+			begin = begin->next;
+		}
 	}
 }
 
