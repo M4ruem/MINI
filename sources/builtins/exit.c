@@ -227,8 +227,6 @@ void	free_exit_argument(t_data *data)
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	data->data1.arg_tabl = NULL;
-	if (data->data5.str_f != NULL)
-		free(data->data5.str_f);
 	ft_env_lstclear(&data->env_table);
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
