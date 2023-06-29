@@ -48,6 +48,14 @@ void	free_if_execv_fail(t_data *data)
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
+	if (data->data4.fds_malloced == 1)
+	{
+   		i = -1;
+		while (++i <= data->data2.lst_nbr)
+			free(data->data3.fds[i]);
+		free(data->data3.fds);
+		data->data3.fds = NULL;
+	}
 	data->data1.arg_tabl = NULL;
 	close(data->data5.stdin_save);
 	data->data5.last_error = 127;

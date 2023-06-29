@@ -144,9 +144,9 @@ void	exekerror(int nbr, t_data *data)
 	(void)data;
 	i = 0;
 
+	handle_directory_error(data);
 	if (nbr == 2)
 	{
-		handle_directory_error(data);
 		while (i <= data->data4.nbr_save + 1)
 			free(data->data1.arg_tabl[i++]);
 		free(data->data1.arg_tabl);
@@ -158,7 +158,6 @@ void	exekerror(int nbr, t_data *data)
 	if (nbr == 3)
 	{
 		handle_directory_error(data);
-//		write(2, "Error with redirections\n", 25);
 		if (data->data3.houna == 1)
 		{
 			i = -1;
@@ -185,6 +184,7 @@ void	exekerror(int nbr, t_data *data)
 		}
 		else
 		{
+			handle_directory_error(data);
 			i = -1;
 			while (data->data4.redir_file[++i])
 			{
@@ -206,13 +206,6 @@ void	exekerror(int nbr, t_data *data)
 			execkerror_utils(data);
 			data->data5.last_error = 127;
 		}
-//		else
-//		{	
-///			if (data->data5.is_pipe == 1)
-///				error_handel(data , 0);
-//		}
-	//	if (data->data5.is_pipe == 1)
-	//		exit(data->data5.last_error);
 		data->data5.last_error = 1;
 	}
 	if (nbr == 4)

@@ -22,13 +22,16 @@ void	bin_export(char **arg, t_data *data)
 		ft_display_env(data->env_table_sorted);
 		return ;
 	}
-	if (ft_strncmp(arg[0], "_") == 0)
-		return ;
 	while (arg[data->data4.f])
 	{
 		data->data4.e = 0;
 		while (arg[data->data4.f][data->data4.e])
 		{
+			if (arg[data->data4.f][data->data4.e] == '_' 
+				&& data->data4.e == 0)
+			{
+				break;
+			}
 			while (ft_isalnum(arg[data->data4.f][data->data4.e]) == 1 \
 				|| arg[data->data4.f][data->data4.e] == '_')
 			{
@@ -67,6 +70,8 @@ void	ft_display_env(t_env_list *list)
 	while (begin)
 	{
 		printf("declare -x %s", begin->name);
+		if (begin->name[0] == '_')
+			begin = begin->next;
 		if (begin->value)
 			printf("=\"%s\"\n", begin->value);
 		else
