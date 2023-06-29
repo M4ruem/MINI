@@ -81,7 +81,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 			if (len++)
 				i++;
 		value = ft_is_var_env(data, cmd_list->cmd, pos, len);
-		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1 , value);
 	}
 	data->data5.lol = 1;
 }
@@ -93,7 +93,7 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 
 	env_list = data->env_table;
 	if (len == 0)
-		var_name = ft_strtrim(cmd, "$");
+		var_name = ft_substr(cmd, pos + 1 , ft_strlen(cmd));
 	else
 		var_name = ft_substr(cmd, pos + 1, len);
 	while (env_list)

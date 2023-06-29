@@ -283,5 +283,6 @@ int			ft_isdigit(int c);
 int			continue_func(t_data *data);
 int			while_redir(t_data *data, int i, int nbr);
 void		execkerror_utils(t_data *data);
+char		**ft_split(char const *s, char c);
 
 #endif

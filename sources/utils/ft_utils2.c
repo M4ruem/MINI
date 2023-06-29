@@ -62,9 +62,9 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	j = 0;
 	k = 0;
 	newlen = ft_strlen(str) - len + ft_strlen(word);
-	if (len == 1)
+	if (word == NULL)
 	{
-		result = ft_substr(word , 0, ft_strlen(word));
+		result = ft_substr(str , 0, start);
 		free(str);
 		return (result);
 	}
@@ -75,7 +75,10 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 		{
 			while (word && word[j])
 				result[i++] = word[j++];
-			k = start + len;
+			if (len == 1)
+				k = start + 2;
+			else
+				k = start + len;
 		}
 		if (str[k] != '\0')
 			result[i++] = str[k++];

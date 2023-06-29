@@ -25,8 +25,10 @@ int count_tabel(char **tab)
 void	bin_cd(t_data *data)
 {
 	int		error;
+	char 	*home;
 	char	cwd[PATH_MAX];
 
+	error = 0;
 	data->data5.last_error = 0;
 	if (count_tabel(data->data1.arg_tabl) > 2)
 	{
@@ -36,8 +38,10 @@ void	bin_cd(t_data *data)
 	}
 	if (!data->data1.arg_tabl[1])
 	{
-		error = chdir(ft_chr_var_env(data, "HOME"));
-		if (error != 0)
+		home = ft_chr_var_env(data, "HOME");
+		if (home != NULL)
+			error = chdir(ft_chr_var_env(data, "HOME"));
+		if (error != 0 || home == NULL)
 			printf("minishell: cd: No PATH found\n");
 		if (error != 0)
 			data->data5.last_error = 1;

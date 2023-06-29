@@ -173,6 +173,7 @@ int	ft_execution(t_data *data, char **env)
 //		{
 //			return (4);
 //		}
+		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		return (exec_cmds(data, env));
 	}
 	return (0);

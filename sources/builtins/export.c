@@ -127,7 +127,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 			write(2, "Minisheru: ", 11);
 			write(2, arg[data->data4.f],
 				ft_strlen(arg[data->data4.f]));
-			write(2, ": not a valid identifie\n", 25);
+			write(2, ": not a valid identifier\n", 25);
 			data->data3.export_num = 0;
 			data->data5.last_error = 1;
 			free(name);
