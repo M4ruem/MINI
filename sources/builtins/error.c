@@ -33,7 +33,6 @@ int	parserror(int nbr, t_data *data)
 	}
 	if (nbr == 6)
 	{
-		printf("here_doc");
 		return (-1);
 	}
 	if (nbr == 2)

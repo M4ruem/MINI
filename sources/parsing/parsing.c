@@ -96,7 +96,9 @@ int	ft_parser2(t_data *data, char *str)
 			&& data->data1.squote == 0 && data->data1.dquote == 0)
 		{
 			data->data3.pskip = redir_parsing(str, data);
-			if (data->data3.pskip < 0)
+			if (data->data3.pskip == 6)
+				return (6);
+			else if (data->data3.pskip < 0)
 				return (data->data3.pskip);
 			data->data3.rdi = data->data3.rdi + data->data3.pskip;
 		}

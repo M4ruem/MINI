@@ -26,8 +26,6 @@
 # include <readline/history.h>
 # include <termios.h>
 
-extern int	g_sigint;
-int	g_pip[2];
 
 typedef struct s_cmd_list
 {
@@ -81,6 +79,8 @@ typedef struct s_data3
 	int			export_num;
 	int			error_getcmd;
 	int			main_error;
+	int			fd;
+	char		*file;
 	int			**fds;
 	int			pid;
 	int			rdi;
@@ -128,10 +128,12 @@ typedef struct s_data
 {
 	char		*main_str;
 	int			bsn;
+	int			sigint;
 	int			close_need;
 	int			hell;
 	int			str_exit;
-	struct		sigaction sa;
+	struct		sigaction sa_child;
+	struct		sigaction sa_parent;
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
@@ -143,6 +145,7 @@ typedef struct s_data
 	t_data5		data5;
 }				t_data;
 
+t_data *g_data;
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */
 /* -------------------------------------------------------------------------- */

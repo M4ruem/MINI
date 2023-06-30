@@ -12,11 +12,39 @@
 
 #include "../../include/minishell.h"
 
-void	sigint_handler(int sig)
+t_data *g_data;
+
+void free_child(t_data *data)
+{
+	int i;
+
+	i = -1;
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+	i = -1;
+	while (data->data4.redir_file[++i])
+		free(data->data4.redir_file[i]);
+	free(data->data4.redir_file);
+	free(data->data4.redir_type);
+	free(data->cmd_table);
+	ft_env_lstclear(&data->env_table);
+	ft_env_lstclear(&data->env_table_sorted);
+	ft_close_for_fun();
+}
+
+void	sigint_handler_parent()
+{
+	printf("\n");
+}
+
+void	sigint_handler_child(int sig)
 {
 	if (sig == SIGINT)
-	{	
-		g_sigint = 2;
+	{
+		free_child(g_data);
+		free(g_data->data3.file);
+		close(g_data->data3.fd);
 		exit(6);
 	}
 }
@@ -70,49 +98,67 @@ static char	*read_user_input(void)
 	return (0);
 }*/
 
+
+void	child_process(t_data *data, char *str)
+{
+	char	*str2;
+
+	signal(SIGINT, sigint_handler_child);
+	signal(SIGQUIT, SIG_IGN);	
+    data->data3.file = create_here_doc_file(data);
+	str2 = NULL;
+	data->data3.fd = open(data->data3.file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	while (1)
+	{
+    	str2 = read_user_input();
+		if (str2 == NULL)
+		{
+			free(str2);
+			free(data->data3.file);
+			close(data->data3.fd);
+			free_child(data);
+			exit(0);
+		}
+		str2 = ft_search_and_change_env_var(data, str2);
+		if (str_diff(str, str2) == 0)
+		{
+			free(str2);
+			free(data->data3.file);
+			close(data->data3.fd);
+			free_child(data);
+			exit(0);
+		}
+		write(data->data3.fd, str2, ft_strlen(str2));
+		write(data->data3.fd, "\n", 1);
+		free(str2);
+	}
+	close(data->data3.fd);
+	free(str2);
+}
+
 int	here_doc_fct(t_data *data, char *str)
 {
-	char	*file;
-	int		fd;
-	char	*str2;
 	int		pid;
-
+	
+	g_data = data;
 	pid = fork();
 	if (pid == 0)
 	{	
-//		sigemptyset(&data->sa.sa_mask);
-//		data->sa.sa_flags = 0;
-//		data->sa.sa_handler = sigint_handler;
-//		if (sigaction(SIGINT, &data->sa, NULL) == -1)
-//			exit(1);
-		signal(SIGINT, sigint_handler);
-    	file = create_here_doc_file(data);
-		str2 = NULL;
-		fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		while (1)
-		{
-       		str2 = read_user_input();
-			if (str2 == NULL)
-			{
-				free(str2);
-				exit(0);
-			}
-			str2 = ft_search_and_change_env_var(data, str2);
-			if (str_diff(str, str2) == 0)
-				exit(0);
-			write(fd, str2, ft_strlen(str2));
-			write(fd, "\n", 1);
-			free(str2);
-		}
-		close(fd);
-		free(str2);
+		child_process(data, str);
 	}
-	waitpid(pid, NULL, 0);
+	else if (pid > 0)
+	{
+		signal(SIGINT, sigint_handler_parent);
+		wait(&pid);
+//		if (g_sigint == 2)
+//			return (6);
 	if (WIFEXITED(pid))
 	{
 		int exit_s = WEXITSTATUS(pid);
 			if (exit_s == 6)
 				return (6);
+	}
+//	data->data1.ctr_c_herd = 1;
 	}
 	return (0);
 }

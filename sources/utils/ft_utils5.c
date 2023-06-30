@@ -44,7 +44,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 int	check_rl(void)
 {
-	if (g_sigint == 1)
+	if (g_data->sigint == 1)
 		rl_done = 1;
 	return (0);
 }

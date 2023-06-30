@@ -14,9 +14,9 @@
 
 void	handler(int sigtype)
 {
-	if (sigtype == SIGINT && g_sigint != 2)
+	if (sigtype == SIGINT)
 	{
-		g_sigint = 1;
+		g_data->sigint = 1;
 		printf("^C\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -58,9 +58,9 @@ void	main_fonction_two(t_data *data)
 	data->main_str = readline("Minisheru > ");
 	if (main_utils(data) == 1)
 		return ;
-	if (g_sigint)
+	if (g_data->sigint)
 	{
-		g_sigint = 0;
+		g_data->sigint = 0;
 		data->data5.last_error = 130;
 	}
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
@@ -97,7 +97,7 @@ void	run_main_loop(t_data *data, char **env)
 	}
 }
 
-int	g_sigint;
+t_data *g_data;
 
 int	main(int argc, char **argv, char **env)
 {
@@ -110,6 +110,8 @@ int	main(int argc, char **argv, char **env)
 	}
 	if (argc != 1 || !(argv[0]))
 		exit(0);
+	g_data = &data;
+	g_data->sigint = 0;
 	data.close_need = 0;
 	data.data5.lol = 0;
 	data.data5.last_error = 0;
