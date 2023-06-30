@@ -14,7 +14,7 @@
 
 void	handler(int sigtype)
 {
-	if (sigtype == SIGINT)
+	if (sigtype == SIGINT && g_sigint != 2)
 	{
 		g_sigint = 1;
 		printf("^C\n");

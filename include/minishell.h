@@ -27,6 +27,7 @@
 # include <termios.h>
 
 extern int	g_sigint;
+int	g_pip[2];
 
 typedef struct s_cmd_list
 {
@@ -130,6 +131,7 @@ typedef struct s_data
 	int			close_need;
 	int			hell;
 	int			str_exit;
+	struct		sigaction sa;
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
