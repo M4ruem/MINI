@@ -101,6 +101,7 @@ typedef struct s_data4
 	int			fds_malloced;
 	int			free_i;
 	int			sit;
+	int			unset;
 	int			e;
 	int			set;
 	int			f;

@@ -81,13 +81,14 @@ static void	print_command_not_found(t_data *data)
 		printf("%s : Command not found\n", data->cmd_table->cmd);
 	else
 		write(2, "Command not found\n", 19);
+	data->data5.last_error = 127;
 }
 
 static void	handle_directory_error(t_data *data)
 {
 	if (data->cmd_table->cmd == NULL)
 		return ;
-	if (access(data->cmd_table->cmd, F_OK) == 0)
+	if (access(data->cmd_table->cmd, F_OK) == 0 && data->data4.unset == 1)
 	{
 		if (access(data->cmd_table->cmd, X_OK) == 0)
 		{	

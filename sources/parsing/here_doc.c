@@ -103,11 +103,9 @@ void	child_process(t_data *data, char *str)
 {
 	char	*str2;
 
+	str2 = NULL;
 	signal(SIGINT, sigint_handler_child);
 	signal(SIGQUIT, SIG_IGN);	
-    data->data3.file = create_here_doc_file(data);
-	str2 = NULL;
-	data->data3.fd = open(data->data3.file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	while (1)
 	{
     	str2 = read_user_input();
@@ -141,6 +139,8 @@ int	here_doc_fct(t_data *data, char *str)
 	int		pid;
 	
 	g_data = data;
+    data->data3.file = create_here_doc_file(data);
+	data->data3.fd = open(data->data3.file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pid = fork();
 	if (pid == 0)
 	{	

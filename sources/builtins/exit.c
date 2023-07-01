@@ -137,7 +137,7 @@ static void	ft_continue(t_data *data)
 		{
 			printf("\nnumeric argument required\n");
 			free_for_exit(data, 1);
-			exit(255);
+			exit(2);
 		}
 		len = ft_atoi((data->data1.arg_tabl[1])) % 256;
 		free_for_exit(data, 1);

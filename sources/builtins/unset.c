@@ -57,6 +57,8 @@ void	ft_remove_env_var(char **arg, t_data *data)
 	char		*name;
 
 	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
+	if (ft_strncmp(name, "PATH") == 0)
+		data->data4.unset = 1;
 	if (ft_isdigit(name[0]) == 1)
 	 {
 		write(2, "Minisheru: ", 11);

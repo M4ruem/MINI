@@ -51,6 +51,7 @@ void	main_fonction_two(t_data *data)
 	setup_term(0);
 	data->data3.houna = 0;
 	data->data3.redir_error = 0;
+	data->data4.unset = 0;
 	data->bsn = 0;
 	data->hell = 0;
 	signal(SIGINT, handler);
