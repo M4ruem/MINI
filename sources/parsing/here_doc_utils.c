@@ -46,3 +46,9 @@ char	*create_here_doc_file(t_data *data)
 	file = ft_strjoin_c("/tmp/.here_doc", character);
 	return (file);
 }
+
+void	here(t_data *data)
+{
+	free(data->data3.file);
+	close(data->data3.fd);
+}

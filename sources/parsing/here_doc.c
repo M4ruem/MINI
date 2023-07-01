@@ -81,9 +81,7 @@ int	here_doc_fct(t_data *data, char *str)
 	data->data3.fd = open(data->data3.file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pid = fork();
 	if (pid == 0)
-	{
 		child_process(data, str);
-	}
 	else if (pid > 0)
 	{
 		signal(SIGINT, sigint_handler_parent);
@@ -95,10 +93,7 @@ int	here_doc_fct(t_data *data, char *str)
 				return (6);
 		}
 		else
-		{
-			free(data->data3.file);
-			close(data->data3.fd);
-		}
+			here(data);
 	}
 	return (0);
 }

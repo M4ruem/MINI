@@ -30,31 +30,14 @@ void	bin_export(char **arg, t_data *data)
 			if (arg[data->data4.f][data->data4.e] == '_' \
 				&& data->data4.e == 0)
 				break ;
-			while (ft_isalnum(arg[data->data4.f][data->data4.e]) == 1 \
-				|| arg[data->data4.f][data->data4.e] == '_')
-			{
-				data->data3.export_num++;
-				data->data4.e++;
-			}
-			if ((arg[data->data4.f][data->data4.e] == '=' || arg[data->data4.f] \
-				[data->data4.e] == '\0') && data->data4.e > 0)
-			{
-				ft_correct_env_name(arg, data);
-			}
+			if (continue_6(arg, data, 0) == 1)
+				return ;
 			else
 			{
 				ft_wrong_env_name(arg, data);
 				return ;
 			}
-			if (arg[data->data4.f][data->data4.e])
-				data->data4.e++;
-			if (data->data3.export_num > 0)
-			{
-				write(2, "Minisheru: ", 11);
-				write(2, arg[data->data4.f], ft_strlen(arg[0]));
-				write(2, ": not a valid identifier\n", 25);
-				data->data5.last_error = 1;
-			}
+			continue_6(arg, data, 1);
 		}
 		data->data4.f++;
 	}
