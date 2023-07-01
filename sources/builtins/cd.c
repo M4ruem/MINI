@@ -12,20 +12,36 @@
 
 #include "../../include/minishell.h"
 
-int	count_tabel(char **tab)
+void	bin_cd_next(t_data *data)
 {
-	int	i;
+	char	*home;
+	int		error;
 
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	error = 0;
+	home = ft_chr_var_env(data, "HOME");
+	if (home != NULL)
+		error = chdir(ft_chr_var_env(data, "HOME"));
+	if (error != 0 || home == NULL)
+		printf("minishell: cd: No PATH found\n");
+	if (error != 0)
+		data->data5.last_error = 1;
+	ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
+	ft_update_var_env(data, "PWD", ft_chr_var_env(data, "HOME"));
+}
+
+void	bin_cd_next2(t_data *data)
+{
+	if (access(data->data1.arg_tabl[1], F_OK) != 0)
+		printf("minishell: cd: %s: No such file or directory\n", \
+			data->data1.arg_tabl[1]);
+	else if (access(data->data1.arg_tabl[1], R_OK) != 0)
+		printf("minishell: cd: %s: Permission denied\n", \
+			data->data1.arg_tabl[1]);
 }
 
 void	bin_cd(t_data *data)
 {
 	int		error;
-	char	*home;
 	char	cwd[PATH_MAX];
 
 	error = 0;
@@ -37,29 +53,12 @@ void	bin_cd(t_data *data)
 		return ;
 	}
 	if (!data->data1.arg_tabl[1])
-	{
-		home = ft_chr_var_env(data, "HOME");
-		if (home != NULL)
-			error = chdir(ft_chr_var_env(data, "HOME"));
-		if (error != 0 || home == NULL)
-			printf("minishell: cd: No PATH found\n");
-		if (error != 0)
-			data->data5.last_error = 1;
-		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
-		ft_update_var_env(data, "PWD", ft_chr_var_env(data, "HOME"));
-	}
+		bin_cd_next(data);
 	else
 	{
 		error = chdir(data->data1.arg_tabl[1]);
 		if (error != 0)
-		{
-			if (access(data->data1.arg_tabl[1], F_OK) != 0)
-				printf("minishell: cd: %s: No such file or directory\n", \
-					data->data1.arg_tabl[1]);
-			else if (access(data->data1.arg_tabl[1], R_OK) != 0)
-				printf("minishell: cd: %s: Permission denied\n", \
-					data->data1.arg_tabl[1]);
-		}
+			bin_cd_next2(data);
 		if (error != 0)
 			data->data5.last_error = 1;
 		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));

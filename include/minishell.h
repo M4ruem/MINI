@@ -269,6 +269,7 @@ void		free_exit_pipe(t_data *data);
 int			parserror2(int nbr, t_data *data);
 void		exekerror_utils(t_data *data);
 void		print_command_not_found(t_data *data);
+int			count_tabel(char **tab);
 
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
