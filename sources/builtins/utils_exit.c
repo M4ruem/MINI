@@ -67,7 +67,7 @@ void	ft_continue_exit(t_data *data)
 	}
 	printf("\n");
 	free_for_exit(data);
-	exit(EXIT_SUCCESS);
+	exit(data->data5.last_error);
 }
 
 void	free_exit_pipe_next(t_data *data)

@@ -80,3 +80,18 @@ int	ft_lstsize(t_cmd_list *lst)
 	}
 	return (nbr);
 }
+
+void	init_main(t_data *data)
+{
+	data->data1.here_doc_nbr = 0;
+	data->data1.arg_tabl = NULL;
+	data->data1.here = 0;
+	data->data3.fds = NULL;
+	data->data4.nbr_save = 0;
+	data->data5.is_pipe = 0;
+	data->data3.houna = 0;
+	data->data3.redir_error = 0;
+	data->data4.unset = 0;
+	data->bsn = 0;
+	data->hell = 0;
+}

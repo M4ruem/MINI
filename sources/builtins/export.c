@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:49 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/27 10:57:21 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 15:42:03 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,12 @@ void	ft_correct_env_name(char **arg, t_data *data)
 	p_env_name = NULL;
 	name = NULL;
 	value = NULL;
-	co_8(name, value, arg, data);
+	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
+	if (arg[data->data4.f][data->data4.e] == '=' &&
+		arg[data->data4.f][data->data4.e + 1])
+		value = ft_substr(arg[data->data4.f], data->data4.e + 1, \
+			ft_strlen(arg[data->data4.f]) - (data->data4.e + 1));
+//co_8(name, value, arg, data);
 	if (arg[data->data4.f][data->data4.e] == '=' &&
 		arg[data->data4.f][data->data4.e + 1])
 		data->data4.e = ft_strlen(arg[data->data4.f]);

@@ -90,7 +90,10 @@ int	here_doc_fct(t_data *data, char *str)
 		{
 			exit_s = WEXITSTATUS(pid);
 			if (exit_s == 6)
+			{
+				data->data5.last_error = 130;
 				return (6);
+			}
 			else
 				here(data);
 		}

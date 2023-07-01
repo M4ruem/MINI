@@ -52,40 +52,27 @@ char	*ft_strdup(const char *s1)
 
 char	*ft_replace_word(char *str, int start, int len, char *word)
 {
-	char	*result;
-	int		newlen;
-	int		i;
-	int		j;
-	int		k;
+	t_var	var;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	newlen = ft_strlen(str) - len + ft_strlen(word);
-	if (word == NULL)
+	var.i = 0;
+	var.j = 0;
+	var.k = 0;
+	var.newlen = ft_strlen(str) - len + ft_strlen(word);
+	var.result = malloc(sizeof(char) * (var.newlen + 1));
+	while (str[var.k])
 	{
-		result = ft_substr(str, 0, start);
-		free(str);
-		return (result);
-	}
-	result = malloc(sizeof(char) * (newlen + 1));
-	while (str[k])
-	{
-		if (k == start)
+		if (var.k == start)
 		{
-			while (word && word[j])
-				result[i++] = word[j++];
-			if (len == 1)
-				k = start + 2;
-			else
-				k = start + len;
+			while (word && word[var.j])
+				var.result[var.i++] = word[var.j++];
+			var.k = start + len;
 		}
-		if (str[k] != '\0')
-			result[i++] = str[k++];
+		if (str[var.k] != '\0')
+			var.result[var.i++] = str[var.k++];
 	}
-	result[i] = '\0';
+	var.result[var.i] = '\0';
 	free(str);
-	return (result);
+	return (var.result);
 }
 
 int	ft_strncmp(const char *s1, const char *s2)

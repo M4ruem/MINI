@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/01 08:34:32 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/01 14:28:21 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
-
 
 typedef struct s_cmd_list
 {
@@ -125,6 +124,15 @@ typedef struct s_data5
 	int			last_error;
 }	t_data5;
 
+typedef struct s_var
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*result;
+	int		newlen;
+}		t_var;
+
 typedef struct s_data
 {
 	char		*main_str;
@@ -145,7 +153,7 @@ typedef struct s_data
 	t_data5		data5;
 }				t_data;
 
-extern t_data *g_data;
+extern t_data	*g_data;
 /* -------------------------------------------------------------------------- */
 /*                                   parsing                                  */
 /* -------------------------------------------------------------------------- */
@@ -154,16 +162,16 @@ void		find_dollar(t_data *data);
 int			ft_lexer(char *str, t_data *data);
 int			ft_parser(char *str, t_data *data, int end);
 void		ft_addpipe(t_data *data);
-void here(t_data *data);
+void		here(t_data *data);
 void		quotes_switch(t_data *data, char *str, int i);
 int			redir_parsing(char *str, t_data *data);
-void	free_child(t_data *data);
+void		free_child(t_data *data);
 int			count_redir(char *str, t_data *data);
 int			str_is_empty(char *str);
 int			here_doc_fct(t_data *data, char *str);
 int			ft_lexer2(t_data *data, char *str);
 int			ft_parser2(t_data *data, char *str);
-char	*create_here_doc_file(t_data *data);
+char		*create_here_doc_file(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                     env                                    */
@@ -193,7 +201,7 @@ void		ft_env_lstclear(t_env_list **lst);
 int			ft_execution(t_data *data, char **env);
 char		**recup_path(t_data *data);
 void		ultimate_free(t_data *data, int key);
-int	continue_1(t_data *data);
+int			continue_1(t_data *data);
 char		*recupathline(char **env);
 int			exec_one_cmd(t_data *data, char **env);
 char		**get_cmd(t_data *data);
@@ -204,7 +212,7 @@ int			cmd_redir(t_data *data, char **env, int nbr);
 int			exec_cmds(t_data *data, char **env);
 void		while_1(t_data *data);
 void		wait_loop(t_data *data);
-void	free_if_cmd_fail(t_data *data);
+void		free_if_cmd_fail(t_data *data);
 char		**rm_quote(char **tabl, t_data *data);
 char		*rm_quote2(t_data *data, char **tabl, char *str);
 int			forward_redir(t_data *data, int i);
@@ -216,7 +224,7 @@ void		exec_cmds_two(t_data *data);
 void		getcmd_and_pipe_three(t_data *data);
 char		**allocate_tabl(t_data **data);
 char		**fill_tabl(t_data **data, char *str, char **tabl);
-void	continue_3(t_data *data);
+void		continue_3(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                  builtins                                  */
@@ -225,20 +233,20 @@ void		handler(int sigtype);
 void		exekerror3(t_data *data);
 void		handle_directory_error(t_data *data);
 void		exekerror2(t_data *data);
-int	count_tabel(char **tab);
+int			count_tabel(char **tab);
 void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(t_data *data, const char *s1);
 void		bin_env(t_data *data);
-void error_handel_tow(t_data *data);
+void		error_handel_tow(t_data *data);
 int			bin_pwd(t_data *data);
 void		bin_cd(t_data *data);
-void	co_8(char *name, char *value, char **arg, t_data *data);
-void	export_msg(char *str ,t_data *data);
-int	first_enter(char **arg, t_data *data);
-void	co_7(t_env_list *p_env_name, char *name, t_data *data, char *value);
-int 	continue_6(char **arg, t_data *data, int key);
-void	export_msg(char *str ,t_data *data);
+void		co_8(char *name, char *value, char **arg, t_data *data);
+void		export_msg(char *str, t_data *data);
+int			first_enter(char **arg, t_data *data);
+void		co_7(t_env_list *p_env_name, char *name, t_data *data, char *value);
+int			continue_6(char **arg, t_data *data, int key);
+void		export_msg(char *str, t_data *data);
 char		*ft_chr_var_env(t_data *data, char *str);
 void		ft_update_var_env(t_data *data, char *name, char *value);
 void		bin_export(char **arg, t_data *data);
@@ -268,7 +276,7 @@ void		free_exit_pipe_next(t_data *data);
 int			check_for_exit(t_data *data);
 void		free_for_exit(t_data *data);
 void		execkerror_utils(t_data *data);
-int	ft_isdigit(int c);
+int			ft_isdigit(int c);
 void		bin_exit_next(t_data *data, int flag);
 void		free_for_redir_fail(t_data *data);
 void		free_exit_pipe(t_data *data);
@@ -298,6 +306,7 @@ char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);
 void		ft_putendl(char *s);
+void		init_main(t_data *data);
 char		*ft_found_path(t_data *data, char *str);
 int			ft_intlen(int n);
 char		*ft_itoa(int n);

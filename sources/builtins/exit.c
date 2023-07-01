@@ -18,6 +18,7 @@ void	free_for_redir_fail(t_data *data)
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
+	ft_env_lstclear(&data->env_table_sorted);
 	while (data->data1.paths[++i])
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
@@ -36,8 +37,11 @@ void	free_for_redir_fail(t_data *data)
 		free(data->data3.fds);
 	}
 	free_redir_fail_next(data);
-	ft_close_for_fun();
-	exit(data->data5.last_error);
+	if (data->data5.is_pipe == 1)
+	{
+		ft_close_for_fun();
+		exit(data->data5.last_error);
+	}
 }
 
 void	free_for_exit(t_data *data)

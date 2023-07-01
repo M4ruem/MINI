@@ -83,9 +83,12 @@ void	exekerror2(t_data *data)
 				ft_strlen(data->cmd_table->redir_file[i]));
 			write(2, ": Permission denied\n", 20);
 		}
-		error_handel(data);
-		exit(0);
 		data->data3.houna = 0;
+	}
+	if (data->data5.is_pipe == 1)
+	{
+		error_handel(data);
+		exit(data->data5.last_error);
 	}
 }
 

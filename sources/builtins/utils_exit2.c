@@ -39,7 +39,7 @@ void	bin_exit_next(t_data *data, int flag)
 	if (flag == 1)
 	{
 		free_exit_pipe(data);
-		exit(1);
+		exit(data->data5.last_error);
 	}
 	if (flag == 2)
 	{

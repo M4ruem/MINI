@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <sys/stat.h>
 
 int	syntax_error(t_data *data)
 {
@@ -74,6 +75,27 @@ void	handle_directory_error(t_data *data)
 {
 	if (data->cmd_table->cmd == NULL)
 		return ;
+		
+	/*struct stat st;
+	if (access(data->cmd_table->cmd, F_OK) == 0){
+		if( stat( data->cmd_table->cmd, &st) != -1) // Check the return value of stat
+		{
+		    	if( S_ISREG( st.st_mode ) == 0 ){
+				printf( "%s is a directory\n", data->cmd_table->cmd );
+				data->data5.last_error = 126;
+			}
+		 	else if (access(data->cmd_table->cmd, X_OK) != 0){
+				printf( "%s access denied\n", data->cmd_table->cmd );
+				data->data5.last_error = 126;
+			}
+		}
+	}
+	//e/lse{
+		//printf( "zsh: no such file or directory: %s\n", data->cmd_table->cmd );
+		//data->data5.last_error = 127;
+	//}
+	
+	return;*/
 	if (access(data->cmd_table->cmd, F_OK) == 0 && data->data4.unset == 1)
 	{
 		if (access(data->cmd_table->cmd, X_OK) == 0)
@@ -83,7 +105,7 @@ void	handle_directory_error(t_data *data)
 			return ;
 		}
 	}
-	else if (access(data->cmd_table->cmd, X_OK) == 0)
+	else if (access(data->cmd_table->cmd, X_OK) == 0 && data->data4.unset == 1)
 	{
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
 		data->data5.last_error = 126;
@@ -99,7 +121,6 @@ void	exekerror(int nbr, t_data *data)
 		exekerror_utils(data);
 	if (nbr == 3)
 	{
-		handle_directory_error(data);
 		if (data->data3.houna == 1)
 			exekerror2(data);
 		else
@@ -108,7 +129,6 @@ void	exekerror(int nbr, t_data *data)
 	}
 	if (nbr == 4)
 	{
-		handle_directory_error(data);
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
