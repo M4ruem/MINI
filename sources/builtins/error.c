@@ -25,32 +25,8 @@ int	syntax_error(t_data *data)
 
 int	parserror(int nbr, t_data *data)
 {
-	if (nbr == 1)
-	{
-		write(2, "syntax error near unexpected token `|'\n", 40);
-		data->data5.last_error = 2;
+	if (parserror2(nbr, data) == -1)
 		return (-1);
-	}
-	if (nbr == 6)
-	{
-		nbr = -1;
-		if (data->data3.pcommand != NULL)
-			free(data->data3.pcommand);
-		data->data3.pcommand = NULL;
-		while (data->data4.redir_file[++nbr])
-			free(data->data4.redir_file[nbr]);
-		free(data->data4.redir_file);
-		free(data->data4.redir_type);
-		free(data->data3.file);
-		close(data->data3.fd); 
-		return (-1);
-	}
-	if (nbr == 2)
-	{
-		write(2, "Error quote not closed\n", 24);
-		data->data5.last_error = 1;
-		return (-1);
-	}
 	if (nbr == 3)
 	{
 		write(2, "Syntax error\n", 14);
@@ -66,7 +42,7 @@ int	parserror(int nbr, t_data *data)
 	return (0);
 }
 
-static void	print_command_not_found(t_data *data)
+void	print_command_not_found(t_data *data)
 {
 	int	i;
 
@@ -82,7 +58,7 @@ static void	print_command_not_found(t_data *data)
 		ft_lstclear(data, &data->cmd_table_temp);
 		free(data->cmd_table_temp);
 		close(data->data5.stdin_save);
- 		close(data->data5.stdout_save);
+		close(data->data5.stdout_save);
 		ft_env_lstclear(&data->env_table);
 		free(data->data3.fds);
 		exit(127);
@@ -101,40 +77,26 @@ void	handle_directory_error(t_data *data)
 	if (access(data->cmd_table->cmd, F_OK) == 0 && data->data4.unset == 1)
 	{
 		if (access(data->cmd_table->cmd, X_OK) == 0)
-		{	
+		{
 			printf("%s : Is a directory\n", data->cmd_table->cmd);
 			data->data5.last_error = 126;
 			return ;
 		}
 	}
 	else if (access(data->cmd_table->cmd, X_OK) == 0)
-	{	
+	{
 		printf("%s : Is a directory\n", data->cmd_table->cmd);
 		data->data5.last_error = 126;
 		return ;
 	}
 }
 
-
 void	exekerror(int nbr, t_data *data)
 {
-	int	i;
-
 	(void)data;
-	i = 0;
-
 	handle_directory_error(data);
 	if (nbr == 2)
-	{
-		while (i <= data->data4.nbr_save + 1)
-			free(data->data1.arg_tabl[i++]);
-		free(data->data1.arg_tabl);
-		if (data->hell == 0)
-			print_command_not_found(data);
-		close(data->data5.stdin_save);
- 		close(data->data5.stdout_save);
-		data->data5.last_error = 127;
-	}
+		exekerror_utils(data);
 	if (nbr == 3)
 	{
 		handle_directory_error(data);

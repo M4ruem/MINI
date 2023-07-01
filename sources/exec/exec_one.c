@@ -135,6 +135,8 @@ int	ft_execution(t_data *data, char **env)
 	if (data->data2.lst_nbr > 1)
 	{
 		data->data5.is_pipe = 1;
+		if (last->cmd[0] == '\0')
+			return (4);
 		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		return (exec_cmds(data, env));
 	}

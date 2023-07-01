@@ -262,6 +262,9 @@ void		execkerror_utils(t_data *data);
 void		bin_exit_next(t_data *data, int flag);
 void		free_for_redir_fail(t_data *data);
 void		free_exit_pipe(t_data *data);
+int			parserror2(int nbr, t_data *data);
+void		exekerror_utils(t_data *data);
+void		print_command_not_found(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
