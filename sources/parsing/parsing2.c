@@ -20,9 +20,9 @@ void	ft_continue2(t_data *data, char *str)
 		&& data->data1.dquote == 0)
 		while (str[data->data3.rdi] == ' ' && data->data1.squote == 0
 			&& data->data1.dquote == 0)
-		data->data3.rdi++;
+			data->data3.rdi++;
 	else
-	data->data3.rdi++;
+		data->data3.rdi++;
 }
 
 void	ft_continue3(t_data *data)

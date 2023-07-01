@@ -12,11 +12,11 @@
 
 #include "../../include/minishell.h"
 
-t_data *g_data;
+t_data	*g_data;
 
-void free_child(t_data *data)
+void	free_child(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (data->data1.paths[++i])
@@ -39,8 +39,9 @@ void free_child(t_data *data)
 	ft_close_for_fun();
 }
 
-void	sigint_handler_parent()
+void	sigint_handler_parent(int sig)
 {
+	(void)sig;
 	printf("\n");
 }
 
@@ -82,10 +83,10 @@ void	child_process(t_data *data, char *str)
 
 	str2 = NULL;
 	signal(SIGINT, sigint_handler_child);
-	signal(SIGQUIT, SIG_IGN);	
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-    	str2 = read_user_input();
+		str2 = read_user_input();
 		if (str2 == NULL)
 		{
 			free(str2);
@@ -107,14 +108,15 @@ void	child_process(t_data *data, char *str)
 
 int	here_doc_fct(t_data *data, char *str)
 {
-	int		pid;
-	
+	int	pid;
+	int	exit_s;
+
 	g_data = data;
-    data->data3.file = create_here_doc_file(data);
+	data->data3.file = create_here_doc_file(data);
 	data->data3.fd = open(data->data3.file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	pid = fork();
 	if (pid == 0)
-	{	
+	{
 		child_process(data, str);
 	}
 	else if (pid > 0)
@@ -123,9 +125,9 @@ int	here_doc_fct(t_data *data, char *str)
 		wait(&pid);
 		if (WIFEXITED(pid))
 		{
-			int exit_s = WEXITSTATUS(pid);
-				if (exit_s == 6)
-					return (6);
+			exit_s = WEXITSTATUS(pid);
+			if (exit_s == 6)
+				return (6);
 		}
 		free(data->data3.file);
 		close(data->data3.fd);

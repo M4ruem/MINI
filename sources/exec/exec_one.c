@@ -67,7 +67,7 @@ int	backward_redir(t_data *data, int i, int nbr)
 
 void	free_if_cmd_fail(t_data *data)
 {
-	int i;
+	int	i;
 
 	ft_lstclear(data, &data->cmd_table_temp);
 	ft_env_lstclear(&data->env_table);
@@ -77,14 +77,14 @@ void	free_if_cmd_fail(t_data *data)
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
 	i = -1;
-	while (data->data1.arg_tabl[++i])	
+	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	i = -1;
 	if (data->data3.fds != NULL)
 	{
 		while (++i <= data->data2.lst_nbr)
-	 		free(data->data3.fds[i]);
+			free(data->data3.fds[i]);
 		free(data->data3.fds);
 	}
 	data->data1.arg_tabl = NULL;
@@ -169,10 +169,6 @@ int	ft_execution(t_data *data, char **env)
 	if (data->data2.lst_nbr > 1)
 	{
 		data->data5.is_pipe = 1;
-//		if (last->cmd[0] == '\0')
-//		{
-//			return (4);
-//		}
 		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		return (exec_cmds(data, env));
 	}

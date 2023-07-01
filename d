@@ -1,0 +1,10 @@
+b
+B
+c
+d
+include
+Makefile
+minishell
+sources
+test_files
+vsupp

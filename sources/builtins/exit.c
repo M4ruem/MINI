@@ -32,7 +32,7 @@ int	is_number(char *str)
 
 void	free_for_redir_fail(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
@@ -51,7 +51,7 @@ void	free_for_redir_fail(t_data *data)
 	{
 		while (++i <= data->data2.lst_nbr)
 			free(data->data3.fds[i]);
- 		free(data->data3.fds);
+		free(data->data3.fds);
 	}
 	i = -1;
 	while (data->data1.arg_tabl[++i])
@@ -66,7 +66,7 @@ void	free_for_redir_fail(t_data *data)
 
 void	execkerror_utils(t_data *data)
 {
-	int i;
+	int	i;
 
 	data->data5.last_error = 1;
 	data->data5.finale = 1;
@@ -86,7 +86,7 @@ void	execkerror_utils(t_data *data)
 	}
 }
 
-void	free_for_exit(t_data *data, int x)
+void	free_for_exit(t_data *data)
 {
 	int	i;
 
@@ -102,20 +102,11 @@ void	free_for_exit(t_data *data, int x)
 		free(data->data4.redir_type);
 		free(data->data3.pcommand);
 		free(data->cmd_table_temp);
-		if (x == 0)
+		if (data->data1.arg_tabl != NULL)
 		{
-//			free(data->data5.str_f);
-		//	if (data->data1.arg_tabl != NULL)
-		//		free(data->data1.arg_tabl);
-		}
-		else
-		{
-			if (data->data1.arg_tabl != NULL)
-			{
-				while (data->data1.arg_tabl[++i])
-					free(data->data1.arg_tabl[i]);
-				free(data->data1.arg_tabl);
-			}
+			while (data->data1.arg_tabl[++i])
+				free(data->data1.arg_tabl[i]);
+			free(data->data1.arg_tabl);
 		}
 	}
 	ft_close_for_fun();
@@ -136,11 +127,11 @@ static void	ft_continue(t_data *data)
 			|| ft_atoi(data->data1.arg_tabl[1]) == -2)
 		{
 			printf("\nnumeric argument required\n");
-			free_for_exit(data, 1);
+			free_for_exit(data);
 			exit(2);
 		}
 		len = ft_atoi((data->data1.arg_tabl[1])) % 256;
-		free_for_exit(data, 1);
+		free_for_exit(data);
 		exit(len);
 	}
 	if (data->data1.arg_tabl != NULL)
@@ -151,13 +142,13 @@ static void	ft_continue(t_data *data)
 		free(data->data1.arg_tabl);
 	}
 	printf("\n");
-	free_for_exit(data, 0);
+	free_for_exit(data);
 	exit(EXIT_SUCCESS);
 }
 
 void	free_exit_pipe(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
@@ -167,8 +158,8 @@ void	free_exit_pipe(t_data *data)
 	i = 0;
 	while (i < data->data2.lst_nbr - 1)
 	{
- 		close(data->data3.fds[i][0]);
- 		close(data->data3.fds[i][1]);
+		close(data->data3.fds[i][0]);
+		close(data->data3.fds[i][1]);
 		i++;
 	}
 	i = -1;
@@ -187,8 +178,8 @@ void	free_exit_pipe(t_data *data)
 
 int	check_for_exit(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
@@ -196,19 +187,18 @@ int	check_for_exit(t_data *data)
 		return (0);
 	while (data->data1.arg_tabl[i])
 	{
-			j++;
+		j++;
 		i++;
 	}
 	if (i <= j)
 		return (1);
 	else
 		return (0);
-
 }
 
 void	free_exit_argument(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
@@ -218,8 +208,8 @@ void	free_exit_argument(t_data *data)
 	i = 0;
 	while (i < data->data2.lst_nbr - 1)
 	{
- 		close(data->data3.fds[i][0]);
- 		close(data->data3.fds[i][1]);
+		close(data->data3.fds[i][0]);
+		close(data->data3.fds[i][1]);
 		i++;
 	}
 	i = -1;
@@ -231,7 +221,6 @@ void	free_exit_argument(t_data *data)
 	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
-
 }
 
 void	bin_exit(t_data *data, int is_pipe)

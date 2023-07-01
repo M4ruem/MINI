@@ -53,9 +53,9 @@ void	getcmd_and_pipe_three(t_data *data)
 	}
 }
 
-void	ultimate_free(t_data *data , int key)
+void	ultimate_free(t_data *data, int key)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
@@ -94,7 +94,7 @@ void	ultimate_free(t_data *data , int key)
 
 int	getcmd_and_pipe(t_data *data, char **env)
 {
-	int i;
+	int	i;
 
 	if (ft_is_builtin(data, data->data1.arg_tabl[0]) != 0)
 		if (put_path(data) == 2)
@@ -108,9 +108,7 @@ int	getcmd_and_pipe(t_data *data, char **env)
 		{
 			i = built_in(data, env, data->data4.bin_nbr);
 			data->data4.is_built_in = 0;
-//			if (data->data2.close_l == 1)
-//				close(data->data3.fds[data->data2.j - 1][0]);
-			ultimate_free(data ,i);	
+			ultimate_free(data, i);
 			exit (data->data5.last_error);
 		}
 		else

@@ -12,9 +12,9 @@
 
 #include "../../include/minishell.h"
 
-int count_tabel(char **tab)
+int	count_tabel(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])

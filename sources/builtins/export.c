@@ -27,11 +27,9 @@ void	bin_export(char **arg, t_data *data)
 		data->data4.e = 0;
 		while (arg[data->data4.f][data->data4.e])
 		{
-			if (arg[data->data4.f][data->data4.e] == '_' 
+			if (arg[data->data4.f][data->data4.e] == '_' \
 				&& data->data4.e == 0)
-			{
-				break;
-			}
+				break ;
 			while (ft_isalnum(arg[data->data4.f][data->data4.e]) == 1 \
 				|| arg[data->data4.f][data->data4.e] == '_')
 			{
@@ -53,10 +51,10 @@ void	bin_export(char **arg, t_data *data)
 			if (data->data3.export_num > 0)
 			{
 				write(2, "Minisheru: ", 11);
- 				write(2, arg[data->data4.f], ft_strlen(arg[0]));
+				write(2, arg[data->data4.f], ft_strlen(arg[0]));
 				write(2, ": not a valid identifier\n", 25);
 				data->data5.last_error = 1;
- 			}
+			}
 		}
 		data->data4.f++;
 	}
@@ -97,7 +95,7 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	return (NULL);
 }
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c < 48 || c > 57)
 		return (0);
@@ -144,7 +142,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 		p_env_name->value = ft_strdup(value);
 		free(value);
 	}
-			data->data3.export_num = 0;
+		data->data3.export_num = 0;
 }
 
 void	ft_wrong_env_name(char **arg, t_data *data)
