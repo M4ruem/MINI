@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 17:06:51 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:34:32 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_data1
 	char		**arg_tabl;
 	int			path_nbr;
 	int			here_doc_nbr;
-	int			ctr_c_herd;
+	int			here;
 }	t_data1;
 
 typedef struct s_data2

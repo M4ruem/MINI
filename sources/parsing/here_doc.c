@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:21:32 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/21 19:41:46 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:44:48 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ void free_child(t_data *data)
 		free(data->data1.paths[i]);
 	free(data->data1.paths);
 	i = -1;
+	if (data->data1.here == 1)
+		ft_lstclear(data, &data->cmd_table);
 	while (data->data4.redir_file[++i])
 		free(data->data4.redir_file[i]);
 	free(data->data4.redir_file);
 	free(data->data4.redir_type);
 	free(data->cmd_table);
-	ft_env_lstclear(&data->env_table);
-	ft_env_lstclear(&data->env_table_sorted);
 	if (data->data3.pcommand != NULL)
 		free(data->data3.pcommand);
+	ft_env_lstclear(&data->env_table);
+	ft_env_lstclear(&data->env_table_sorted);
 	free(g_data->data3.file);
 	close(g_data->data3.fd);
 	ft_close_for_fun();
@@ -87,8 +89,6 @@ void	child_process(t_data *data, char *str)
 		if (str2 == NULL)
 		{
 			free(str2);
-			if (data->data5.is_pipe == 1)
-				ft_lstclear(data, &data->cmd_table);
 			free_child(data);
 			exit(0);
 		}
@@ -96,8 +96,6 @@ void	child_process(t_data *data, char *str)
 		if (str_diff(str, str2) == 0)
 		{
 			free(str2);
-			if (data->data5.is_pipe == 1)
-				ft_lstclear(data, &data->cmd_table);
 			free_child(data);
 			exit(0);
 		}
@@ -131,7 +129,6 @@ int	here_doc_fct(t_data *data, char *str)
 		}
 		free(data->data3.file);
 		close(data->data3.fd);
-//	data->data1.ctr_c_herd = 1;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/16 13:04:20 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 09:00:28 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ int	parserror(int nbr, t_data *data)
 	if (nbr == 6)
 	{
 		nbr = -1;
+		if (data->data3.pcommand != NULL)
+			free(data->data3.pcommand);
+		data->data3.pcommand = NULL;
 		while (data->data4.redir_file[++nbr])
 			free(data->data4.redir_file[nbr]);
 		free(data->data4.redir_file);
 		free(data->data4.redir_type);
-		//free(data->data3.file);
-		//close(data->data3.fd); 
+		free(data->data3.file);
+		close(data->data3.fd); 
 		return (-1);
 	}
 	if (nbr == 2)
@@ -161,6 +164,7 @@ void	exekerror(int nbr, t_data *data)
 			print_command_not_found(data);
 		close(data->data5.stdin_save);
  		close(data->data5.stdout_save);
+		data->data5.last_error = 127;
 	}
 	if (nbr == 3)
 	{

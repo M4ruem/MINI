@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:14 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/21 11:23:49 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:36:31 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	main_fonction_two(t_data *data)
 {
 	data->data1.paths = recup_path(data);
 	data->data1.here_doc_nbr = 0;
-	data->data1.ctr_c_herd = 0;
 	data->data1.arg_tabl = NULL; 
+	data->data1.here = 0; 
 	data->data3.fds = NULL;
 	data->data4.nbr_save = 0;
 	data->data5.is_pipe = 0;

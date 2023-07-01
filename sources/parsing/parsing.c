@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:23 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/16 13:03:59 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:34:45 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_addpipe(t_data *data)
 	str[0] = '|';
 	str[1] = '\0';
 	ft_lstadd_back(&data->cmd_table, ft_lstnew(str, redir_type, redir_file));
+	data->data1.here = 1;
 }
 
 int	ft_parser2(t_data *data, char *str)
