@@ -60,10 +60,10 @@ void	ft_remove_env_var(char **arg, t_data *data)
 	if (ft_strncmp(name, "PATH") == 0)
 		data->data4.unset = 1;
 	if (ft_isdigit(name[0]) == 1)
-	 {
+	{
 		write(2, "Minisheru: ", 11);
 		write(2, arg[data->data4.f],
-		ft_strlen(arg[data->data4.f]));
+			ft_strlen(arg[data->data4.f]));
 		write(2, ": not a valid identifier\n", 25);
 		data->data3.export_num = 0;
 		free(name);

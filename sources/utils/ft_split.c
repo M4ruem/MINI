@@ -59,7 +59,7 @@ char	**ft_split(char const *s, char c)
 	size_t		i;
 	size_t		j;
 	size_t		x;
-	char	**dest;
+	char		**dest;
 
 	if (!s)
 		return (0);

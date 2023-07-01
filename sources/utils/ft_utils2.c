@@ -64,7 +64,7 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	newlen = ft_strlen(str) - len + ft_strlen(word);
 	if (word == NULL)
 	{
-		result = ft_substr(str , 0, start);
+		result = ft_substr(str, 0, start);
 		free(str);
 		return (result);
 	}

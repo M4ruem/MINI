@@ -25,7 +25,7 @@ int	count_tabel(char **tab)
 void	bin_cd(t_data *data)
 {
 	int		error;
-	char 	*home;
+	char	*home;
 	char	cwd[PATH_MAX];
 
 	error = 0;

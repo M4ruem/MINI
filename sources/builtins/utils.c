@@ -2,7 +2,7 @@
 
 void	error_handel(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_lstclear(data, &data->cmd_table_temp);
@@ -18,7 +18,7 @@ void	error_handel(t_data *data)
 	}
 	i = -1;
 	while (data->data1.arg_tabl[++i])
- 		free(data->data1.arg_tabl[i]);
+		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
 	ft_env_lstclear(&data->env_table);
 	if (data->data3.fds != NULL)
@@ -28,15 +28,15 @@ void	error_handel(t_data *data)
 			free(data->data3.fds[i]);
 		free(data->data3.fds);
 	}
- 	close(data->data5.stdin_save);
+	close(data->data5.stdin_save);
 	close(data->data5.stdout_save);
 	ft_close_for_fun();
 }
 
 void	exekerror3(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	handle_directory_error(data);
 	i = -1;
 	while (data->data4.redir_file[++i])
@@ -62,8 +62,8 @@ void	exekerror3(t_data *data)
 
 void	exekerror2(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (data->cmd_table->redir_file[++i])
 	{
@@ -71,7 +71,7 @@ void	exekerror2(t_data *data)
 		{
 			write(2, "minishell: ", 12);
 			write(2, data->cmd_table->redir_file[i],
-			ft_strlen(data->cmd_table->redir_file[i]));
+				ft_strlen(data->cmd_table->redir_file[i]));
 			write(2, ": No such file or directory\n", 28);
 		}
 		else if (access(data->cmd_table->redir_file[i], R_OK) != 0)
