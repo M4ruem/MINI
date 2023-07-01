@@ -158,6 +158,8 @@ int	here_doc_fct(t_data *data, char *str)
 			if (exit_s == 6)
 				return (6);
 	}
+	free(data->data3.file);
+	close(data->data3.fd);
 //	data->data1.ctr_c_herd = 1;
 	}
 	return (0);

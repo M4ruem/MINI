@@ -17,7 +17,9 @@ char	*ft_search_and_change_env_var(t_data *data, char *str)
 	int		i;
 
 	i = 0;
-	if (data == NULL || str == NULL || str[0] == '\0')
+	if (str[0] == '\0')
+		return (str);
+	if (data == NULL || str == NULL)
 		return (NULL);
 	while (str[i])
 	{
