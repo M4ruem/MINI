@@ -225,13 +225,18 @@ void		handler(int sigtype);
 void		exekerror3(t_data *data);
 void		handle_directory_error(t_data *data);
 void		exekerror2(t_data *data);
+int	count_tabel(char **tab);
 void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(t_data *data, const char *s1);
 void		bin_env(t_data *data);
+void error_handel_tow(t_data *data);
 int			bin_pwd(t_data *data);
 void		bin_cd(t_data *data);
+void	co_8(char *name, char *value, char **arg, t_data *data);
 void	export_msg(char *str ,t_data *data);
+int	first_enter(char **arg, t_data *data);
+void	co_7(t_env_list *p_env_name, char *name, t_data *data, char *value);
 int 	continue_6(char **arg, t_data *data, int key);
 void	export_msg(char *str ,t_data *data);
 char		*ft_chr_var_env(t_data *data, char *str);
@@ -263,13 +268,13 @@ void		free_exit_pipe_next(t_data *data);
 int			check_for_exit(t_data *data);
 void		free_for_exit(t_data *data);
 void		execkerror_utils(t_data *data);
+int	ft_isdigit(int c);
 void		bin_exit_next(t_data *data, int flag);
 void		free_for_redir_fail(t_data *data);
 void		free_exit_pipe(t_data *data);
 int			parserror2(int nbr, t_data *data);
 void		exekerror_utils(t_data *data);
 void		print_command_not_found(t_data *data);
-int			count_tabel(char **tab);
 
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */

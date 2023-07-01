@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/01 13:50:36 by jghribi           #+#    #+#             */
+/*   Updated: 2023/07/01 13:50:37 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	error_handel(t_data *data)
@@ -20,17 +32,7 @@ void	error_handel(t_data *data)
 	while (data->data1.arg_tabl[++i])
 		free(data->data1.arg_tabl[i]);
 	free(data->data1.arg_tabl);
-	ft_env_lstclear(&data->env_table);
-	if (data->data3.fds != NULL)
-	{
-		i = -1;
-		while (++i <= data->data2.lst_nbr)
-			free(data->data3.fds[i]);
-		free(data->data3.fds);
-	}
-	close(data->data5.stdin_save);
-	close(data->data5.stdout_save);
-	ft_close_for_fun();
+	error_handel_tow(data);
 }
 
 void	exekerror3(t_data *data)
@@ -85,4 +87,20 @@ void	exekerror2(t_data *data)
 		exit(0);
 		data->data3.houna = 0;
 	}
+}
+
+void	co_8(char *name, char *value, char **arg, t_data *data)
+{
+	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
+	if (arg[data->data4.f][data->data4.e] == '=' &&
+		arg[data->data4.f][data->data4.e + 1])
+		value = ft_substr(arg[data->data4.f], data->data4.e + 1, \
+			ft_strlen(arg[data->data4.f]) - (data->data4.e + 1));
+}
+
+int	ft_isdigit(int c)
+{
+	if (c < 48 || c > 57)
+		return (0);
+	return (1);
 }

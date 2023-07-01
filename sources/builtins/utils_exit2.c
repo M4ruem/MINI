@@ -52,3 +52,20 @@ void	bin_exit_next(t_data *data, int flag)
 		ft_continue_exit(data);
 	}
 }
+
+void	error_handel_tow(t_data *data)
+{
+	int	i;
+
+	ft_env_lstclear(&data->env_table);
+	if (data->data3.fds != NULL)
+	{
+		i = -1;
+		while (++i <= data->data2.lst_nbr)
+			free(data->data3.fds[i]);
+		free(data->data3.fds);
+	}
+	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
+	ft_close_for_fun();
+}
