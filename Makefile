@@ -13,7 +13,8 @@ SRC = ./sources/main.c \
 	./sources/exec/exec_two.c ./sources/parsing/pars_redir.c ./sources/parsing/parsing.c ./sources/parsing/parsing2.c \
 	./sources/parsing/rm_quote.c ./sources/utils/cmd_utils.c ./sources/utils/cmd_utils2.c ./sources/utils/ft_utils.c \
 	./sources/utils/ft_utils2.c ./sources/utils/ft_utils3.c ./sources/utils/ft_utils4.c ./sources/utils/ft_strtrim.c \
-	./sources/utils/ft_utils5.c ./sources/exec/exec_utils.c ./sources/parsing/here_doc.c ./sources/parsing/utils_parsing.c ./sources/utils/ft_split.c ./sources/builtins/utils.c
+	./sources/utils/ft_utils5.c ./sources/exec/exec_utils.c ./sources/parsing/here_doc.c ./sources/parsing/utils_parsing.c \
+	./sources/utils/ft_split.c ./sources/builtins/utils.c ./sources/builtins/utils_exit.c ./sources/builtins/utils_exit2.c
 
 PURPLE	= \033[38;5;213m
 
