@@ -215,6 +215,9 @@ char		**fill_tabl(t_data **data, char *str, char **tabl);
 /*                                  builtins                                  */
 /* -------------------------------------------------------------------------- */
 void		handler(int sigtype);
+void	exekerror3(t_data *data);
+void	handle_directory_error(t_data *data);
+void	exekerror2(t_data *data);
 void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(t_data *data, const char *s1);
@@ -236,6 +239,7 @@ void		ft_clear_first_elmt(t_data *data);
 void		ft_clear_elmt(t_data *data, char *name);
 int			bin_echo(t_data *data);
 void		bin_exit(t_data *data, int pipe);
+void	error_handel(t_data *data);
 int			parserror(int nbr, t_data *data);
 void		exekerror(int nbr, t_data *data);
 int			str_is_empty(char *str);

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/27 10:56:49 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/01 10:08:32 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,6 @@ static void	ft_continue(t_data *data)
 		len = ft_atoi((data->data1.arg_tabl[1])) % 256;
 		free_for_exit(data);
 		exit(len);
-	}
-	if (data->data1.arg_tabl != NULL)
-	{
-		len = -1;
-		while (data->data1.arg_tabl[++len])
-			free(data->data1.arg_tabl[len]);
-		free(data->data1.arg_tabl);
 	}
 	printf("\n");
 	free_for_exit(data);
