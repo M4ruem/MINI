@@ -69,8 +69,8 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 {
 	int		i;
 
-	i = 0;
-	while (data->cmd_table->redir_type[i++] != 0)
+	i = -1;
+	while (data->cmd_table->redir_type[++i] != 0)
 		if (while_redir(data, i, nbr) == -1)
 			return (-1);
 	if (data->data4.is_built_in == 0)

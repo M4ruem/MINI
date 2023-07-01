@@ -157,11 +157,13 @@ int			ft_parser(char *str, t_data *data, int end);
 void		ft_addpipe(t_data *data);
 void		quotes_switch(t_data *data, char *str, int i);
 int			redir_parsing(char *str, t_data *data);
+void	free_child(t_data *data);
 int			count_redir(char *str, t_data *data);
 int			str_is_empty(char *str);
 int			here_doc_fct(t_data *data, char *str);
 int			ft_lexer2(t_data *data, char *str);
 int			ft_parser2(t_data *data, char *str);
+char	*create_here_doc_file(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                     env                                    */

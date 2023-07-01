@@ -15,7 +15,7 @@ SRC = ./sources/main.c \
 	./sources/utils/ft_utils2.c ./sources/utils/ft_utils3.c ./sources/utils/ft_utils4.c ./sources/utils/ft_strtrim.c \
 	./sources/utils/ft_utils5.c ./sources/exec/exec_utils.c ./sources/parsing/here_doc.c ./sources/parsing/utils_parsing.c \
 	./sources/utils/ft_split.c ./sources/builtins/utils.c ./sources/exec/ft_utils2.c ./sources/exec/ft_utils3.c \
-	./sources/builtins/utils_exit.c ./sources/builtins/utils_exit2.c
+	./sources/builtins/utils_exit.c ./sources/builtins/utils_exit2.c ./sources/parsing/here_doc_utils.c
 
 PURPLE	= \033[38;5;213m
 

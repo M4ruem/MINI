@@ -13,8 +13,6 @@
 #include "../../include/minishell.h"
 
 t_data	*g_data;
-
-
 void	sigint_handler_parent(int sig)
 {
 	(void)sig;
