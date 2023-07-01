@@ -38,8 +38,8 @@ int	parserror(int nbr, t_data *data)
 			free(data->data4.redir_file[nbr]);
 		free(data->data4.redir_file);
 		free(data->data4.redir_type);
-		free(data->data3.file);
-		close(data->data3.fd); 
+		//free(data->data3.file);
+		//close(data->data3.fd); 
 		return (-1);
 	}
 	if (nbr == 2)

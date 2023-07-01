@@ -48,6 +48,7 @@ void	main_fonction_two(t_data *data)
 	data->data1.arg_tabl = NULL; 
 	data->data3.fds = NULL;
 	data->data4.nbr_save = 0;
+	data->data5.is_pipe = 0;
 	setup_term(0);
 	data->data3.houna = 0;
 	data->data3.redir_error = 0;
@@ -98,7 +99,7 @@ void	run_main_loop(t_data *data, char **env)
 	}
 }
 
-t_data *g_data;
+//t_data *g_data;
 
 int	main(int argc, char **argv, char **env)
 {

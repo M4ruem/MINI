@@ -30,6 +30,10 @@ void free_child(t_data *data)
 	free(data->cmd_table);
 	ft_env_lstclear(&data->env_table);
 	ft_env_lstclear(&data->env_table_sorted);
+	if (data->data3.pcommand != NULL)
+		free(data->data3.pcommand);
+	free(g_data->data3.file);
+	close(g_data->data3.fd);
 	ft_close_for_fun();
 }
 
@@ -43,8 +47,6 @@ void	sigint_handler_child(int sig)
 	if (sig == SIGINT)
 	{
 		free_child(g_data);
-		free(g_data->data3.file);
-		close(g_data->data3.fd);
 		exit(6);
 	}
 }
@@ -72,33 +74,6 @@ static char	*read_user_input(void)
 	return (str2);
 }
 
-/*int	here_doc_fct(t_data *data, char *str)
-{
-    char *file;
-    int fd;
-    char *str2;
-
-    fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-    str2 = NULL;
-    g_sigint = 0;
-    while (1)
-    {
-        if (str2 == NULL)
-           break;
-        if (str_diff(str, str2) == 0)
-            break;
-        str2 = ft_search_and_change_env_var(data, str2);
-        write(fd, str2, ft_strlen(str2));
-        write(fd, "\n", 1);
-        free(str2);
-    }
-    close(fd);
-    free(file);
-    g_sigint = 0;
-	return (0);
-}*/
-
-
 void	child_process(t_data *data, char *str)
 {
 	char	*str2;
@@ -112,8 +87,8 @@ void	child_process(t_data *data, char *str)
 		if (str2 == NULL)
 		{
 			free(str2);
-			free(data->data3.file);
-			close(data->data3.fd);
+			if (data->data5.is_pipe == 1)
+				ft_lstclear(data, &data->cmd_table);
 			free_child(data);
 			exit(0);
 		}
@@ -121,8 +96,8 @@ void	child_process(t_data *data, char *str)
 		if (str_diff(str, str2) == 0)
 		{
 			free(str2);
-			free(data->data3.file);
-			close(data->data3.fd);
+			if (data->data5.is_pipe == 1)
+				ft_lstclear(data, &data->cmd_table);
 			free_child(data);
 			exit(0);
 		}
@@ -130,8 +105,6 @@ void	child_process(t_data *data, char *str)
 		write(data->data3.fd, "\n", 1);
 		free(str2);
 	}
-	close(data->data3.fd);
-	free(str2);
 }
 
 int	here_doc_fct(t_data *data, char *str)
@@ -150,16 +123,14 @@ int	here_doc_fct(t_data *data, char *str)
 	{
 		signal(SIGINT, sigint_handler_parent);
 		wait(&pid);
-//		if (g_sigint == 2)
-//			return (6);
-	if (WIFEXITED(pid))
-	{
-		int exit_s = WEXITSTATUS(pid);
-			if (exit_s == 6)
-				return (6);
-	}
-	free(data->data3.file);
-	close(data->data3.fd);
+		if (WIFEXITED(pid))
+		{
+			int exit_s = WEXITSTATUS(pid);
+				if (exit_s == 6)
+					return (6);
+		}
+		free(data->data3.file);
+		close(data->data3.fd);
 //	data->data1.ctr_c_herd = 1;
 	}
 	return (0);
