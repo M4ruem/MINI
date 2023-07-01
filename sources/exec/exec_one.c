@@ -65,60 +65,26 @@ int	backward_redir(t_data *data, int i, int nbr)
 	return (0);
 }
 
-void	free_if_cmd_fail(t_data *data)
-{
-	int	i;
-
-	ft_lstclear(data, &data->cmd_table_temp);
-	ft_env_lstclear(&data->env_table);
-	ft_env_lstclear(&data->env_table_sorted);
-	i = -1;
-	while (data->data1.paths[++i])
-		free(data->data1.paths[i]);
-	free(data->data1.paths);
-	i = -1;
-	while (data->data1.arg_tabl[++i])
-		free(data->data1.arg_tabl[i]);
-	free(data->data1.arg_tabl);
-	i = -1;
-	if (data->data3.fds != NULL)
-	{
-		while (++i <= data->data2.lst_nbr)
-			free(data->data3.fds[i]);
-		free(data->data3.fds);
-	}
-	data->data1.arg_tabl = NULL;
-	close(data->data5.stdin_save);
-	data->data5.last_error = 127;
-	close(data->data5.stdout_save);
-	ft_close_for_fun();
-}
-
 int	cmd_redir(t_data *data, char **env, int nbr)
 {
 	int		i;
 
 	i = 0;
-	while (data->cmd_table->redir_type[i] != 0)
-	{
+	while (data->cmd_table->redir_type[i++] != 0)
 		if (while_redir(data, i, nbr) == -1)
 			return (-1);
-		i++;
-	}
 	if (data->data4.is_built_in == 0)
 	{
 		data->data5.finale = 0;
 		if (data->cmd_table->cmd == NULL)
 		{
 			free_if_cmd_fail(data);
-			ft_close_for_fun();
 			exit(0);
 		}
 		if (data->cmd_table->cmd[0] == '\0')
 		{
 			data->data5.finale = 1;
 			free_if_cmd_fail(data);
-			ft_close_for_fun();
 			exit (0);
 		}
 		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);

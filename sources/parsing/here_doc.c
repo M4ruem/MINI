@@ -14,30 +14,6 @@
 
 t_data	*g_data;
 
-void	free_child(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (data->data1.paths[++i])
-		free(data->data1.paths[i]);
-	free(data->data1.paths);
-	i = -1;
-	if (data->data1.here == 1)
-		ft_lstclear(data, &data->cmd_table);
-	while (data->data4.redir_file[++i])
-		free(data->data4.redir_file[i]);
-	free(data->data4.redir_file);
-	free(data->data4.redir_type);
-	free(data->cmd_table);
-	if (data->data3.pcommand != NULL)
-		free(data->data3.pcommand);
-	ft_env_lstclear(&data->env_table);
-	ft_env_lstclear(&data->env_table_sorted);
-	free(g_data->data3.file);
-	close(g_data->data3.fd);
-	ft_close_for_fun();
-}
 
 void	sigint_handler_parent(int sig)
 {
@@ -54,15 +30,6 @@ void	sigint_handler_child(int sig)
 	}
 }
 
-static char	*create_here_doc_file(t_data *data)
-{
-	char	*file;
-	char	character;
-
-	character = (char)(data->data1.here_doc_nbr + 97);
-	file = ft_strjoin_c("/tmp/.here_doc", character);
-	return (file);
-}
 
 static char	*read_user_input(void)
 {

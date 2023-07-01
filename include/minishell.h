@@ -190,6 +190,8 @@ void		ft_env_lstclear(t_env_list **lst);
 
 int			ft_execution(t_data *data, char **env);
 char		**recup_path(t_data *data);
+void		ultimate_free(t_data *data, int key);
+int	continue_1(t_data *data);
 char		*recupathline(char **env);
 int			exec_one_cmd(t_data *data, char **env);
 char		**get_cmd(t_data *data);
@@ -198,7 +200,9 @@ int			get_argnbr(char *str, t_data *data);
 int			put_path(t_data *data);
 int			cmd_redir(t_data *data, char **env, int nbr);
 int			exec_cmds(t_data *data, char **env);
+void		while_1(t_data *data);
 void		wait_loop(t_data *data);
+void	free_if_cmd_fail(t_data *data);
 char		**rm_quote(char **tabl, t_data *data);
 char		*rm_quote2(t_data *data, char **tabl, char *str);
 int			forward_redir(t_data *data, int i);
@@ -210,6 +214,7 @@ void		exec_cmds_two(t_data *data);
 void		getcmd_and_pipe_three(t_data *data);
 char		**allocate_tabl(t_data **data);
 char		**fill_tabl(t_data **data, char *str, char **tabl);
+void	continue_3(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                  builtins                                  */

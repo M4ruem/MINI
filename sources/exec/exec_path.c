@@ -97,13 +97,7 @@ int	put_path(t_data *data)
 	data->data2.full_path[0] = '\0';
 	while (access(data->data2.full_path, X_OK) == -1
 		&& data->data5.ppi < data->data1.path_nbr)
-	{
-		data->data5.ppi++;
-		data->data2.full_path[0] = '\0';
-		free(data->data2.full_path);
-		data->data2.full_path = ft_1ststrjoin(
-				data->data1.paths[data->data5.ppi], data->data1.arg_tabl[0]);
-	}
+		while_1(data);
 	data->data5.ppi = 0;
 	if (access(data->data2.full_path, X_OK) == 0)
 		return (ft_continue(data, data->data2.full_path));

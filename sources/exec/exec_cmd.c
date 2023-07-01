@@ -12,26 +12,11 @@
 
 #include "../../include/minishell.h"
 
-int	exec_one_cmd(t_data *data, char **env)
+int	continue_2(t_data *data, char **env)
 {
 	int	pid;
-	int	i;
 
 	pid = 0;
-	data->data4.bin_nbr = 0;
-	data->data1.arg_tabl = get_cmd(data);
-	if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
-	{
-		i = built_in(data, env, data->data4.bin_nbr);
-		if (i == -1)
-		{
-			data->data3.redir_error = 1;
-			return (3);
-		}
-		else if (i != 0)
-			return (5);
-		return (0);
-	}
 	if (put_path(data) == 2)
 		return (2);
 	pid = fork();
@@ -46,6 +31,27 @@ int	exec_one_cmd(t_data *data, char **env)
 		free(data->data1.arg_tabl[pid++]);
 	free(data->data1.arg_tabl);
 	return (0);
+}
+
+int	exec_one_cmd(t_data *data, char **env)
+{
+	int	i;
+
+	data->data4.bin_nbr = 0;
+	data->data1.arg_tabl = get_cmd(data);
+	if (ft_is_builtin(data, data->data1.arg_tabl[0]) == 0)
+	{
+		i = built_in(data, env, data->data4.bin_nbr);
+		if (i == -1)
+		{
+			data->data3.redir_error = 1;
+			return (3);
+		}
+		else if (i != 0)
+			return (5);
+		return (0);
+	}
+	return (continue_2(data, env));
 }
 
 int	get_argnbr(char *str, t_data *data)
