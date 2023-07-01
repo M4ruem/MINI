@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/01 11:45:35 by jghribi           #+#    #+#             */
+/*   Updated: 2023/07/01 11:46:46 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	free_child(t_data *data)
@@ -34,4 +46,3 @@ char	*create_here_doc_file(t_data *data)
 	file = ft_strjoin_c("/tmp/.here_doc", character);
 	return (file);
 }
-

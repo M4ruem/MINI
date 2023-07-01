@@ -133,8 +133,7 @@ typedef struct s_data
 	int			close_need;
 	int			hell;
 	int			str_exit;
-	struct		sigaction sa_child;
-	struct		sigaction sa_parent;
+	int			i;
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;

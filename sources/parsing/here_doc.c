@@ -13,6 +13,7 @@
 #include "../../include/minishell.h"
 
 t_data	*g_data;
+
 void	sigint_handler_parent(int sig)
 {
 	(void)sig;
@@ -27,7 +28,6 @@ void	sigint_handler_child(int sig)
 		exit(6);
 	}
 }
-
 
 static char	*read_user_input(void)
 {
@@ -94,8 +94,11 @@ int	here_doc_fct(t_data *data, char *str)
 			if (exit_s == 6)
 				return (6);
 		}
-		free(data->data3.file);
-		close(data->data3.fd);
+		else
+		{
+			free(data->data3.file);
+			close(data->data3.fd);
+		}
 	}
 	return (0);
 }

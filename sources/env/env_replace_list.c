@@ -23,9 +23,26 @@ int	ft_env_var(t_data *data)
 	return (0);
 }
 
+void	continue_5(t_cmd_list *cmd_list, t_data *data)
+{
+	quotes_switch(data, cmd_list->cmd, data->i);
+	if (cmd_list->cmd[data->i] == '$' && cmd_list->cmd[data->i + 1] == '$'\
+		&& cmd_list->cmd[data->i + 2] == '?')
+		data->i++;
+	else if (cmd_list->cmd[data->i] == '$'
+		&& (ft_isalnum(cmd_list->cmd[data->i + 1]) == 1
+			|| cmd_list->cmd[data->i + 1] == '_'
+			|| cmd_list->cmd[data->i + 1] == '?')
+		&& data->data1.squote == 0)
+	{
+		ft_replace_var_env(cmd_list, data->i, data);
+		if (data->i > 0)
+			data->i--;
+	}
+}
+
 int	ft_search_and_replace_env_var(t_data *data)
 {
-	int			i;
 	t_cmd_list	*cmd_list;
 
 	cmd_list = data->cmd_table;
@@ -33,24 +50,12 @@ int	ft_search_and_replace_env_var(t_data *data)
 	data->data1.dquote = 0;
 	while (cmd_list)
 	{
-		i = 0;
-		while (cmd_list->cmd[i])
+		data->i = -1;
+		while (cmd_list->cmd[++data->i])
 		{
-			quotes_switch(data, cmd_list->cmd, i);
-			if (cmd_list->cmd[i] == '$' && cmd_list->cmd[i + 1] == '$'\
-				&& cmd_list->cmd[i + 2] == '?')
-				i++;
-			else if (cmd_list->cmd[i] == '$' && (ft_isalnum(cmd_list->cmd[i + 1]) \
-				== 1 || cmd_list->cmd[i + 1] == '_' || cmd_list->cmd[i + 1] \
-				== '?') && data->data1.squote == 0)
-			{
-				ft_replace_var_env(cmd_list, i, data);
-				if (i > 0)
-					i--;
-			}
+			continue_5(cmd_list, data);
 			if (ft_strlen(cmd_list->cmd) == 0)
-				break;
-			i++;
+				break ;
 		}
 		cmd_list = cmd_list->next;
 	}
@@ -81,7 +86,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 			if (len++)
 				i++;
 		value = ft_is_var_env(data, cmd_list->cmd, pos, len);
-		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1 , value);
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
 	data->data5.lol = 1;
 }
@@ -93,7 +98,7 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 
 	env_list = data->env_table;
 	if (len == 0)
-		var_name = ft_substr(cmd, pos + 1 , ft_strlen(cmd));
+		var_name = ft_substr(cmd, pos + 1, ft_strlen(cmd));
 	else
 		var_name = ft_substr(cmd, pos + 1, len);
 	while (env_list)
