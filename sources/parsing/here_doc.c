@@ -91,9 +91,9 @@ int	here_doc_fct(t_data *data, char *str)
 			exit_s = WEXITSTATUS(pid);
 			if (exit_s == 6)
 				return (6);
+			else
+				here(data);
 		}
-		else
-			here(data);
 	}
 	return (0);
 }
