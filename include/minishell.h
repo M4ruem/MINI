@@ -220,9 +220,9 @@ void	continue_3(t_data *data);
 /*                                  builtins                                  */
 /* -------------------------------------------------------------------------- */
 void		handler(int sigtype);
-void	exekerror3(t_data *data);
-void	handle_directory_error(t_data *data);
-void	exekerror2(t_data *data);
+void		exekerror3(t_data *data);
+void		handle_directory_error(t_data *data);
+void		exekerror2(t_data *data);
 void		handler2(int sigtype);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(t_data *data, const char *s1);
@@ -244,13 +244,23 @@ void		ft_clear_first_elmt(t_data *data);
 void		ft_clear_elmt(t_data *data, char *name);
 int			bin_echo(t_data *data);
 void		bin_exit(t_data *data, int pipe);
-void	error_handel(t_data *data);
+void		error_handel(t_data *data);
 int			parserror(int nbr, t_data *data);
 void		exekerror(int nbr, t_data *data);
 int			str_is_empty(char *str);
 void		setup_term(int save);
 void		ft_free_all(t_data *data);
 void		main_fonction_two(t_data *data);
+int			is_number(char *str);
+void		ft_continue_exit(t_data *data);
+void		free_redir_fail_next(t_data *data);
+void		free_exit_pipe_next(t_data *data);
+int			check_for_exit(t_data *data);
+void		free_for_exit(t_data *data);
+void		execkerror_utils(t_data *data);
+void		bin_exit_next(t_data *data, int flag);
+void		free_for_redir_fail(t_data *data);
+void		free_exit_pipe(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                    utils                                   */
