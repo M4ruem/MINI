@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 10:48:18 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 13:55:15 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ void	print_command_not_found(t_data *data)
 		free(data->data3.fds);
 		exit(data->data5.last_error);
 	}
-	if (data->cmd_table->cmd)
-		printf("%s : Command not found\n", data->cmd_table->cmd);
-	else
-		write(2, "Command not found\n", 19);
-	data->data5.last_error = 127;
+	if (data->data5.last_error != 126)
+	{
+		if (data->cmd_table->cmd)
+			printf("%s : Command not found\n", data->cmd_table->cmd);
+		else
+			write(2, "Command not found\n", 19);
+		data->data5.last_error = 127;
+	}
 }
 
 void	handle_directory_error(t_data *data)
@@ -77,7 +80,7 @@ void	handle_directory_error(t_data *data)
 	if (data->cmd_table->cmd == NULL)
 		return ;
 		
-	/*struct stat st;
+	struct stat st;
 	if (access(data->cmd_table->cmd, F_OK) == 0){
 		if( stat( data->cmd_table->cmd, &st) != -1) // Check the return value of stat
 		{
@@ -91,12 +94,12 @@ void	handle_directory_error(t_data *data)
 			}
 		}
 	}
-	//e/lse{
-		//printf( "zsh: no such file or directory: %s\n", data->cmd_table->cmd );
-		//data->data5.last_error = 127;
-	//}
+	else{
+		printf( "Minishreu: no such file or directory: %s\n", data->cmd_table->cmd );
+		data->data5.last_error = 127;
+	}
 	
-	return;*/
+	return;
 	if (access(data->cmd_table->cmd, F_OK) == 0 && data->data4.unset == 1)
 	{
 		if (access(data->cmd_table->cmd, X_OK) == 0)

@@ -252,7 +252,7 @@ void		ft_update_var_env(t_data *data, char *name, char *value);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
-void		ft_correct_env_name(char **arg, t_data *data);
+int		ft_correct_env_name(char **arg, t_data *data);
 void		ft_wrong_env_name(char **arg, t_data *data);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);

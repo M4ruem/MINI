@@ -14,6 +14,8 @@
 
 void	bin_export(char **arg, t_data *data)
 {
+	int i;
+	
 	if (first_enter(arg, data) == 1)
 		return ;
 	while (arg[data->data4.f])
@@ -24,12 +26,12 @@ void	bin_export(char **arg, t_data *data)
 			if (arg[data->data4.f][data->data4.e] == '_' \
 				&& data->data4.e == 0)
 				break ;
-			if (continue_6(arg, data, 0) == 1)
-				return ;
+			i = continue_6(arg, data, 0);
+			if (i == 0)
+				continue;
 			else
 			{
 				ft_wrong_env_name(arg, data);
-				return ;
 			}
 			continue_6(arg, data, 1);
 		}
@@ -72,7 +74,7 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	return (NULL);
 }
 
-void	ft_correct_env_name(char **arg, t_data *data)
+int	ft_correct_env_name(char **arg, t_data *data)
 {
 	t_env_list	*p_env_name;
 	char		*name;
@@ -96,14 +98,16 @@ void	ft_correct_env_name(char **arg, t_data *data)
 	{
 		if (ft_isdigit(name[0]) == 1)
 		{
-			export_msg(name, data);
+			//export_msg(name, data);
 			data->data3.export_num = 0;
 			free(name);
-			return ;
+			return (1);
 		}
 	}
 	co_7(p_env_name, name, data, value);
+	return (0);
 }
+
 
 void	ft_wrong_env_name(char **arg, t_data *data)
 {

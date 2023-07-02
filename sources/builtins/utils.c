@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 13:50:36 by jghribi           #+#    #+#             */
-/*   Updated: 2023/07/01 13:50:37 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 13:16:07 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,29 @@ void	exekerror2(t_data *data)
 	{
 		error_handel(data);
 		exit(data->data5.last_error);
+	}
+	else 
+	{
+		i = -1;
+		if (data->data1.arg_tabl != NULL)
+		{
+			while (data->data1.arg_tabl[++i])
+				free(data->data1.arg_tabl[i]);
+			free(data->data1.arg_tabl);
+			data->data1.arg_tabl = NULL;
+			
+			ft_lstclear(data, &data->cmd_table_temp);
+			ft_env_lstclear(&data->env_table);
+			ft_env_lstclear(&data->env_table_sorted);
+			i = -1;
+			while (data->data1.paths[++i])
+			free(data->data1.paths[i]);
+			free(data->data1.paths);
+			ft_close_for_fun();
+			close(data->data5.stdin_save);
+			close(data->data5.stdout_save);
+			exit(data->data5.last_error);
+		}	
 	}
 }
 

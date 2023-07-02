@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 11:53:38 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 12:59:06 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	exec_cmds(t_data *data, char **env)
 	data->data3.error_getcmd = exec_cmds_second(data, env);
 	if (data->data3.error_getcmd != 0)
 		return (data->data3.error_getcmd);
+	exec_cmds_two(data);
 	//while (data->data3.exec_i++ < data->data2.lst_nbr)
 	wait_loop(data);
-	exec_cmds_two(data);
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
 	{

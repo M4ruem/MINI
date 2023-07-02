@@ -37,7 +37,7 @@ void	co_7(t_env_list *p_env_name, char *name, t_data *data, char *value)
 
 int	first_enter(char **arg, t_data *data)
 {
-	data->data3.export_num = 0;
+	data->data3.export_num = 1;
 	data->data4.f = 0;
 	if (!arg[data->data4.f])
 	{
@@ -56,6 +56,7 @@ int	con(char **arg, t_data *data, int key)
 				data->data4.e++;
 		if (data->data3.export_num > 0)
 			export_msg(arg[data->data4.f], data);
+		return (1);
 	}
 	return (0);
 }
@@ -73,14 +74,14 @@ int	continue_6(char **arg, t_data *data, int key)
 		if ((arg[data->data4.f][data->data4.e] == '=' || arg[data->data4.f] \
 				[data->data4.e] == '\0') && data->data4.e > 0)
 		{
-			ft_correct_env_name(arg, data);
-			return (1);
+			if (ft_correct_env_name(arg, data) == 1)
+				return (1);
 		}
 		else
 		{
-			ft_wrong_env_name(arg, data);
 			return (1);
 		}
+		return (0);
 	}
 	return (con(arg, data, key));
 }
