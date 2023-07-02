@@ -43,6 +43,7 @@ int	parserror2(int nbr, t_data *data)
 	}
 	if (nbr == 2)
 	{
+		ft_lstclear( data,&data->cmd_table);
 		write(2, "Error quote not closed\n", 24);
 		data->data5.last_error = 1;
 		return (-1);

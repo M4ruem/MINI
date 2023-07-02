@@ -21,7 +21,7 @@ char	**recup_path(t_data *data)
 	str = ft_found_path(data, "PATH");
 	i = -1;
 	data->data2.nbr = 0;
-	while (str[++i])
+	while (str && str[++i])
 		if (str[i] == ':')
 			data->data2.nbr = data->data2.nbr + 1;
 	data->data1.path_nbr = data->data2.nbr;

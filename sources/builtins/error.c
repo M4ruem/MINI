@@ -61,6 +61,7 @@ void	print_command_not_found(t_data *data)
 		close(data->data5.stdin_save);
 		close(data->data5.stdout_save);
 		ft_env_lstclear(&data->env_table);
+		ft_env_lstclear(&data->env_table_sorted);
 		data->data5.last_error = 127;
 		free(data->data3.fds);
 		exit(data->data5.last_error);
@@ -94,27 +95,6 @@ void	handle_directory_error(t_data *data)
 			}
 		}
 	}
-	else{
-		printf( "Minishreu: no such file or directory: %s\n", data->cmd_table->cmd );
-		data->data5.last_error = 127;
-	}
-	
-	return;
-	if (access(data->cmd_table->cmd, F_OK) == 0 && data->data4.unset == 1)
-	{
-		if (access(data->cmd_table->cmd, X_OK) == 0)
-		{
-			printf("%s : Is a directory\n", data->cmd_table->cmd);
-			data->data5.last_error = 126;
-			return ;
-		}
-	}
-	else if (access(data->cmd_table->cmd, X_OK) == 0 && data->data4.unset == 1)
-	{
-		printf("%s : Is a directory\n", data->cmd_table->cmd);
-		data->data5.last_error = 126;
-		return ;
-	}
 }
 
 void	exekerror(int nbr, t_data *data)
@@ -136,6 +116,4 @@ void	exekerror(int nbr, t_data *data)
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
-	//if (nbr == 0)
-	//	data->data5.last_error = 0;
 }

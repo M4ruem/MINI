@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/01 14:28:21 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 14:13:25 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_data5
 	char		*str;
 	char		**tabl;
 	int			i;
+	int			file_error;
 	int			finale;
 	int			echo_n;
 	int			is_pipe;
