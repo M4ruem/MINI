@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 13:50:36 by jghribi           #+#    #+#             */
-/*   Updated: 2023/07/02 15:51:16 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 17:48:20 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ void	continue_9(t_data *data, int i)
 		i = -1;
 		if (data->data1.arg_tabl != NULL)
 		{
-			free_continue_9(data);
-			//exit(data->data5.last_error);
-		}	
+			if (data->data3.redir_error == 1 && data->data5.is_pipe == 0)
+			{
+				free_if_execv_fail(data);
+				exit(data->data5.last_error);
+			}
+			else
+				free_continue_9(data);
+		}
 	}
 }
 

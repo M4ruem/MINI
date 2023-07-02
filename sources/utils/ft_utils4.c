@@ -59,6 +59,19 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
+int	main_utils_2(t_data *data, int i)
+{
+	if (i == 3)
+	{
+		data->data3.main_error = 0;
+		add_history(data->main_str);
+		data->data5.last_error = 127;
+		data->bsn = 1;
+		return (1);
+	}
+	return (0);
+}
+
 void	close_hell(t_data *data)
 {
 	data->close_need = 1;

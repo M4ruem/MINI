@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:26:26 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/29 14:28:16 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:50:54 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,7 @@ int	main_utils(t_data *data)
 		data->bsn = 1;
 		return (1);
 	}
-	if (i == 3)
-	{
-		data->data3.main_error = 0;
-		add_history(data->main_str);
-		data->data5.last_error = 127;
-		data->bsn = 1;
-		return (1);
-	}
-	return (0);
+	return (main_utils_2(data, i));
 }
 
 void	free_fds_error(t_data *data)

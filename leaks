@@ -1,4 +1,0 @@
-exit > a --> leaks
-echo $? apres une cmd qui marche pas dans les pipe
-unset PATH plus export path -->leak
-/bin/ls sans path -->error

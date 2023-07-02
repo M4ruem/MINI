@@ -311,6 +311,7 @@ char		*ft_replace_word(char *str, int start, int len, char *word);
 int			ft_strncmp(const char *s1, const char *s2);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_1ststrjoin(char *s1, char *s2);
+int			main_utils_2(t_data *data, int i);
 char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 15:28:52 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 17:46:36 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,6 @@ void	bin_exit(t_data *data, int is_pipe)
 	int	i;
 
 	i = -1;
-	if (data->data3.path == 1)
-		free(data->data2.full_path);
 	if (data->data2.lst_nbr > 1)
 	{
 		if (is_pipe == 1)
