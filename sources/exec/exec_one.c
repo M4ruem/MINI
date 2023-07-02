@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/06/16 15:59:23 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/02 11:53:38 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,17 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 		if (data->cmd_table->cmd == NULL)
 		{
 			free_if_cmd_fail(data);
-			exit(0);
+			exit(data->data5.last_error);
 		}
 		if (data->cmd_table->cmd[0] == '\0')
 		{
 			data->data5.finale = 1;
 			free_if_cmd_fail(data);
-			exit (0);
+			exit (data->data5.last_error);
 		}
 		execve(data->data1.arg_tabl[0], data->data1.arg_tabl, env);
 		free_if_execv_fail(data);
-		exit(0);
+		exit(data->data5.last_error);
 	}
 	return (0);
 }
@@ -101,9 +101,9 @@ int	exec_cmds(t_data *data, char **env)
 	data->data3.error_getcmd = exec_cmds_second(data, env);
 	if (data->data3.error_getcmd != 0)
 		return (data->data3.error_getcmd);
+	//while (data->data3.exec_i++ < data->data2.lst_nbr)
+	wait_loop(data);
 	exec_cmds_two(data);
-	while (data->data3.exec_i++ < data->data2.lst_nbr)
-		wait_loop(data);
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
 	{

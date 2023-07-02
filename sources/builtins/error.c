@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/01 09:00:28 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 10:48:18 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	print_command_not_found(t_data *data)
 		close(data->data5.stdin_save);
 		close(data->data5.stdout_save);
 		ft_env_lstclear(&data->env_table);
+		data->data5.last_error = 127;
 		free(data->data3.fds);
-		exit(127);
+		exit(data->data5.last_error);
 	}
 	if (data->cmd_table->cmd)
 		printf("%s : Command not found\n", data->cmd_table->cmd);
@@ -132,4 +133,6 @@ void	exekerror(int nbr, t_data *data)
 		write(2, "No command after pipe\n", 23);
 		data->data5.last_error = 1;
 	}
+	//if (nbr == 0)
+	//	data->data5.last_error = 0;
 }

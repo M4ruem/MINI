@@ -6,7 +6,7 @@
 /*   By: jalel <jalel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:30 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/24 02:59:32 by jalel            ###   ########.fr       */
+/*   Updated: 2023/07/02 11:41:33 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	wait_loop(t_data *data)
 	int	error_code;
 	int	status;
 
+	error_code = 0;
 	status = wait(&data->data5.last_error);
 	while (status != -1)
 	{

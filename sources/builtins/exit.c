@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/01 10:08:32 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 09:52:22 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	free_for_exit(t_data *data)
 		free(data->cmd_table_temp);
 		if (data->data1.arg_tabl != NULL)
 		{
+			i = -1;
 			while (data->data1.arg_tabl[++i])
 				free(data->data1.arg_tabl[i]);
 			free(data->data1.arg_tabl);
