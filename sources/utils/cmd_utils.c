@@ -85,6 +85,7 @@ void	init_main(t_data *data)
 {
 	data->data1.here_doc_nbr = 0;
 	data->data1.arg_tabl = NULL;
+	data->data3.path = 0;
 	data->data1.here = 0;
 	data->data3.fds = NULL;
 	data->data4.nbr_save = 0;

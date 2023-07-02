@@ -73,11 +73,11 @@ char	*safe_malloc(void)
 	return (str);
 }
 
-int	ft_continue(t_data *data, char *full_path)
+int	ft_continue(t_data *data)
 {
 	free(data->data1.arg_tabl[0]);
-	data->data1.arg_tabl[0] = ft_malloc_str(full_path);
-	free(full_path);
+	data->data1.arg_tabl[0] = ft_malloc_str(data->data2.full_path);
+	free(data->data2.full_path);
 	return (0);
 }
 
@@ -101,7 +101,7 @@ int	put_path(t_data *data)
 		while_1(data);
 	data->data5.ppi = 0;
 	if (access(data->data2.full_path, X_OK) == 0)
-		return (ft_continue(data, data->data2.full_path));
+		return (ft_continue(data));
 	else
 		free(data->data2.full_path);
 	return (2);

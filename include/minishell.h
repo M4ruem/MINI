@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:08 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 14:13:25 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 16:05:05 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_data2
 	char		*full_path;
 	int			i;
 	char		*result;
+	int			pid;
+	int			exit_s;
 	int			close_l;
 	int			li;
 	int			ly;
@@ -76,6 +78,7 @@ typedef struct s_data3
 	int			lexer_start;
 	int			houna;
 	int			export_num;
+	int			path;
 	int			error_getcmd;
 	int			main_error;
 	int			fd;
@@ -92,6 +95,8 @@ typedef struct s_data4
 	int			*redir_type;
 	char		**redir_file;
 	int			tabl_s;
+	char		*value;
+	char		*name;
 	int			parser_error;
 	int			rd_error;
 	int			is_built_in;
@@ -253,8 +258,9 @@ void		ft_update_var_env(t_data *data, char *name, char *value);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
-int		ft_correct_env_name(char **arg, t_data *data);
+int			ft_correct_env_name(char **arg, t_data *data);
 void		ft_wrong_env_name(char **arg, t_data *data);
+void		free_continue_9(t_data *data);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
 void		ft_remove_env_var(char **arg, t_data *data);
@@ -265,6 +271,7 @@ int			bin_echo(t_data *data);
 void		bin_exit(t_data *data, int pipe);
 void		error_handel(t_data *data);
 int			parserror(int nbr, t_data *data);
+void		free_printf(t_data *data);
 void		exekerror(int nbr, t_data *data);
 int			str_is_empty(char *str);
 void		setup_term(int save);
@@ -277,6 +284,7 @@ void		free_exit_pipe_next(t_data *data);
 int			check_for_exit(t_data *data);
 void		free_for_exit(t_data *data);
 void		execkerror_utils(t_data *data);
+void		free_start(t_data *data);
 int			ft_isdigit(int c);
 void		bin_exit_next(t_data *data, int flag);
 void		free_for_redir_fail(t_data *data);

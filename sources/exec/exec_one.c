@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:35 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 12:59:06 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 17:38:15 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	exec_cmds(t_data *data, char **env)
 	if (data->data3.error_getcmd != 0)
 		return (data->data3.error_getcmd);
 	exec_cmds_two(data);
-	//while (data->data3.exec_i++ < data->data2.lst_nbr)
 	wait_loop(data);
 	data->data3.exec_i = 0;
 	while (data->data3.exec_i < data->data2.lst_nbr)
@@ -135,7 +134,7 @@ int	ft_execution(t_data *data, char **env)
 	if (data->data2.lst_nbr > 1)
 	{
 		data->data5.is_pipe = 1;
-		if (last->cmd[0] == '\0')
+		if (last->cmd[0] == '\0' && data->data2.rdj == 0)
 			return (4);
 		data->data2.lst_nbr = (data->data2.lst_nbr / 2) + 1;
 		return (exec_cmds(data, env));

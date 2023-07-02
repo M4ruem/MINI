@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:49 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/01 15:42:03 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:36:26 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	bin_export(char **arg, t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	if (first_enter(arg, data) == 1)
 		return ;
 	while (arg[data->data4.f])
@@ -27,12 +27,8 @@ void	bin_export(char **arg, t_data *data)
 				&& data->data4.e == 0)
 				break ;
 			i = continue_6(arg, data, 0);
-			if (i == 0)
-				continue;
-			else
-			{
+			if (i == 1)
 				ft_wrong_env_name(arg, data);
-			}
 			continue_6(arg, data, 1);
 		}
 		data->data4.f++;
@@ -77,37 +73,30 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 int	ft_correct_env_name(char **arg, t_data *data)
 {
 	t_env_list	*p_env_name;
-	char		*name;
-	char		*value;
 
 	p_env_name = NULL;
-	name = NULL;
-	value = NULL;
-	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
+	data->data4.name = ft_substr(arg[data->data4.f], 0, data->data4.e);
 	if (arg[data->data4.f][data->data4.e] == '=' &&
 		arg[data->data4.f][data->data4.e + 1])
-		value = ft_substr(arg[data->data4.f], data->data4.e + 1, \
+		data->data4.value = ft_substr(arg[data->data4.f], data->data4.e + 1, \
 			ft_strlen(arg[data->data4.f]) - (data->data4.e + 1));
-//co_8(name, value, arg, data);
 	if (arg[data->data4.f][data->data4.e] == '=' &&
 		arg[data->data4.f][data->data4.e + 1])
 		data->data4.e = ft_strlen(arg[data->data4.f]);
 	else
-		value = NULL;
-	if (value == NULL)
+		data->data4.value = NULL;
+	if (data->data4.value == NULL)
 	{
-		if (ft_isdigit(name[0]) == 1)
+		if (ft_isdigit(data->data4.name[0]) == 1)
 		{
-			//export_msg(name, data);
 			data->data3.export_num = 0;
-			free(name);
+			free(data->data4.name);
 			return (1);
 		}
 	}
-	co_7(p_env_name, name, data, value);
+	co_7(p_env_name, data->data4.name, data, data->data4.value);
 	return (0);
 }
-
 
 void	ft_wrong_env_name(char **arg, t_data *data)
 {

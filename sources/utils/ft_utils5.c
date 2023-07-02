@@ -56,6 +56,7 @@ int	main_utils(t_data *data)
 	if (ft_strncmp(data->main_str, "") == 0)
 	{
 		data->data3.main_error = 0;
+		data->data5.last_error = 127;
 		data->bsn = 1;
 		return (1);
 	}
@@ -64,6 +65,7 @@ int	main_utils(t_data *data)
 	{
 		data->data3.main_error = 0;
 		add_history(data->main_str);
+		data->data5.last_error = 127;
 		data->bsn = 1;
 		return (1);
 	}
@@ -71,6 +73,7 @@ int	main_utils(t_data *data)
 	{
 		data->data3.main_error = 0;
 		add_history(data->main_str);
+		data->data5.last_error = 127;
 		data->bsn = 1;
 		return (1);
 	}

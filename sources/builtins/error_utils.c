@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 13:50:11 by jghribi           #+#    #+#             */
-/*   Updated: 2023/07/01 13:50:21 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:51:50 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	parserror_next(t_data *data)
 		free(data->data4.redir_file[nbr]);
 	free(data->data4.redir_file);
 	free(data->data4.redir_type);
-	free(data->data3.file);
+	if (data->data3.file != NULL)
+		free(data->data3.file);
 	close(data->data3.fd);
 }
 
@@ -43,7 +44,7 @@ int	parserror2(int nbr, t_data *data)
 	}
 	if (nbr == 2)
 	{
-		ft_lstclear( data,&data->cmd_table);
+		ft_lstclear(data, &data->cmd_table);
 		write(2, "Error quote not closed\n", 24);
 		data->data5.last_error = 1;
 		return (-1);

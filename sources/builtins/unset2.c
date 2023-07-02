@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:44 by cormiere          #+#    #+#             */
-/*   Updated: 2023/05/23 19:11:59 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/07/02 15:52:18 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ void	ft_clear_elmt(t_data *data, char *name)
 		ft_env_lstclear(&save_p_next);
 	}
 	free(name);
+}
+
+void	free_continue_9(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->data1.arg_tabl[++i])
+		free(data->data1.arg_tabl[i]);
+	free(data->data1.arg_tabl);
+	data->data1.arg_tabl = NULL;
 }
 
 int	bin_pwd(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 13:50:36 by jghribi           #+#    #+#             */
-/*   Updated: 2023/07/02 13:16:07 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:51:16 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,24 @@ void	exekerror3(t_data *data)
 	data->data5.last_error = 127;
 }
 
+void	continue_9(t_data *data, int i)
+{
+	if (data->data5.is_pipe == 1)
+	{
+		error_handel(data);
+		exit(data->data5.last_error);
+	}
+	else
+	{
+		i = -1;
+		if (data->data1.arg_tabl != NULL)
+		{
+			free_continue_9(data);
+			//exit(data->data5.last_error);
+		}	
+	}
+}
+
 void	exekerror2(t_data *data)
 {
 	int	i;
@@ -85,43 +103,7 @@ void	exekerror2(t_data *data)
 		}
 		data->data3.houna = 0;
 	}
-	if (data->data5.is_pipe == 1)
-	{
-		error_handel(data);
-		exit(data->data5.last_error);
-	}
-	else 
-	{
-		i = -1;
-		if (data->data1.arg_tabl != NULL)
-		{
-			while (data->data1.arg_tabl[++i])
-				free(data->data1.arg_tabl[i]);
-			free(data->data1.arg_tabl);
-			data->data1.arg_tabl = NULL;
-			
-			ft_lstclear(data, &data->cmd_table_temp);
-			ft_env_lstclear(&data->env_table);
-			ft_env_lstclear(&data->env_table_sorted);
-			i = -1;
-			while (data->data1.paths[++i])
-			free(data->data1.paths[i]);
-			free(data->data1.paths);
-			ft_close_for_fun();
-			close(data->data5.stdin_save);
-			close(data->data5.stdout_save);
-			exit(data->data5.last_error);
-		}	
-	}
-}
-
-void	co_8(char *name, char *value, char **arg, t_data *data)
-{
-	name = ft_substr(arg[data->data4.f], 0, data->data4.e);
-	if (arg[data->data4.f][data->data4.e] == '=' &&
-		arg[data->data4.f][data->data4.e + 1])
-		value = ft_substr(arg[data->data4.f], data->data4.e + 1, \
-			ft_strlen(arg[data->data4.f]) - (data->data4.e + 1));
+	continue_9(data, i);
 }
 
 int	ft_isdigit(int c)

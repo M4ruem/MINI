@@ -6,12 +6,11 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:15 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 13:55:15 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:27:57 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <sys/stat.h>
 
 int	syntax_error(t_data *data)
 {
@@ -54,16 +53,8 @@ void	print_command_not_found(t_data *data)
 		while (data->data1.paths[++i])
 			free(data->data1.paths[i]);
 		free(data->data1.paths);
-		i = 0;
 		free_fds_error(data);
-		ft_lstclear(data, &data->cmd_table_temp);
-		free(data->cmd_table_temp);
-		close(data->data5.stdin_save);
-		close(data->data5.stdout_save);
-		ft_env_lstclear(&data->env_table);
-		ft_env_lstclear(&data->env_table_sorted);
-		data->data5.last_error = 127;
-		free(data->data3.fds);
+		free_printf(data);
 		exit(data->data5.last_error);
 	}
 	if (data->data5.last_error != 126)
@@ -78,19 +69,22 @@ void	print_command_not_found(t_data *data)
 
 void	handle_directory_error(t_data *data)
 {
+	struct stat	st;
+
 	if (data->cmd_table->cmd == NULL)
 		return ;
-		
-	struct stat st;
-	if (access(data->cmd_table->cmd, F_OK) == 0){
-		if( stat( data->cmd_table->cmd, &st) != -1) // Check the return value of stat
+	if (access(data->cmd_table->cmd, F_OK) == 0)
+	{
+		if (stat(data->cmd_table->cmd, &st) != -1)
 		{
-		    	if( S_ISREG( st.st_mode ) == 0 ){
-				printf( "%s is a directory\n", data->cmd_table->cmd );
+			if (S_ISREG(st.st_mode) == 0)
+			{
+				printf("%s is a directory\n", data->cmd_table->cmd);
 				data->data5.last_error = 126;
 			}
-		 	else if (access(data->cmd_table->cmd, X_OK) != 0){
-				printf( "%s access denied\n", data->cmd_table->cmd );
+			else if (access(data->cmd_table->cmd, X_OK) != 0)
+			{
+				printf("%s access denied\n", data->cmd_table->cmd);
 				data->data5.last_error = 126;
 			}
 		}

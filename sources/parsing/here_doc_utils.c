@@ -50,5 +50,6 @@ char	*create_here_doc_file(t_data *data)
 void	here(t_data *data)
 {
 	free(data->data3.file);
+	data->data3.file = NULL;
 	close(data->data3.fd);
 }

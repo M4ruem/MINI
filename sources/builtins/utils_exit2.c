@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 12:32:24 by jghribi           #+#    #+#             */
-/*   Updated: 2023/07/01 12:32:27 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:39:37 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@ void	execkerror_utils(t_data *data)
 		else
 			free(data->data1.arg_tabl);
 	}
+}
+
+void	free_start(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	ft_lstclear(data, &data->cmd_table_temp);
+	ft_env_lstclear(&data->env_table_sorted);
+	while (data->data1.paths[++i])
+		free(data->data1.paths[i]);
+	free(data->data1.paths);
+}
+
+void	free_printf(t_data *data)
+{
+	ft_lstclear(data, &data->cmd_table_temp);
+	free(data->cmd_table_temp);
+	close(data->data5.stdin_save);
+	close(data->data5.stdout_save);
+	ft_env_lstclear(&data->env_table);
+	ft_env_lstclear(&data->env_table_sorted);
+	data->data5.last_error = 127;
+	free(data->data3.fds);
 }
 
 void	bin_exit_next(t_data *data, int flag)

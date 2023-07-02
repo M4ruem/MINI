@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:37:43 by cormiere          #+#    #+#             */
-/*   Updated: 2023/07/02 09:52:22 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:28:52 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@ void	free_for_redir_fail(t_data *data)
 	int	i;
 
 	i = -1;
-	ft_lstclear(data, &data->cmd_table_temp);
-	ft_env_lstclear(&data->env_table_sorted);
-	while (data->data1.paths[++i])
-		free(data->data1.paths[i]);
-	free(data->data1.paths);
-	i = 0;
-	while (i < data->data2.lst_nbr - 1)
+	free_start(data);
+	i = -1;
+	while (++i < data->data2.lst_nbr - 1)
 	{
 		close(data->data3.fds[i][0]);
 		close(data->data3.fds[i][1]);
-		i++;
 	}
 	i = -1;
 	if (data->data3.fds != NULL)
@@ -130,6 +125,8 @@ void	bin_exit(t_data *data, int is_pipe)
 	int	i;
 
 	i = -1;
+	if (data->data3.path == 1)
+		free(data->data2.full_path);
 	if (data->data2.lst_nbr > 1)
 	{
 		if (is_pipe == 1)
